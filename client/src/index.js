@@ -1,16 +1,17 @@
-const express = require("express");
-const app = express();
-const PORT = 8080;
-const indexRouter = require("./routers/indexRouter");
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-app.use(express.json());
-app.use("/api", indexRouter);
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-// use swagger hub for node
-app.get("/", (req, res) => {
-  const user = req.query.user;
-
-  res.send(user + "!", user);
-});
-
-app.listen(PORT, () => console.log("It's alive on http://localhost:" + PORT));
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
