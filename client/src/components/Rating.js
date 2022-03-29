@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const ScoreBtn = styled.button`
@@ -8,11 +8,15 @@ const ScoreBtn = styled.button`
   border: 1px solid black;
   height: 2.5em;
   width: 2.5em;
+  background: #aedfff;
   &:hover {
-    background-color: #0495f6;
+    background: #0495f6;
     cursor: pointer;
   }
-  background: ${(props) => (props.isActive ? "#0495f6" : "#aedfff")};
+  &.active {
+    background: #0495f6;
+    cursor: none;
+  }
 `;
 
 const SpaceBetweenDiv = styled.div`
@@ -26,28 +30,19 @@ const SatisfiedLabels = styled(SpaceBetweenDiv)`
   max-width: 13.5em;
 `;
 
-const FiveScoreBtns = () => {
-  const scores = { 1: false, 2: false, 3: false, 4: false, 5: false };
-  let prevKey = -1;
-
-  const scoreClick = (keyName) => {
-    if (prevKey !== -1) scores[prevKey] = false;
-
-    scores[keyName] = true;
-    prevKey = keyName;
-  };
+const FiveScoreBtns = ({ rate, onClickRate }) => {
+  const scores = [1, 2, 3, 4, 5];
 
   return (
     <SpaceBetweenDiv>
-      {Object.entries(scores).map(([key, isActive]) => (
+      {scores.map((score, key) => (
         <ScoreBtn
           key={"score" + key}
-          isActive={isActive}
-          onClick={() => {
-            scoreClick(key);
-          }}
+          className={score == rate ? "active" : ""}
+          value={score}
+          onClick={onClickRate}
         >
-          {key}
+          {score}
         </ScoreBtn>
       ))}
     </SpaceBetweenDiv>
@@ -61,10 +56,15 @@ const StyledRating = styled.div`
 `;
 
 const Rating = ({ ratingLabel = "Rating" }) => {
+  const [rate, setRate] = useState(0);
+  const onClickRate = (e) => {
+    setRate(e.target.value);
+  };
+
   return (
     <StyledRating>
       <h4>{ratingLabel}</h4>
-      <FiveScoreBtns />
+      <FiveScoreBtns rate={rate} onClickRate={onClickRate} />
       <SatisfiedLabels>
         <p>Not Satisfied</p>
         <p>Very Satisfied</p>
