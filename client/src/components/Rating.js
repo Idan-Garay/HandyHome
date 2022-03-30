@@ -15,7 +15,7 @@ const ScoreBtn = styled.button`
   }
   &.active {
     background: #0495f6;
-    cursor: none;
+    cursor: default;
   }
 `;
 
