@@ -28,6 +28,8 @@ const SpaceBetweenDiv = styled.div`
 const SatisfiedLabels = styled(SpaceBetweenDiv)`
   justify-content: space-between;
   max-width: 13.5em;
+  font-weight: bold;
+  color: #c4c4c4;
 `;
 
 const FiveScoreBtns = ({ rate, onClickRate }) => {
