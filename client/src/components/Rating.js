@@ -5,7 +5,7 @@ const ScoreBtn = styled.button`
   font-weight: bold;
   border-radius: 8px;
   font-size: 1em;
-  border: 1px solid black;
+  border: none;
   height: 2.5em;
   width: 2.5em;
   background: #aedfff;
@@ -53,8 +53,9 @@ const FiveScoreBtns = ({ rate, onClickRate }) => {
 
 const StyledRating = styled.div`
   max-width: 20em;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   text-align: left;
+  margin-bottom: 0.5em;
 `;
 
 const Rating = ({ ratingLabel = "Rating" }) => {
