@@ -37,7 +37,7 @@ const OrderDetailsFrame = styled.div`
   max-width: 20em;
   border: 1px solid black;
   border-radius: 5px;
-  padding: 0 0.4em;
+  padding: 0.4em 0.6em;
 `;
 
 const OrderDetails = () => {
