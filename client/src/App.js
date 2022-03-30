@@ -1,13 +1,10 @@
 import "./App.css";
-import OrderDetails from "./components/OrderDetails";
-import Rating from "./components/Rating";
+import Feedback from "./views/Feedback";
 
 function App() {
   return (
     <div className="App">
-      <Rating ratingLabel="Communication with Seller" />
-      <br />
-      <OrderDetails />
+      <Feedback />
     </div>
   );
 }
