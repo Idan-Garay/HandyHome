@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { postFeedback } from "../API/feedback";
 import BaseButton from "../components/BaseButton";
 import OrderDetails from "../components/OrderDetails";
 import Rating from "../components/Rating";
@@ -50,12 +51,12 @@ const Feedback = () => {
     const newRatings = { ...ratings };
     newRatings[field] = e.target.value;
     setRatings(newRatings);
-    console.log(field, e.target.value);
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    // fetch();
+    postFeedback({ ratings, review });
+    console.log("form submitted");
   };
 
   return (
