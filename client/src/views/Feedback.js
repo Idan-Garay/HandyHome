@@ -4,7 +4,7 @@ import BaseButton from "../components/BaseButton";
 import OrderDetails from "../components/OrderDetails";
 import Rating from "../components/Rating";
 
-const FeedBackFrame = styled.div`
+const FeedBackForm = styled.form`
   margin: 1em;
   padding: 1em;
   padding-top: 3em;
@@ -33,8 +33,12 @@ const TextAreaSection = styled.div`
 `;
 
 const Feedback = () => {
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <FeedBackFrame>
+    <FeedBackForm onSubmit={onFormSubmit}>
       <div className="left">
         <Rating ratingLabel="Communication with Seller" />
         <Rating ratingLabel="Service as described" />
@@ -48,7 +52,7 @@ const Feedback = () => {
         </TextAreaSection>
         <BaseButton text="Send" className="justify-right" />
       </div>
-    </FeedBackFrame>
+    </FeedBackForm>
   );
 };
 

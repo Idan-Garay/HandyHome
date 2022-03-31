@@ -43,6 +43,7 @@ const FiveScoreBtns = ({ rate, onClickRate }) => {
           className={score == rate ? "active" : ""}
           value={score}
           onClick={onClickRate}
+          type="button"
         >
           {score}
         </ScoreBtn>
