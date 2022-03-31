@@ -32,7 +32,7 @@ const SatisfiedLabels = styled(SpaceBetweenDiv)`
   color: #c4c4c4;
 `;
 
-const FiveScoreBtns = ({ rate, onClickRate }) => {
+const FiveScoreBtns = ({ rate, onClickRate, ratingName }) => {
   const scores = [1, 2, 3, 4, 5];
 
   return (
@@ -40,10 +40,12 @@ const FiveScoreBtns = ({ rate, onClickRate }) => {
       {scores.map((score, key) => (
         <ScoreBtn
           key={"score" + key}
+          // eslint-disable-next-line eqeqeq
           className={score == rate ? "active" : ""}
           value={score}
           onClick={onClickRate}
           type="button"
+          name={ratingName}
         >
           {score}
         </ScoreBtn>
@@ -59,16 +61,15 @@ const StyledRating = styled.div`
   margin-bottom: 0.5em;
 `;
 
-const Rating = ({ ratingLabel = "Rating" }) => {
-  const [rate, setRate] = useState(0);
-  const onClickRate = (e) => {
-    setRate(e.target.value);
-  };
-
+const Rating = ({ ratingLabel = "Rating", ratingName, rate, onClick }) => {
   return (
     <StyledRating>
       <h4>{ratingLabel}</h4>
-      <FiveScoreBtns rate={rate} onClickRate={onClickRate} />
+      <FiveScoreBtns
+        rate={rate}
+        onClickRate={onClick}
+        ratingName={ratingName}
+      />
       <SatisfiedLabels>
         <p>Not Satisfied</p>
         <p>Very Satisfied</p>

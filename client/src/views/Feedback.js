@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import BaseButton from "../components/BaseButton";
 import OrderDetails from "../components/OrderDetails";
@@ -33,22 +33,62 @@ const TextAreaSection = styled.div`
 `;
 
 const Feedback = () => {
+  const [ratings, setRatings] = useState({
+    communication: 0,
+    service: 0,
+    recommend: 0,
+  });
+
+  const [review, setReview] = useState("");
+
+  const onTextAreaChange = (e) => {
+    setReview(e.target.value);
+  };
+
+  const onRate = (e) => {
+    const field = e.target.name;
+    const newRatings = { ...ratings };
+    newRatings[field] = e.target.value;
+    setRatings(newRatings);
+    console.log(field, e.target.value);
+  };
+
   const onFormSubmit = (e) => {
     e.preventDefault();
+    // fetch();
   };
 
   return (
     <FeedBackForm onSubmit={onFormSubmit}>
       <div className="left">
-        <Rating ratingLabel="Communication with Seller" />
-        <Rating ratingLabel="Service as described" />
-        <Rating ratingLabel="Buy again or recommend" />
+        <Rating
+          ratingLabel="Communication with Seller"
+          onClick={onRate}
+          ratingName="communication"
+          rate={ratings.communication}
+        />
+        <Rating
+          ratingLabel="Service as described"
+          onClick={onRate}
+          ratingName="service"
+          rate={ratings.service}
+        />
+        <Rating
+          ratingLabel="Buy again or recommend"
+          onClick={onRate}
+          ratingName="recommend"
+          rate={ratings.recommend}
+        />
       </div>
       <div className="right">
         <OrderDetails />
         <TextAreaSection>
           <h3>What can you say about the service?</h3>
-          <textarea placeholder="Type your message here..."></textarea>
+          <textarea
+            placeholder="Type your message here..."
+            onChange={onTextAreaChange}
+            value={review}
+          ></textarea>
         </TextAreaSection>
         <BaseButton text="Send" className="justify-right" />
       </div>
