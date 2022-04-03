@@ -56,7 +56,8 @@ const Feedback = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     postFeedback({ ratings, review });
-    console.log("form submitted");
+    setReview("");
+    setRatings({ communication: 0, service: 0, recommend: 0 });
   };
 
   return (
