@@ -1,3 +1,5 @@
+const PORT = 4000;
+
 export const postFeedback = (feedback) => {
   const { ratings, review } = feedback;
 
@@ -8,7 +10,7 @@ export const postFeedback = (feedback) => {
   };
 
   try {
-    fetch("http://localhost:3000/api/feedback", requestOptions)
+    fetch(`http://localhost:${PORT}/api/feedback`, requestOptions)
       .then((res) => res.json())
       .then((feedback) => feedback.id);
   } catch (err) {
