@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { postFeedback } from "../API/feedback";
 import BaseButton from "../components/BaseButton";
-import OrderDetails from "../components/OrderDetails";
-import Rating from "../components/Rating";
+import OrderDetails from "../components/Order/OrderDetails";
+import Rating from "../components/Order/Rating";
 
 const FeedBackForm = styled.form`
   margin: 1em;

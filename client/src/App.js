@@ -1,12 +1,13 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import Feedback from "./pages/Feedback";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <div>Page Content</div>
+      <Feedback />
       <Footer />
     </div>
   );
