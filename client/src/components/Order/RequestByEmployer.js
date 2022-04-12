@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import FormTextInputGroup from "../FormTextInput";
 import TextAreaInput from "../TextAreaInput";
 import BaseButton from "../BaseButton";
+
+import { postRequestByEmployer } from "../../API/order";
 
 const RequestForm = styled.form`
   margin: 1em;
@@ -23,13 +25,55 @@ const RequestForm = styled.form`
 `;
 
 const RequestByEmployer = () => {
+  const [requestForm, setRequestForm] = useState({
+    formType: "request",
+    contactNo: "",
+    minRate: "",
+    description: "",
+  });
+
+  const onAnyFormInputChange = (e) => {
+    const field = e.target.name;
+    const newFormVal = { ...requestForm };
+    newFormVal[field] = e.target.value;
+    setRequestForm(newFormVal);
+  };
+
+  const sendRequest = (e) => {
+    e.preventDefault();
+    postRequestByEmployer(requestForm);
+    setRequestForm({
+      formType: "request",
+      contactNo: "",
+      minRate: "",
+      description: "",
+    });
+  };
+
   return (
-    <RequestForm>
+    <RequestForm onSubmit={sendRequest}>
       <div>
-        <FormTextInputGroup labelName="Contact Number" placeholder="09###" />
-        <FormTextInputGroup labelName="Minimum Daily Rate" placeholder="Rate" />
-        <TextAreaInput labelName="Request Description" />
-        <BaseButton text="Send" onClick={() => {}} />
+        <FormTextInputGroup
+          labelName="Contact Number"
+          placeholder="09###"
+          name="contactNo"
+          onChange={onAnyFormInputChange}
+          value={requestForm.contactNo}
+        />
+        <FormTextInputGroup
+          labelName="Minimum Daily Rate"
+          placeholder="Rate"
+          name="minRate"
+          onChange={onAnyFormInputChange}
+          value={requestForm.minRate}
+        />
+        <TextAreaInput
+          labelName="Request Description"
+          name="description"
+          onChange={onAnyFormInputChange}
+          value={requestForm.description}
+        />
+        <BaseButton text="Send" />
       </div>
     </RequestForm>
   );

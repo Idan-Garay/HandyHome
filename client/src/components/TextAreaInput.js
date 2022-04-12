@@ -10,11 +10,12 @@ const StyledDiv = styled.div`
     padding: 0.4em 0.4em;
     padding-left: 0;
     margin-left: 1.7em;
-    min-width: 40em;
+    min-width: 30em;
     max-width: 100%;
     height: 12em;
     resize: none;
     font: inherit;
+    font-weight: normal;
     padding: 0.4em;
   }
   & > .left-label {
@@ -26,8 +27,10 @@ const StyledDiv = styled.div`
 
 const TextAreaInput = (props) => {
   const labelName = props.labelName || "";
+  const name = props.name || "";
   const placeholder = props.placeholder || `${labelName}...`;
-  const onChange = props.labelName || (() => {});
+  const onChange = props.onChange || (() => {});
+  const value = props.value || "";
 
   return (
     <StyledDiv>
@@ -36,6 +39,8 @@ const TextAreaInput = (props) => {
         className="input"
         onChange={onChange}
         placeholder={placeholder}
+        name={name}
+        defaultValue={value}
       />
     </StyledDiv>
   );

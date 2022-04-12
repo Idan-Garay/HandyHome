@@ -19,8 +19,10 @@ const StyledDiv = styled.div`
 
 const FormTextInputGroup = (props) => {
   const labelName = props.labelName || "";
+  const name = props.name || "";
   const placeholder = props.labelName || "";
-  const onClick = props.labelName || (() => {});
+  const onChange = props.onChange;
+  const value = props.value;
 
   return (
     <StyledDiv>
@@ -29,7 +31,9 @@ const FormTextInputGroup = (props) => {
         type="text"
         className="input"
         placeholder={placeholder}
-        onClick={onClick}
+        name={name}
+        defaultValue={value}
+        onChange={onChange}
       />
     </StyledDiv>
   );
