@@ -1,20 +1,8 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
 // import Feedback from "./pages/Feedback";
 import Request from "./pages/Request";
 import { Grommet, Footer, Main, Header, Box, Anchor } from "grommet";
 import { Tools } from "grommet-icons";
-import styled from "styled-components";
-
-const LogoSection = styled.div`
-  max-width: 25%;
-  width: 20%;
-  border: 1px solid black;
-  & > img {
-    width: 100%;
-    height: 100%;
-  }
-`;
 
 function App() {
   return (
