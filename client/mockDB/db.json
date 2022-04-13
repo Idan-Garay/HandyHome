@@ -24,5 +24,16 @@
       "description": "Hello There",
       "id": 4
     }
+  ],
+  "feedbacks": [
+    {
+      "ratings": {
+        "communication": "2",
+        "service": "3",
+        "recommend": "5"
+      },
+      "description": "dafdsfasdsda",
+      "id": 1
+    }
   ]
 }

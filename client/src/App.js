@@ -1,6 +1,6 @@
 import "./App.css";
-// import Feedback from "./pages/Feedback";
-import Request from "./pages/Request";
+import Feedback from "./pages/Feedback";
+// import Request from "./pages/Request";
 import { Grommet, Footer, Main, Header, Box, Anchor } from "grommet";
 import { Tools } from "grommet-icons";
 
@@ -29,9 +29,12 @@ function App() {
             </Box>
           </Box>
         </Header>
+
         <Main>
-          <Request />
+          {/* <Request /> */}
+          <Feedback />
         </Main>
+
         <Footer
           height="xsmall"
           border={{ top: "1px solid black" }}

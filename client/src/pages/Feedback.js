@@ -1,37 +1,10 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { postFeedback } from "../API/feedback";
-import BaseButton from "../components/BaseButton";
 import OrderDetails from "../components/Order/OrderDetails";
 import Rating from "../components/Order/Rating";
 
-const FeedBackForm = styled.form`
-  margin: 1em;
-  padding: 1em;
-  padding-top: 3em;
-  border: 1px solid black;
-  border-radius: 5px;
-  min-height: 30em;
-  display: flex;
-  & > .left {
-    min-width: 35%;
-  }
-`;
-
-const TextAreaSection = styled.div`
-  color: #41518c;
-  margin-top: 1em;
-  text-align: left;
-  & > textarea {
-    min-width: 40em;
-    max-width: 100%;
-    height: 12em;
-    resize: none;
-    font: inherit;
-    padding: 5px;
-    margin-top: 0.3em;
-  }
-`;
+import { useForm, Controller } from "react-hook-form";
+import { Box, Page, PageContent, Form, Text, TextArea, Button } from "grommet";
 
 const Feedback = () => {
   const [ratings, setRatings] = useState({
@@ -40,10 +13,10 @@ const Feedback = () => {
     recommend: 0,
   });
 
-  const [review, setReview] = useState("");
+  const [description, setDescription] = useState("");
 
   const onTextAreaChange = (e) => {
-    setReview(e.target.value);
+    setDescription(e.target.value);
   };
 
   const onRate = (e) => {
@@ -55,46 +28,65 @@ const Feedback = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    postFeedback({ ratings, review });
-    setReview("");
+    postFeedback({ ratings, description });
+    setDescription("");
     setRatings({ communication: 0, service: 0, recommend: 0 });
   };
 
   return (
-    <FeedBackForm onSubmit={onFormSubmit}>
-      <div className="left">
-        <Rating
-          ratingLabel="Communication with Seller"
-          onClick={onRate}
-          ratingName="communication"
-          rate={ratings.communication}
-        />
-        <Rating
-          ratingLabel="Service as described"
-          onClick={onRate}
-          ratingName="service"
-          rate={ratings.service}
-        />
-        <Rating
-          ratingLabel="Buy again or recommend"
-          onClick={onRate}
-          ratingName="recommend"
-          rate={ratings.recommend}
-        />
-      </div>
-      <div className="right">
-        <OrderDetails />
-        <TextAreaSection>
-          <h3>What can you say about the service?</h3>
-          <textarea
-            placeholder="Type your message here..."
-            onChange={onTextAreaChange}
-            value={review}
-          ></textarea>
-        </TextAreaSection>
-        <BaseButton text="Send" className="justify-right" />
-      </div>
-    </FeedBackForm>
+    <Page kind="wide">
+      <PageContent background="light-3">
+        <Form onSubmit={onFormSubmit}>
+          <Box width="xlarge" direction="row" pad="medium" justify="evenly">
+            <Box>
+              <Rating
+                ratingLabel="Communication with Seller"
+                onClick={onRate}
+                ratingName="communication"
+                rate={ratings.communication}
+              />
+              <Rating
+                ratingLabel="Service as described"
+                onClick={onRate}
+                ratingName="service"
+                rate={ratings.service}
+              />
+              <Rating
+                ratingLabel="Buy again or recommend"
+                onClick={onRate}
+                ratingName="recommend"
+                rate={ratings.recommend}
+              />
+            </Box>
+            <Box direction="column">
+              <OrderDetails />
+              <Box direction="row" gap="medium" wrap margin={{ top: "1em" }}>
+                <Text>
+                  <b>Description</b>
+                </Text>
+                <TextArea
+                  value={description}
+                  rows={10}
+                  width="xlarge"
+                  cols={40}
+                  resize={false}
+                  onChange={onTextAreaChange}
+                />
+              </Box>
+
+              <Box
+                tag="footer"
+                margin={{ top: "medium" }}
+                direction="row"
+                justify="end"
+              >
+                <Button type="submit" primary label="Send" />
+              </Box>
+            </Box>
+          </Box>
+        </Form>
+      </PageContent>
+    </Page>
   );
 };
 
