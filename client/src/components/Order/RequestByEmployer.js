@@ -1,81 +1,72 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import FormTextInputGroup from "../FormTextInput";
-import TextAreaInput from "../TextAreaInput";
-import BaseButton from "../BaseButton";
-
+import React from "react";
+import { Box, Button, Heading, TextArea, TextInput, Text } from "grommet";
+import { useForm, Controller } from "react-hook-form";
 import { postRequestByEmployer } from "../../API/order";
 
-const RequestForm = styled.form`
-  margin: 1em;
-  padding: 1em;
-  padding-top: 3em;
-  border: 1px solid black;
-  border-radius: 5px;
-  min-height: 30em;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  & > .left {
-    min-width: 35%;
-  }
-  & > .b-1 {
-    border: 1px solid black;
-  }
-`;
-
 const RequestByEmployer = () => {
-  const [requestForm, setRequestForm] = useState({
-    formType: "request",
-    contactNo: "",
-    minRate: "",
-    description: "",
-  });
-
-  const onAnyFormInputChange = (e) => {
-    const field = e.target.name;
-    const newFormVal = { ...requestForm };
-    newFormVal[field] = e.target.value;
-    setRequestForm(newFormVal);
-  };
-
-  const sendRequest = (e) => {
-    e.preventDefault();
-    postRequestByEmployer(requestForm);
-    setRequestForm({
+  const { control, handleSubmit, reset } = useForm({
+    defaultValues: {
       formType: "request",
       contactNo: "",
       minRate: "",
       description: "",
-    });
+    },
+  });
+
+  const onSubmit = (data) => {
+    postRequestByEmployer(data);
+    reset();
   };
 
   return (
-    <RequestForm onSubmit={sendRequest}>
-      <div>
-        <FormTextInputGroup
-          labelName="Contact Number"
-          placeholder="09###"
-          name="contactNo"
-          onChange={onAnyFormInputChange}
-          value={requestForm.contactNo}
-        />
-        <FormTextInputGroup
-          labelName="Minimum Daily Rate"
-          placeholder="Rate"
-          name="minRate"
-          onChange={onAnyFormInputChange}
-          value={requestForm.minRate}
-        />
-        <TextAreaInput
-          labelName="Request Description"
-          name="description"
-          onChange={onAnyFormInputChange}
-          value={requestForm.description}
-        />
-        <BaseButton text="Send" />
-      </div>
-    </RequestForm>
+    <Box align="center">
+      <Box width="large" margin="large" gap="small">
+        <Heading margin={{ bottom: "0.5em" }}>Request Form</Heading>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Box gap="medium">
+            <Controller
+              name="contactNo"
+              control={control}
+              render={({ field }) => (
+                <Box direction="row" gap="medium" wrap>
+                  <Text>Contact Number</Text>
+                  <TextInput name="" {...field} />
+                </Box>
+              )}
+            />
+            <Controller
+              name="minRate"
+              control={control}
+              render={({ field }) => (
+                <Box direction="row" gap="medium" wrap>
+                  <Text>Minimum Daily Rate</Text>
+                  <TextInput {...field} />
+                </Box>
+              )}
+            />
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <Box direction="row" gap="medium" wrap>
+                  <Text>Description</Text>
+                  <TextArea rows={5} resize={false} {...field} />
+                </Box>
+              )}
+            />
+          </Box>
+          <Box
+            tag="footer"
+            margin={{ top: "medium" }}
+            direction="row"
+            justify="end"
+          >
+            <Button type="submit" primary label="Send" />
+          </Box>
+        </form>
+      </Box>
+    </Box>
   );
 };
 
