@@ -17,13 +17,13 @@ const StyledDiv = styled.div`
   }
 `;
 
-const FormTextInputGroup = (props) => {
-  const labelName = props.labelName || "";
-  const name = props.name || "";
-  const placeholder = props.labelName || "";
-  const onChange = props.onChange;
-  const value = props.value;
-
+const FormTextInputGroup = ({
+  labelName,
+  name,
+  placeholder,
+  register,
+  required = false,
+}) => {
   return (
     <StyledDiv>
       <label className="left-label">{labelName}</label>
@@ -31,9 +31,7 @@ const FormTextInputGroup = (props) => {
         type="text"
         className="input"
         placeholder={placeholder}
-        name={name}
-        defaultValue={value}
-        onChange={onChange}
+        {...register(name, { required: required })}
       />
     </StyledDiv>
   );
