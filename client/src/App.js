@@ -3,14 +3,17 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 // import Feedback from "./pages/Feedback";
 import Request from "./pages/Request";
+import { Grommet } from "grommet";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Request />
-      <Footer />
-    </div>
+    <Grommet>
+      <div className="App">
+        <NavBar />
+        <Request />
+        <Footer />
+      </div>
+    </Grommet>
   );
 }
 
