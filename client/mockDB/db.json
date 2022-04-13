@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "requests": [
+    {
+      "contactNo": "09663208955",
+      "minRate": "600",
+      "description": "clean the garden for 3 days",
+      "id": 1
+    },
+    {
+      "contactNo": "09621312312",
+      "minRate": "6002",
+      "description": "Get a haricut",
+      "id": 2
+    }
+  ]
+}

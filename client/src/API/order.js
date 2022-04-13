@@ -10,7 +10,7 @@ export const postRequestByEmployer = (requestForm) => {
   };
 
   try {
-    fetch(`http://localhost:${PORT}/api/requestForm`, requestOptions)
+    fetch(`http://localhost:${PORT}/requests`, requestOptions)
       .then((res) => res.json())
       .then((request) => request.id);
   } catch (err) {
