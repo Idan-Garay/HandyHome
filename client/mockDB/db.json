@@ -1,21 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "requests": [
     {
       "contactNo": "09663208955",
@@ -28,6 +11,18 @@
       "minRate": "6002",
       "description": "Get a haricut",
       "id": 2
+    },
+    {
+      "contactNo": "09663208775",
+      "minRate": "878",
+      "description": "Hello World",
+      "id": 3
+    },
+    {
+      "contactNo": "096632423234",
+      "minRate": "2823",
+      "description": "Hello There",
+      "id": 4
     }
   ]
 }
