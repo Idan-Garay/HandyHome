@@ -4,25 +4,36 @@
       "contactNo": "09663208955",
       "minRate": "600",
       "description": "clean the garden for 3 days",
-      "id": 1
+      "id": 0,
+      "status": "rejected"
+    },
+    {
+      "contactNo": "09663208955",
+      "minRate": "600",
+      "description": "clean the garden for 3 days",
+      "id": 1,
+      "status": "accepted"
     },
     {
       "contactNo": "09621312312",
       "minRate": "6002",
       "description": "Get a haricut",
-      "id": 2
+      "id": 2,
+      "status": "rejected"
     },
     {
       "contactNo": "09663208775",
       "minRate": "878",
       "description": "Hello World",
-      "id": 3
+      "id": 3,
+      "status": "rejected"
     },
     {
       "contactNo": "096632423234",
       "minRate": "2823",
       "description": "Hello There",
-      "id": 4
+      "id": 4,
+      "status": "accepted"
     },
     {
       "contactNo": "09663208775",
@@ -33,6 +44,7 @@
   ],
   "feedbacks": [
     {
+      "type": "EmployerToHandyman",
       "ratings": {
         "communication": "2",
         "service": "3",
@@ -42,6 +54,7 @@
       "id": 1
     },
     {
+      "type": "EmployerToHandyman",
       "ratings": {
         "communication": "1",
         "service": "2",
@@ -59,6 +72,50 @@
       },
       "description": "Mic check 1 2",
       "id": 3
+    },
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "5",
+        "service": "3",
+        "recommend": "5"
+      },
+      "description": "I am hello world again",
+      "id": 4
+    },
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "4",
+        "service": "5",
+        "recommend": "4"
+      },
+      "description": "Refactored code still working?",
+      "id": 5
+    },
+    {
+      "type": "HandymanToEmployer",
+      "ratings": {
+        "experience": "5"
+      },
+      "description": "Hello World from Handyman",
+      "id": 6
+    },
+    {
+      "type": "HandymanToEmployer",
+      "ratings": {
+        "experience": "2"
+      },
+      "description": "Hello Wrold 12312",
+      "id": 7
+    },
+    {
+      "type": "HandymanToEmployer",
+      "ratings": {
+        "experience": "3"
+      },
+      "description": "Hello Again from handyman",
+      "id": 8
     }
   ]
 }
