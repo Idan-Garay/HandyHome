@@ -2,6 +2,14 @@ import React from "react";
 import { Box, Button, Heading, TextArea, TextInput, Text } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import { postRequestByEmployer } from "../../API/order";
+import styled from "styled-components";
+
+const StyledTextInput = styled(TextInput)`
+  background-color: #f8f8f8;
+`;
+const StyledTextArea = styled(TextArea)`
+  background-color: #f8f8f8;
+`;
 
 const RequestByEmployer = () => {
   const { control, handleSubmit, reset } = useForm({
@@ -30,8 +38,8 @@ const RequestByEmployer = () => {
               control={control}
               render={({ field }) => (
                 <Box direction="row" gap="medium" wrap>
-                  <Text>Contact Number</Text>
-                  <TextInput name="" {...field} />
+                  <Text text>Contact Number</Text>
+                  <StyledTextInput {...field} />
                 </Box>
               )}
             />
@@ -41,7 +49,7 @@ const RequestByEmployer = () => {
               render={({ field }) => (
                 <Box direction="row" gap="medium" wrap>
                   <Text>Minimum Daily Rate</Text>
-                  <TextInput {...field} />
+                  <StyledTextInput {...field} />
                 </Box>
               )}
             />
@@ -51,7 +59,7 @@ const RequestByEmployer = () => {
               render={({ field }) => (
                 <Box direction="row" gap="medium" wrap>
                   <Text weight={500}>Description</Text>
-                  <TextArea rows={5} resize={false} {...field} />
+                  <StyledTextArea rows={5} resize={false} {...field} />
                 </Box>
               )}
             />

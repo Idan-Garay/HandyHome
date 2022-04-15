@@ -3,6 +3,7 @@ const spaceTheme = {
   rounding: 24,
   spacing: 20,
   defaultMode: "light",
+  textInput: { background: { extend: { color: "blue" } } },
   global: {
     colors: {
       brand: {

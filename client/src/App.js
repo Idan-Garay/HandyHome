@@ -1,6 +1,6 @@
 import "./App.css";
-import Feedback from "./pages/Feedback";
-// import Request from "./pages/Request";
+// import Feedback from "./pages/Feedback";
+import Request from "./pages/Request";
 import { Grommet, Footer, Main, Header, Box, Anchor } from "grommet";
 import { Tools } from "grommet-icons";
 import theme from "./Theme";
@@ -33,8 +33,8 @@ function App() {
         </Header>
 
         <Main fill="horizontal" justify="center">
-          {/* <Request /> */}
-          <Feedback />
+          <Request />
+          {/* <Feedback /> */}
         </Main>
 
         <Footer height="xsmall" border="top" justify="center">

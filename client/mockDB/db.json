@@ -23,6 +23,12 @@
       "minRate": "2823",
       "description": "Hello There",
       "id": 4
+    },
+    {
+      "contactNo": "09663208775",
+      "minRate": "fasdfsda",
+      "description": "fsdafsdafsda",
+      "id": 5
     }
   ],
   "feedbacks": [
@@ -34,6 +40,15 @@
       },
       "description": "dafdsfasdsda",
       "id": 1
+    },
+    {
+      "ratings": {
+        "communication": "1",
+        "service": "2",
+        "recommend": "5"
+      },
+      "description": "Hello world here 123",
+      "id": 2
     }
   ]
 }
