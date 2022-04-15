@@ -59,9 +59,10 @@ const FiveScoreBtns = ({ rate, onClickRate, ratingName }) => {
 
 const StyledRating = styled.div`
   max-width: 20em;
-  /* border: 1px solid black; */
+  padding: 8px;
   text-align: left;
   margin-bottom: 0.5em;
+  background-color: #f8f8f8;
 `;
 
 const Rating = ({ ratingLabel = "Rating", ratingName, rate, onClick }) => {
