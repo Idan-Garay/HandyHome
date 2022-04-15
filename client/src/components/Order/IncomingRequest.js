@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Heading, TextArea, TextInput, Text } from "grommet";
+import { Box, Button, Heading, Text } from "grommet";
 import { acceptRequest } from "../../API/order";
 import styled from "styled-components";
 
