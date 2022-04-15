@@ -26,7 +26,7 @@ const Feedback = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    postFeedback({ ratings, description });
+    postFeedback({ type: "EmployerToHandyman", ratings, description });
     setDescription("");
     setRatings({ communication: 0, service: 0, recommend: 0 });
   };
@@ -38,7 +38,7 @@ const Feedback = () => {
           <Box width="xlarge" direction="row" pad="medium" justify="evenly">
             <Box>
               <Rating
-                ratingLabel="Communication with Seller"
+                ratingLabel="Communication with Handyman"
                 onClick={onRate}
                 ratingName="communication"
                 rate={ratings.communication}

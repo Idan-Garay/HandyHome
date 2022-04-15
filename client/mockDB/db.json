@@ -49,6 +49,16 @@
       },
       "description": "Hello world here 123",
       "id": 2
+    },
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "1",
+        "service": "2",
+        "recommend": "5"
+      },
+      "description": "Mic check 1 2",
+      "id": 3
     }
   ]
 }

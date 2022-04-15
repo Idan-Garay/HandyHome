@@ -1,12 +1,12 @@
 const PORT = 4000;
 
 export const postFeedback = (feedback) => {
-  const { ratings, description } = feedback;
+  const { type, ratings, description } = feedback;
 
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ratings, description }),
+    body: JSON.stringify({ type, ratings, description }),
   };
 
   try {
