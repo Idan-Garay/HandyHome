@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { postFeedback } from "../API/feedback";
 import OrderDetails from "../components/Order/OrderDetails";
 import Rating from "../components/Order/Rating";
-
-import { useForm, Controller } from "react-hook-form";
 import { Box, Page, PageContent, Form, Text, TextArea, Button } from "grommet";
 
 const Feedback = () => {
@@ -34,8 +32,8 @@ const Feedback = () => {
   };
 
   return (
-    <Page kind="wide">
-      <PageContent background="light-3">
+    <Page kind="wide" pad="0 2em">
+      <PageContent background="light" border={true} round="small">
         <Form onSubmit={onFormSubmit}>
           <Box width="xlarge" direction="row" pad="medium" justify="evenly">
             <Box>
@@ -60,18 +58,25 @@ const Feedback = () => {
             </Box>
             <Box direction="column">
               <OrderDetails />
-              <Box direction="row" gap="medium" wrap margin={{ top: "1em" }}>
-                <Text>
-                  <b>Description</b>
+              <Box
+                direction="column"
+                gap="xxsmall"
+                wrap
+                margin={{ top: "1em" }}
+              >
+                <Text textAlign="start" weight={500}>
+                  Description
                 </Text>
-                <TextArea
-                  value={description}
-                  rows={10}
-                  width="xlarge"
-                  cols={40}
-                  resize={false}
-                  onChange={onTextAreaChange}
-                />
+                <Box background="#f8f8f8">
+                  <TextArea
+                    value={description}
+                    rows={10}
+                    width="xlarge"
+                    cols={50}
+                    resize={false}
+                    onChange={onTextAreaChange}
+                  />
+                </Box>
               </Box>
 
               <Box
@@ -80,7 +85,7 @@ const Feedback = () => {
                 direction="row"
                 justify="end"
               >
-                <Button type="submit" primary label="Send" />
+                <Button type="submit" primary label="Send" c />
               </Box>
             </Box>
           </Box>

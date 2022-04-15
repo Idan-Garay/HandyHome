@@ -50,7 +50,7 @@ const RequestByEmployer = () => {
               control={control}
               render={({ field }) => (
                 <Box direction="row" gap="medium" wrap>
-                  <Text>Description</Text>
+                  <Text weight={500}>Description</Text>
                   <TextArea rows={5} resize={false} {...field} />
                 </Box>
               )}

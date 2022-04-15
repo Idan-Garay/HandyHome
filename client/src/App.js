@@ -3,43 +3,41 @@ import Feedback from "./pages/Feedback";
 // import Request from "./pages/Request";
 import { Grommet, Footer, Main, Header, Box, Anchor } from "grommet";
 import { Tools } from "grommet-icons";
+import theme from "./Theme";
 
 function App() {
   return (
-    <Grommet>
+    <Grommet theme={theme}>
       <div className="App">
-        <Header
-          background="light-1"
-          justify="between"
-          height="3.5em"
-          pad="small-top"
-        >
+        <Header justify="between" height="3.5em" pad="small-top">
           <Box pad="xxsmall">
             <Anchor icon={<Tools color="accent-4" size="large" />} />
           </Box>
           <Box justify="evenly" direction="row" width="medium">
             <Box>
-              <Anchor href="##">Discover</Anchor>
+              <Anchor href="##" weight="normal">
+                Discover
+              </Anchor>
             </Box>
             <Box>
-              <Anchor href="##">List</Anchor>
+              <Anchor href="##" weight="normal">
+                List
+              </Anchor>
             </Box>
             <Box>
-              <Anchor href="##">Register</Anchor>
+              <Anchor href="##" weight="normal">
+                Register
+              </Anchor>
             </Box>
           </Box>
         </Header>
 
-        <Main>
+        <Main fill="horizontal" justify="center">
           {/* <Request /> */}
           <Feedback />
         </Main>
 
-        <Footer
-          height="xsmall"
-          border={{ top: "1px solid black" }}
-          justify="center"
-        >
+        <Footer height="xsmall" border="top" justify="center">
           <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
         </Footer>
       </div>
