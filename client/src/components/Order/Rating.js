@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const ScoreBtn = styled.button`
@@ -8,14 +8,15 @@ const ScoreBtn = styled.button`
   border: none;
   height: 2.5em;
   width: 2.5em;
-  background: #aedfff;
-  &:hover {
-    background: #0495f6;
-    cursor: pointer;
-  }
+  background: #a3e5de;
+  &:hover,
   &.active {
-    background: #0495f6;
+    background: #04c9aa;
     cursor: default;
+    color: white;
+  }
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -28,8 +29,10 @@ const SpaceBetweenDiv = styled.div`
 const SatisfiedLabels = styled(SpaceBetweenDiv)`
   justify-content: space-between;
   max-width: 13.5em;
-  font-weight: bold;
   color: #c4c4c4;
+  & > p {
+    font-weight: 400;
+  }
 `;
 
 const FiveScoreBtns = ({ rate, onClickRate, ratingName }) => {
@@ -56,9 +59,10 @@ const FiveScoreBtns = ({ rate, onClickRate, ratingName }) => {
 
 const StyledRating = styled.div`
   max-width: 20em;
-  /* border: 1px solid black; */
+  padding: 8px;
   text-align: left;
   margin-bottom: 0.5em;
+  background-color: #f8f8f8;
 `;
 
 const Rating = ({ ratingLabel = "Rating", ratingName, rate, onClick }) => {
