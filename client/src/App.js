@@ -1,6 +1,7 @@
 import "./App.css";
 // import Feedback from "./pages/Feedback";
-import Request from "./pages/Request";
+// import Request from "./pages/Request";
+import Discovery from "./pages/Discovery";
 import { Grommet, Footer, Main, Header, Box, Anchor } from "grommet";
 import { Tools } from "grommet-icons";
 import theme from "./Theme";
@@ -33,7 +34,8 @@ function App() {
         </Header>
 
         <Main fill="horizontal" justify="center">
-          <Request />
+          <Discovery />
+          {/* <Request /> */}
           {/* <Feedback /> */}
         </Main>
 

@@ -123,12 +123,13 @@
       "id": 1,
       "name": "Nugget Chicken",
       "services": ["masonry", "construction", "gardener"],
-      "phoneNumber": "09663204332",
+      "contactNumber": "09663204332",
       "address": {
         "street": "National Highway, Reynes Building",
         "city": "Poblacion Near Compostela Public Market",
         "area": "Compostela"
-      }
+      },
+      "requests": []
     },
     {
       "id": 2,
@@ -139,7 +140,8 @@
         "street": "SM City Fairview, Quirino Highway corner Regalado Avenue, Fairview",
         "city": "Quezon City",
         "area": "Metro Manilla"
-      }
+      },
+      "requests": []
     },
     {
       "id": 3,
@@ -150,7 +152,8 @@
         "street": "Osmena Boulevard corner Llorente Street",
         "city": "Cebu City",
         "area": "Cebu"
-      }
+      },
+      "requests": []
     },
     {
       "id": 4,
@@ -161,7 +164,8 @@
         "street": "110 Gorordo Avenue",
         "city": "Cebu City",
         "area": "Cebu"
-      }
+      },
+      "requests": []
     }
   ]
 }
