@@ -12,7 +12,7 @@
       "minRate": "600",
       "description": "clean the garden for 3 days",
       "id": 1,
-      "status": "accepted"
+      "status": "rejected"
     },
     {
       "contactNo": "09621312312",
@@ -116,6 +116,52 @@
       },
       "description": "Hello Again from handyman",
       "id": 8
+    }
+  ],
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Nugget Chicken",
+      "services": ["masonry", "construction", "gardener"],
+      "phoneNumber": "09663204332",
+      "address": {
+        "street": "National Highway, Reynes Building",
+        "city": "Poblacion Near Compostela Public Market",
+        "area": "Compostela"
+      }
+    },
+    {
+      "id": 2,
+      "name": "King Burger",
+      "services": [ "construction", "gardener"],
+      "phoneNumber": "09285551705",
+      "address": {
+        "street": "SM City Fairview, Quirino Highway corner Regalado Avenue, Fairview",
+        "city": "Quezon City",
+        "area": "Metro Manilla"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Ramyun Shin",
+      "services": [ "construction", "gardener"],
+      "phoneNumber": "094743234332",
+      "address": {
+        "street": "Osmena Boulevard corner Llorente Street",
+        "city": "Cebu City",
+        "area": "Cebu"
+      }
+    },
+    {
+      "id": 4,
+      "name": "McSavers Chimken",
+      "services": [ "construction", "gardener"],
+      "phoneNumber": "09235551355",
+      "address": {
+        "street": "110 Gorordo Avenue",
+        "city": "Cebu City",
+        "area": "Cebu"
+      }
     }
   ]
 }
