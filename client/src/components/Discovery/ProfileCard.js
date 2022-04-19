@@ -1,22 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Box, Avatar, Text, Button } from "grommet";
-import { User, Location, Map } from "grommet-icons";
+import { User, Map } from "grommet-icons";
+
 import styled from "styled-components";
 
 const LeftAlignedText = styled(Text)`
   text-align: left;
 `;
 
+const StyledBox = styled(Box)`
+  margin-top: 1em;
+`;
+
 // onClickRequest -> profile's phoneNumber, id is passed
 // redirect to request page depending on user
 
-const ProfileCard = () => {
+const ProfileCard = ({ profileData }) => {
+  const { id, contactNo, services, area, name } = profileData;
+
   return (
-    <Box
-      // border={{ color: "black", size: "small", style: "solid", side: "all" }}
+    <StyledBox
       round
       pad="small"
-      width="medium"
+      width={{ min: "medium", max: "large" }}
       background="#f8f8f8"
     >
       <Box direction="row" gap="small">
@@ -24,20 +31,22 @@ const ProfileCard = () => {
           <User />
         </Avatar>
         <Box align="start">
-          <LeftAlignedText>Nugget Chicken</LeftAlignedText>
+          <LeftAlignedText>{name}</LeftAlignedText>
           <LeftAlignedText size="xsmall" color="#B6B6B6">
-            masonry, construction, gardener
+            {services.join(", ")}
           </LeftAlignedText>
         </Box>
       </Box>
       <Box direction="row" justify="between">
         <Box direction="row" align="end">
           <Map />
-          <Text>Compostela</Text>
+          <Text>{area}</Text>
         </Box>
-        <Button primary label="Request" />
+        <Link to="request" state={{ profileId: id, contactNo }}>
+          <Button primary label="Request" />
+        </Link>
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 
