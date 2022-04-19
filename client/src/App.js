@@ -5,6 +5,8 @@ import Discovery from "./pages/Discovery";
 import { Grommet, Footer, Main, Header, Box, Anchor } from "grommet";
 import { Tools } from "grommet-icons";
 import theme from "./Theme";
+import { Routes, Route } from "react-router-dom";
+import RequestByEmployer from "./components/Order/RequestByEmployer";
 
 function App() {
   return (
@@ -34,9 +36,14 @@ function App() {
         </Header>
 
         <Main fill="horizontal" justify="center">
-          <Discovery />
           {/* <Request /> */}
           {/* <Feedback /> */}
+          <Routes>
+            <Route path="/" element={<Discovery />} />
+          </Routes>
+          <Routes>
+            <Route path="/request" element={<RequestByEmployer />} />
+          </Routes>
         </Main>
 
         <Footer height="xsmall" border="top" justify="center">
