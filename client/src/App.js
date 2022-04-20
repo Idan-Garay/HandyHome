@@ -7,6 +7,7 @@ import { Tools } from "grommet-icons";
 import theme from "./Theme";
 import { Routes, Route } from "react-router-dom";
 import RequestByEmployer from "./components/Order/RequestByEmployer";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -39,7 +40,8 @@ function App() {
           {/* <Request /> */}
           {/* <Feedback /> */}
           <Routes>
-            <Route path="/" element={<Discovery />} />
+            {/* <Route path="/" element={<Discovery />} /> */}
+            <Route path="/" element={<Profile />} />
           </Routes>
           <Routes>
             <Route path="/request" element={<RequestByEmployer />} />
