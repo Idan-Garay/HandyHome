@@ -40,11 +40,12 @@ function App() {
           {/* <Request /> */}
           {/* <Feedback /> */}
           <Routes>
-            {/* <Route path="/" element={<Discovery />} /> */}
-            <Route path="/" element={<Profile />} />
-          </Routes>
-          <Routes>
-            <Route path="/request" element={<RequestByEmployer />} />
+            <Route path="/" element={<Discovery />}></Route>
+            <Route path="/profile/:id" element={<Profile />} />
+            <Route
+              path="/profile/:id/request"
+              element={<RequestByEmployer />}
+            />
           </Routes>
         </Main>
 

@@ -7,16 +7,16 @@ import { getProfiles } from "../API/profiles";
 let profilesCache = [];
 
 const Discovery = () => {
-  const [profiles, setProfiles] = useState([]);
-
+  const [profiles, setProfiles] = useState(profilesCache);
   useEffect(() => {
-    if (profiles.cache !== 0) {
+    if (profilesCache.length !== 0) {
       setProfiles(profilesCache);
     }
+
     getProfiles().then((json) => {
       if (profilesCache != json) setProfiles(json);
     });
-  }, [profilesCache]);
+  }, [profiles.length]);
 
   return (
     <Box direction="row-responsive" wrap gap="small" margin="xlarge">

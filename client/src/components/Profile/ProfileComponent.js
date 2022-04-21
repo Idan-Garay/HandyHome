@@ -10,7 +10,7 @@ const StyledH2 = styled.h2`
   margin-left: 26%;
 `;
 
-const ProfileComponent = () => {
+const ProfileComponent = ({ id, contactNo, service, area, name }) => {
   return (
     <Box
       align="center"
@@ -21,8 +21,8 @@ const ProfileComponent = () => {
       gap="large"
     >
       <Box direction="row-responsive">
-        <UserProfile />
-        <ProfileDetail />
+        <UserProfile id={id} contactNo={contactNo} area={area} />
+        <ProfileDetail service={service} name={name} />
       </Box>
       <Box gap="small">
         <StyledH2>Co-workers</StyledH2>

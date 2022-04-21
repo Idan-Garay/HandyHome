@@ -40,7 +40,7 @@ const UserProfile = ({ id, contactNo, area }) => {
         <Text textAlign="end">6 days</Text>
       </Box>
 
-      <Link to="request" state={{ profileId: id, contactNo }}>
+      <Link to={`/profile/${id}/request`} state={{ profileId: id, contactNo }}>
         <Button type="submit" fill="horizontal" primary label="Request" />
       </Link>
     </Box>

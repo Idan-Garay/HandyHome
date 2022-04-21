@@ -6,7 +6,7 @@ const StyledH2 = styled.h2`
   text-align: left;
 `;
 
-const ProfileDetail = () => {
+const ProfileDetail = ({ service, name }) => {
   return (
     <Box
       justify="start"
@@ -16,9 +16,9 @@ const ProfileDetail = () => {
       fill="horizontal"
       wrap
     >
-      <StyledH2 className="textAlignLeft">Hildevon von Knechtbert</StyledH2>
+      <StyledH2 className="textAlignLeft">{name}</StyledH2>
       <Text as="h4" color="gray" textAlign="start">
-        masonry, construction, gardener
+        {service}
       </Text>
       <Box fill="horizontal" wrap>
         <Text as="p" textAlign="start">
