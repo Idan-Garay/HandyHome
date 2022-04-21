@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { User, Map, Send } from "grommet-icons";
 import { Box, Text, Button, Avatar } from "grommet";
 
-const UserProfile = () => {
+const UserProfile = ({ id, contactNo, area }) => {
   return (
     <Box
       gap="small"
@@ -23,7 +24,7 @@ const UserProfile = () => {
           <Map />
           <Text color="gray">From</Text>
         </Box>
-        <Text textAlign="right"> Area 1</Text>
+        <Text textAlign="end"> {area}</Text>
       </Box>
 
       <Box
@@ -36,10 +37,12 @@ const UserProfile = () => {
           <Send />
           <Text color="gray">Last Delivery</Text>
         </Box>
-        <Text textAlign="right">6 days</Text>
+        <Text textAlign="end">6 days</Text>
       </Box>
 
-      <Button type="submit" fill="horizontal" primary label="Request" />
+      <Link to="request" state={{ profileId: id, contactNo }}>
+        <Button type="submit" fill="horizontal" primary label="Request" />
+      </Link>
     </Box>
   );
 };

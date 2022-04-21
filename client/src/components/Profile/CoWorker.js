@@ -38,7 +38,7 @@ const CoWorker = () => {
               <Text color="gray">From</Text>
             </Box>
           </Box>
-          <Text textAlign="right"> Area 1</Text>
+          <Text textAlign="end"> Area 1</Text>
         </Box>
       </Box>
       <Box
@@ -49,9 +49,9 @@ const CoWorker = () => {
         fill="horizontal"
         wrap
       >
-        <StyledH2>Hildevon von Knechtbert</StyledH2>
+        <StyledH2>Mark Gray</StyledH2>
         <Text as="h4" color="gray">
-          masonry, construction, gardener
+          masonry
         </Text>
         <Text as="p" textAlign="start">
           Brokers and traders and money moves field bet customer value chain
