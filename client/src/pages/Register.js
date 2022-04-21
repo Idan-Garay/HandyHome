@@ -4,13 +4,37 @@ import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import { registerUser } from "../API/user";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
 `;
 
+const ErrorLabel = styled(Text)`
+  color: red;
+  text-align: left;
+`;
+
+const schema = yup
+  .object({
+    username: yup.string().min(5).max(20).required(),
+    password: yup.string().min(8).max(20).required(),
+    email: yup.string().email(),
+    createdOn: yup.date().default(() => new Date()),
+  })
+  .required();
+
 const Register = () => {
-  const { handleSubmit, control, getValues, reset } = useForm({
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: { username: "", password: "", email: "" },
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = () => {
@@ -27,31 +51,41 @@ const Register = () => {
           <Controller
             name="username"
             control={control}
+            rules={{ required: true, maxLength: 20, minLength: 5 }}
             render={({ field }) => (
-              <Box direction="row" gap="medium" wrap>
-                <Text text>Username</Text>
-                <StyledTextInput {...field} />
-              </Box>
+              <>
+                <Box direction="row" gap="medium" wrap>
+                  <Text text>Username</Text>
+                  <StyledTextInput {...field} />
+                </Box>
+                <ErrorLabel>{errors.username?.message}</ErrorLabel>
+              </>
             )}
           />
           <Controller
             name="password"
             control={control}
             render={({ field }) => (
-              <Box direction="row" gap="medium" wrap>
-                <Text>Password</Text>
-                <StyledTextInput type="password" {...field} />
-              </Box>
+              <>
+                <Box direction="row" gap="medium" wrap>
+                  <Text>Password</Text>
+                  <StyledTextInput type="password" {...field} />
+                </Box>
+                <ErrorLabel>{errors.password?.message}</ErrorLabel>
+              </>
             )}
           />
           <Controller
             name="email"
             control={control}
             render={({ field }) => (
-              <Box direction="row" gap="medium" wrap>
-                <Text>Email</Text>
-                <StyledTextInput {...field} />
-              </Box>
+              <>
+                <Box direction="row" gap="medium" wrap>
+                  <Text>Email</Text>
+                  <StyledTextInput {...field} />
+                </Box>
+                <ErrorLabel>{errors.username?.message}</ErrorLabel>
+              </>
             )}
           />
         </Box>
