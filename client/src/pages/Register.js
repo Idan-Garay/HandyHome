@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Form, TextInput, Text, Button } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
-import { registerUser } from "../API/user";
+import {
+  isEmailRegistered,
+  registerUser,
+  serverValidateRegisterForm,
+} from "../API/user";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -33,15 +37,28 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: { username: "", password: "", email: "" },
+    defaultValues: {
+      username: "",
+      password: "",
+      email: "",
+    },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = () => {
+  const [serverValErr, setServerValErr] = useState(false);
+
+  const onSubmit = async () => {
     const registerForm = getValues();
 
-    registerUser(registerForm);
-    reset();
+    const resultError = await serverValidateRegisterForm(registerForm);
+    const keysLength = Object.keys(resultError).length;
+    if (keysLength > 0) {
+      setServerValErr(true);
+    } else {
+      setServerValErr(false);
+      registerUser(registerForm);
+      reset();
+    }
   };
 
   return (
@@ -88,6 +105,9 @@ const Register = () => {
               </>
             )}
           />
+          {serverValErr ? (
+            <ErrorLabel>Username or email is already used.</ErrorLabel>
+          ) : null}
         </Box>
         <Box
           tag="footer"
