@@ -38,3 +38,13 @@ server.get("/get/user", (req, res) => {
     });
   }
 });
+
+server.get("/users", (req, res) => {
+  try {
+    const users = db.users;
+    if (users.length > 0) res.status(200).jsonp(users);
+    res.status(400).jsonp({ error: "No users" });
+  } catch (err) {
+    console.log(err);
+  }
+});
