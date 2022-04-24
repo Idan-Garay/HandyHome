@@ -7,6 +7,10 @@ const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
 `;
 
+// forgot password
+// register
+// validation
+
 const Login = () => {
   const { handleSubmit, control } = useForm({
     defaultValues: { username: "", password: "" },
