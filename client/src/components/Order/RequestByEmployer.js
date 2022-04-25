@@ -3,6 +3,7 @@ import { Box, Button, Heading, TextArea, TextInput, Text } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import { postRequestByEmployer } from "../../API/order";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -12,17 +13,19 @@ const StyledTextArea = styled(TextArea)`
 `;
 
 const RequestByEmployer = () => {
+  const { profileId, contactNo } = useLocation().state;
+
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       formType: "request",
-      contactNo: "",
+      contactNo: contactNo,
       minRate: "",
       description: "",
     },
   });
 
   const onSubmit = (data) => {
-    postRequestByEmployer(data);
+    postRequestByEmployer({ ...data, profileId });
     reset();
   };
 

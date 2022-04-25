@@ -1,12 +1,13 @@
 const PORT = 4000;
 
 export const postRequestByEmployer = (requestForm) => {
-  const { contactNo, minRate, description } = requestForm;
-
+  const { formType, contactNo, minRate, description, profileId } = requestForm;
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
+      from: profileId,
+      formType,
       contactNo,
       minRate,
       description,
