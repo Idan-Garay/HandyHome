@@ -5,11 +5,13 @@ import styled from "styled-components";
 import {
   isEmailRegistered,
   registerUser,
+  sendConfirmationEmail,
   serverValidateRegisterForm,
 } from "../API/user";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -22,14 +24,24 @@ const ErrorLabel = styled(Text)`
 
 const schema = yup
   .object({
-    username: yup.string().min(5).max(20).required(),
-    password: yup.string().min(8).max(20).required(),
+    username: yup
+      .string()
+      .min(5)
+      .max(20)
+      .required(),
+    password: yup
+      .string()
+      .min(8)
+      .max(20)
+      .required(),
     email: yup.string().email(),
     createdOn: yup.date().default(() => new Date()),
   })
   .required();
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     control,
@@ -38,9 +50,9 @@ const Register = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: "",
-      password: "",
-      email: "",
+      username: "Joshzxy",
+      password: "xzy12345",
+      email: "garayidan@gmail.com",
     },
     resolver: yupResolver(schema),
   });
@@ -57,6 +69,8 @@ const Register = () => {
     } else {
       setServerValErr(false);
       registerUser(registerForm);
+      // sendConfirmationEmail(registerForm);
+      navigate("/register/success");
       reset();
     }
   };
