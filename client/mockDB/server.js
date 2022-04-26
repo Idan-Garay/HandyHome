@@ -3,6 +3,22 @@ const server = jsonServer.create();
 const router = jsonServer.router("./db.json");
 const middlewares = jsonServer.defaults();
 // const port = process.env.PORT || 4000;
+
+// cd client
+// json-server --watch ./mockDB/db.json --port 4000
+// 
+
+
+// HTTP Requests: GET, POST, PUT, DELETE, etc.
+
+// GET -> get data from backend
+// POST -> ADD
+// PUT -> Edit
+
+// objective: getting the jobs data
+
+// GET DATA
+
 const port = 4000;
 var db = require("./db.json");
 
@@ -15,6 +31,7 @@ server.use(
   })
 );
 server.use(jsonServer.bodyParser);
+
 
 server.get("/get/user", (req, res) => {
   let userId = req.query["userId"];

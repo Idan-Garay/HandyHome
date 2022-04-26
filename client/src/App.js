@@ -3,12 +3,14 @@ import "./App.css";
 // import Feedback from "./pages/Feedback";
 // import Request from "./pages/Request";
 import Discovery from "./pages/Discovery";
-import { Grommet, Footer, Main, Header, Box } from "grommet";
+import { Grommet, Footer, Main, Header, Box} from "grommet";
 import { Tools } from "grommet-icons";
 import theme from "./Theme";
 import { Routes, Route, NavLink } from "react-router-dom";
 import RequestByEmployer from "./components/Order/RequestByEmployer";
 import Profile from "./pages/Profile";
+import JobCategoryList from "./pages/JobCategoryList";
+import CategoryUserList from "./pages/CategoryUserList";
 import Register from "./pages/Register";
 import styled from "styled-components";
 import RegisterPrompt from "./components/Prompts/RegisterPrompt";
@@ -35,6 +37,9 @@ function App() {
               <StyledNavLink to="/">Discover</StyledNavLink>
             </Box>
             <Box>
+              <StyledNavLink to="/list">List</StyledNavLink>
+            </Box>
+            <Box>
               <StyledNavLink to="/login" weight="normal">
                 Login
               </StyledNavLink>
@@ -47,6 +52,8 @@ function App() {
           {/* <Feedback /> */}
           <Routes>
             <Route path="/" element={<Discovery />} />
+            <Route path="/list" element={<JobCategoryList />} />
+            <Route path="/list/:path" element={<CategoryUserList />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/register/success" element={<RegisterPrompt />} />

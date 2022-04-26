@@ -54,6 +54,15 @@
       "description": "Hello world",
       "status": "pending",
       "id": 6
+    },
+    {
+      "from": 1,
+      "formType": "request",
+      "contactNo": "09663204332",
+      "minRate": "500",
+      "description": "Finish our project",
+      "status": "pending",
+      "id": 7
     }
   ],
   "feedbacks": [
@@ -271,6 +280,38 @@
       "profileId": 1,
       "verified": 0,
       "id": 8
+    }
+  ],
+  "jobs": [
+    {
+      "jobName": "Plumbing",
+      "path": "/list/plumbing",
+      "id": 1
+    },
+    {
+      "jobName": "Carpentry",
+      "path": "/list/carpentry",
+      "id": 2
+    },
+    {
+      "jobName": "Nasonry",
+      "path": "/list/masonry",
+      "id": 3
+    },
+    {
+      "jobName": "Gardening",
+      "path": "/list/gardening",
+      "id": 4
+    },
+    {
+      "jobName": "Housekeeping",
+      "path": "/list/housekeeping",
+      "id": 5
+    },
+    {
+      "jobName": "Babysitting",
+      "path": "/list/babysitting",
+      "id": 6
     }
   ]
 }
