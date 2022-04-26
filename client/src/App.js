@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import styled from "styled-components";
 import RegisterPrompt from "./components/Prompts/RegisterPrompt";
+import JobHistory from "./components/Job/JobHistory";
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
@@ -57,6 +58,8 @@ function App() {
               element={<RequestByEmployer />}
             />
             <Route path="/registerPrompt" element={<RegisterPrompt />} />
+            <Route path="/jobhistory" element={<JobHistory />} /> 
+            {/* added */}
           </Routes>
         </Main>
 
