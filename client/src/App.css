@@ -10,4 +10,15 @@
   border: 1px solid black;
 }
 
+.jobGrid {
+  border-radius: 9px;
+  border: 1px solid black;
+}
+
+.jobLogo {
+  width: 45%;
+  height: 45%;
+  margin-bottom: 20%;
+}
+
 /* font-size: calc(10px + 2vmin); */

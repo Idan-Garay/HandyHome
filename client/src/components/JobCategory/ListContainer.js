@@ -1,9 +1,16 @@
-import { Box } from "grommet"
-import { Link } from "react-router-dom";
+import { Box, Image } from "grommet";
+import { useNavigate } from "react-router-dom";
 
 const ListContainer = (props) => {
-    return <Box direction="row-responsive" className="b-1" justify="start" border="all" width="80%">    
-        <Link to={props.path}>{props.jobName}</Link> 
+    let navigate = useNavigate();
+    const routeChange = () => {
+        let path = props.path;
+        navigate(path, { state: { job:props.jobName } });
+    }
+
+    return <Box gridArea={props.jobName} className="jobGrid" fill="vertical" focusIndicator={false} justify="center" hoverIndicator="background" onClick={routeChange} >
+        <Image alignSelf="center" className="jobLogo" src={props.img_src} />    
+        <strong>{props.jobName}</strong>
     </Box>
 };
 
