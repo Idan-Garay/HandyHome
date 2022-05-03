@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState,useEffect }from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -9,6 +9,7 @@ import {
   Button,
 } from 'grommet';
 import { FormPrevious } from 'grommet-icons';
+import HistoryDetail from "./HistoryDetail";
 
 const DetailsPage = ({ orderDetails, orderPageDetails, ...rest }) => (
   <Box direction="row" align="start" {...rest}>
@@ -24,52 +25,28 @@ DetailsPage.propTypes = {
   orderPageDetails: PropTypes.string,
 };
 
-const data = [
-    {
-        id: 1, desc: 'Cut the grass of a 14-acre field', date: 'Feb 27, 1:04 AM', amount: 3775, rating: 4,
-      },
-      {
-        id: 2, desc: 'Cut the grass of a 14-acre field', date: 'Mar 27, 4:04 PM', amount: 1200, rating: 5,
-      },
-      {
-        id: 3, desc: 'Cut the grass of a 14-acre field', date: 'Jan 30, 1:04 AM', amount: 3000, rating: 4,
-      },
-];
+
 
 const columns = [
   {
     property: 'id',
-    header: 'Order Number',
+    header: 'ID',
     render: datum => <Text truncate="tip">{datum.id}</Text>,
+    size: 'small',
+    align: 'center',
+  },
+  {
+    property: 'name',
+    header: 'Name',
+    render: datum => <Text truncate="tip">{datum.name}</Text>,
     size: 'medium',
     align: 'center',
   },
   {
-    property: 'desc',
-    header: 'Job Description',
-    render: datum => <Text truncate="tip">{datum.desc}</Text>,
-    size: 'xlarge',
-    align: 'center',
-  },
-  {
-    property: 'date',
-    header: 'Delivery Date',
-    render: datum => <Text truncate="tip">{datum.date}</Text>,
-    size: 'large',
-    align: 'center',
-  },
-  {
-    property: 'amount',
-    header: 'Total Price',
-    render: datum => <Text truncate="tip">{datum.amount}</Text>,
-    size: 'small',
-    align: 'center',
-  },
-  {
-    property: 'rating',
-    header: 'Rating',
-    render: datum => <Text truncate="tip">{datum.rating}</Text>,
-    size: 'small',
+    property: 'services',
+    header: 'Services',
+    render: datum => <Text truncate="tip">{datum.services}</Text>,
+    size: 'medium',
     align: 'center',
   },
 ];
@@ -78,8 +55,19 @@ export const JobHistory = () => {
   const size = React.useContext(ResponsiveContext);
   const [pageDetails, setPageDetails] = React.useState({});
 
+  const [data, setData] = useState(null);
+  useEffect(()=>{
+    fetch('http://localhost:4000/profiles')
+    .then(res=>{
+      return res.json();
+    })
+    .then(element=>{
+      setData(element);
+    });
+  },[]);
+
   return !pageDetails.id ? (
-    <>
+    <><p>aaa</p>
       <Heading
         id="orders-heading"
         level={3}
@@ -100,6 +88,7 @@ export const JobHistory = () => {
           ]}
           onClickRow={({ datum }) => setPageDetails(datum)}
           pin={['xsmall', 'small'].includes(size)}
+          alignSelf='center'
         />
       </Box>
     </>
@@ -117,19 +106,11 @@ export const JobHistory = () => {
         size="small"
         level={2}
         margin={{ horizontal: 'large', top: 'large', bottom: 'medium' }}
+        alignSelf='center'
       >
-        Job Details
+        Detail
       </Heading>
-      <Box margin={{ vertical: 'small', horizontal: 'large' }} gap="small">
-        {pageDetails &&
-          Object.entries(pageDetails).map(([key, value]) => (
-            <DetailsPage
-              key={key}
-              orderDetails={key}
-              orderPageDetails={value}
-            />
-          ))}
-      </Box>
+      <HistoryDetail element={pageDetails} alignSelf='center'/>
     </>
   );
 };
