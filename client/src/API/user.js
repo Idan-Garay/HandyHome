@@ -1,16 +1,36 @@
 const PORT = 4000;
+const serverPORT = 3501;
 
 // an API for client to server interaction
 
-export const serverValidateLoginForm = (loginForm) => {
+export const serverValidateLoginForm = async (loginForm) => {
   try {
-    const validationFeedback = fetch(`http://localhost:${PORT}/users`)
-      .then((res) => res.json())
-      .then((users) => validateLoginForm(users, loginForm));
+    let users = await fetch(`http://localhost:${serverPORT}/users`);
+    users = await users.json();
+    const validationFeedback = validateLoginForm(users, loginForm);
     return validationFeedback;
   } catch (err) {
     console.log(err);
   }
+};
+
+export const serverVerifiedUser = async (email) => {
+  try {
+    let users = await fetch(`http://localhost:${serverPORT}/users`);
+    users = await users.json;
+    return isUserVerified(users, email);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const isUserVerified = (users = [], email) => {
+  if (users.length) {
+    const user = users.find((user) => user.email === email);
+    // if users.find() returns -1 then no user was found otherwise, ln 23
+    if (user && user.verified === true) return user;
+  }
+  return false;
 };
 
 const validateLoginForm = (users, form) => {
@@ -39,37 +59,35 @@ const validateRegisterForm = (users, form) => {
   return errors;
 };
 
-export const serverValidateRegisterForm = (registerForm) => {
+export const serverValidateRegisterForm = async (registerForm) => {
   try {
-    const validationFeedback = fetch(`http://localhost:${PORT}/users`)
-      .then((res) => res.json())
-      .then((users) => validateRegisterForm(users, registerForm));
+    const users = await fetch(`http://localhost:${serverPORT}/users`);
+    const validationFeedback = validateRegisterForm(users, registerForm);
     return validationFeedback;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const sendConfirmationEmail = (registerForm) => {
-  const { username, password, email } = registerForm;
-
+export const sendConfirmationEmail = (registrantEmail) => {
   const requestOptions = {
     method: "POST",
     credentials: "include",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Sec-Fetch-Site": "cross-site",
+    },
     body: JSON.stringify({
-      accountType: 0,
-      username,
-      password,
-      email,
-      profileId: 1,
-      verified: 0,
+      email: registrantEmail,
     }),
   };
   try {
-    fetch(`http://localhost:${PORT}/api/registration`, requestOptions)
+    fetch(
+      `http://localhost:${serverPORT}/api/email/send_confirmation`,
+      requestOptions
+    )
       .then((res) => res.json())
-      .then(console.log);
+      .catch(console.log);
   } catch (err) {
     console.log(err);
   }
@@ -80,7 +98,9 @@ export const registerUser = (registerForm) => {
   const requestOptions = {
     method: "POST",
     credentials: "include",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       accountType: 0,
       username,
@@ -92,9 +112,9 @@ export const registerUser = (registerForm) => {
   };
 
   try {
-    fetch(`http://localhost:${PORT}/users`, requestOptions)
-      .then((res) => res.json())
-      .then((request) => request.id);
+    fetch(`http://localhost:${serverPORT}/users`, requestOptions).then((res) =>
+      res.json()
+    );
   } catch (err) {
     console.log(err);
   }

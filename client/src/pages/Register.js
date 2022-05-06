@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Form, TextInput, Text, Button } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
@@ -7,6 +7,8 @@ import {
   registerUser,
   sendConfirmationEmail,
   serverValidateRegisterForm,
+  getTest,
+  postTest,
 } from "../API/user";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -24,16 +26,8 @@ const ErrorLabel = styled(Text)`
 
 const schema = yup
   .object({
-    username: yup
-      .string()
-      .min(5)
-      .max(20)
-      .required(),
-    password: yup
-      .string()
-      .min(8)
-      .max(20)
-      .required(),
+    username: yup.string().min(5).max(20).required(),
+    password: yup.string().min(8).max(20).required(),
     email: yup.string().email(),
     createdOn: yup.date().default(() => new Date()),
   })
@@ -68,9 +62,10 @@ const Register = () => {
       setServerValErr(true);
     } else {
       setServerValErr(false);
-      registerUser(registerForm);
-      // sendConfirmationEmail(registerForm);
-      navigate("/register/success");
+      await registerUser(registerForm);
+      setTimeout(() => {
+        navigate("/register/success");
+      }, 1000);
       reset();
     }
   };
