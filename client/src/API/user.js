@@ -17,7 +17,7 @@ export const serverValidateLoginForm = async (loginForm) => {
 export const serverVerifiedUser = async (email) => {
   try {
     let users = await fetch(`http://localhost:${serverPORT}/users`);
-    users = await users.json;
+    users = await users.json();
     return isUserVerified(users, email);
   } catch (err) {
     console.log(err);

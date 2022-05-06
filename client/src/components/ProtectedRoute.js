@@ -3,9 +3,9 @@ import { Navigate } from "react-router-dom";
 import { AccountContext } from "../App";
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthorized } = useContext(AccountContext);
+  const { accountState } = useContext(AccountContext);
 
-  if (!isAuthorized) return <Navigate to="/" replace />;
+  if (!accountState.isAuthorized) return <Navigate to="/" replace />;
   return children;
 };
 

@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import "./App.css";
 // import Feedback from "./pages/Feedback";
 // import Request from "./pages/Request";
@@ -6,7 +6,6 @@ import { Grommet, Footer, Main, Header, Box } from "grommet";
 import theme from "./Theme";
 import NavBar from "./components/NavBar";
 import IndexRoutes from "./pages/Index";
-// import nodemailer from "nodemailer";
 
 const initialState = {
   accountType: 0,
@@ -14,6 +13,7 @@ const initialState = {
   email: "",
   profileId: 0,
   isAuthorized: false,
+  verified: false,
 };
 
 const accountReducer = (state, action) => {
@@ -26,7 +26,10 @@ const accountReducer = (state, action) => {
 
   switch (action.type) {
     case "LOGIN_ACCOUNT":
-      if (action.payload) newState = { ...action.payload };
+      if (action.payload.verified) {
+        newState = { ...action.payload };
+        localStorage.setItem("user", JSON.stringify(newState));
+      }
       break;
     case "LOGOUT_ACCOUNT":
       newState = {
@@ -35,6 +38,7 @@ const accountReducer = (state, action) => {
         email: "",
         profileId: 0,
       };
+      localStorage.removeItem("user");
 
       break;
     default:
@@ -46,14 +50,26 @@ const accountReducer = (state, action) => {
 export const AccountContext = React.createContext();
 
 function App() {
-  const [accountState, dispatch] = useReducer(accountReducer, initialState);
+  const [accountState, dispatch] = useReducer(
+    accountReducer,
+    initialState,
+    (initial) => {
+      const user = localStorage.getItem("user");
+      if (user !== "undefined") return JSON.parse(user);
+      return initial;
+    }
+  );
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(accountState));
+  }, [accountState]);
 
   return (
     <AccountContext.Provider value={{ accountState, dispatch }}>
       <Grommet theme={theme}>
         <div className="App">
           <Header justify="between" height="3.5em" pad="small-top">
-            <NavBar />
+            <NavBar {...accountState} />
           </Header>
 
           <Main fill="horizontal" justify="center">

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Box, Form, TextInput, Text, Button } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { AccountContext } from "../App";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -46,7 +46,9 @@ const schema = yup
 
 const Login = () => {
   let navigate = useNavigate();
-  const { dispatch } = useContext(AccountContext);
+  const { accountState, dispatch } = useContext(AccountContext);
+  if (accountState && accountState.isAuthorized)
+    return <Navigate to="/" replace />;
 
   const {
     handleSubmit,
@@ -81,7 +83,7 @@ const Login = () => {
       setServerValErr(false);
       if (!user) setServerVerifyErr(true);
       else {
-        const { accountType, username, email, profileId } = user;
+        const { accountType, username, email, profileId, verified } = user;
         dispatch({
           type: "LOGIN_ACCOUNT",
           payload: {
@@ -90,6 +92,7 @@ const Login = () => {
             email,
             profileId,
             isAuthorized: true,
+            verified,
           },
         });
         navigate("/");

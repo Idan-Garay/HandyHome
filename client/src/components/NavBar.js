@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Box } from "grommet";
 import { Tools } from "grommet-icons";
-import { NavLink, useMatch, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { AccountContext } from "../App";
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
@@ -26,11 +25,11 @@ const LoginOrRegisterButton = ({ isLoginPage }) => {
   );
 };
 
-const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profId }) => {
+const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
   return (
     <Box>
       {isAuthorized ? (
-        <StyledNavLink to={`/profile/${profId}`} weight="normal">
+        <StyledNavLink to={`/profile/${profileId}`} weight="normal">
           Profile
         </StyledNavLink>
       ) : (
@@ -40,10 +39,8 @@ const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profId }) => {
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ isAuthorized, profileId }) => {
   const isLoginPage = useLocation().pathname === "/login" ? true : false;
-  const { accountState } = useContext(AccountContext);
-  const { isAuthorized, profId } = accountState;
 
   return (
     <>
@@ -57,7 +54,7 @@ const NavBar = () => {
         <AuthorizedNavButtons
           isAuthorized={isAuthorized}
           isLoginPage={isLoginPage}
-          profId={profId}
+          profileId={profileId}
         />
       </Box>
     </>

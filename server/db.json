@@ -8,6 +8,15 @@
       "email": "xyz@gmail.com",
       "profileId": 0,
       "verified": false
+    },
+    {
+      "id": 1,
+      "accountType": 0,
+      "username": "Joshxxx",
+      "password": "12311321",
+      "email": "abcd@gmail.com",
+      "profileId": 0,
+      "verified": true
     }
   ],
   "profiles": [

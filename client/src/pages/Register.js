@@ -3,12 +3,9 @@ import { Box, Form, TextInput, Text, Button } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import {
-  isEmailRegistered,
   registerUser,
   sendConfirmationEmail,
   serverValidateRegisterForm,
-  getTest,
-  postTest,
 } from "../API/user";
 
 import { yupResolver } from "@hookform/resolvers/yup";
