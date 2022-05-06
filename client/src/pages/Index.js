@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Profile from "./Profile";
 import Register from "./Register";
 import Login from "./Login";
@@ -25,6 +25,7 @@ const Index = () => {
         path="/profile/:id/request"
         element={<ProtectedRoute children={<RequestByEmployer />} />}
       />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
