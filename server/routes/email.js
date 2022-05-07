@@ -1,7 +1,7 @@
 const express = require("express");
+const router = express.Router();
+const db = require("../models/index.js");
 
-const emailRoutes = express.Router();
-
-emailRoutes.route("/sendMail").get((req, res) => {});
+router("/sendMail").get((req, res) => {});
 
 export default emailRoutes;

@@ -1,28 +1,41 @@
-// const express = require("express");
-import express from "express";
-// const bodyParser = require("body-parser");
-import bodyParser from "body-parser";
-// const cors = require("cors");
-import cors from "cors";
-// const nodemailer = require("nodemailer");
-import nodemailer from "nodemailer";
-// const jwt = require("jsonwebtoken");
-import jwt from "jsonwebtoken";
-import { verifyUser } from "./jsonServerRequests.js";
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
+const { verifyUser } = require("./jsonServerRequests.js");
 
-// require("dotenv").config();
-import dotenv from "dotenv";
+const { Sequelize } = require("sequelize");
 
-import userRoutes from "./routes/user.js";
+require("dotenv").config();
 
-dotenv.config();
+const sequelize = new Sequelize("handyHome", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
+});
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    await sequelize.sync();
+
+    // transfer all api endpoints to server/routes
+
+    console.log("Connection has been established successfully");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+})();
+
+const userRoutes = require("./routes/User.js");
 
 const app = express();
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  next();
+});
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.json());
 
 app.use("/", userRoutes);
 

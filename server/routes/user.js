@@ -1,79 +1,56 @@
-import fetch from "node-fetch";
+const express = require("express");
+const { Op } = require("sequelize");
+const router = express.Router();
+const db = require("../models/index.js");
 
-import express from "express";
-import nodemailer from "nodemailer";
-import jwt from "jsonwebtoken";
+router.post("/register", async (req, res) => {
+  const userData = req.body;
 
-const userRoutes = express.Router();
-
-const PORT = 4000;
-
-userRoutes.route("/users").get((req, res) => {
-  try {
-    fetch(`http://localhost:${PORT}/users`)
-      .then((data) => data.json())
-      .then((users) => res.status(201).json(users));
-  } catch (err) {
-    console.log(err);
-  }
-});
-
-// userRoutes.route("/users/email_activate").post((req, res) => {
-//   sendConfirmationEmail(email);
-// });
-
-const sendConfirmationEmail = async (email) => {
-  const transport = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS,
+  const users = await db.User.findAndCountAll({
+    where: {
+      [Op.or]: [{ email: userData.email }, { username: userData.username }],
     },
   });
 
-  const token = jwt.sign({ email }, process.env.JWT_ACC_ACTIVATION_KEY, {
-    expiresIn: "20m",
-  });
-
-  const result = transport
-    .sendMail({
-      from: process.env.MAIL_FROM,
-      to: email,
-      subject: "Confirmation Email",
-      text: `Please confirm your account by clicking this link ${process.env.CLIENT_URL}/api/email/confirm/${token} within 20 minutes.`,
-    })
-    .then((res) => res.json());
-};
-
-userRoutes.route("/users").post((req, res) => {
-  const { username, password, email } = req.body;
-
-  const requestOptions = {
-    method: "POST",
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      accountType: 0,
-      username,
-      password,
-      email,
-      profileId: 1,
-      verified: 0,
-    }),
-  };
   try {
-    fetch(`http://localhost:${PORT}/users`, requestOptions)
-      .then((res2) => {
-        return res2.json();
-      })
-      .then(() => {
-        sendConfirmationEmail(email).then(console.log);
-      });
-    res.status(200).jsonp({ success: "user is added" });
+    const errors = {};
+
+    let flag = false;
+    const length = users.rows.length;
+
+    for (let x = 0; x < length && !flag; x++) {
+      if (users.rows[x].email === userData.email)
+        errors.email = "Email already exists.";
+      if (users.rows[x].username === userData.username)
+        errors.username = "Username already exists.";
+      if (Object.keys(errors).length === 2) flag = true;
+    }
+
+    if (!flag && users.count === 0) {
+      const user = await db.User.create(userData);
+      console.log(user, "here");
+      const result = "User registered successfully.";
+      res.status(200).json({ success: result });
+      return { success: result };
+    } else {
+      res.status(202).json(errors);
+      return errors;
+    }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 });
 
-export default userRoutes;
+router.get("/users/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const user = await db.User.findOne({ where: { id: userId } });
+  res.json(user);
+});
+
+router.post("/users", async (req, res) => {
+  const userData = req.body.formData;
+  const user = await db.User.create({ ...userData });
+  res.json(user);
+});
+
+module.exports = router;

@@ -1,13 +1,13 @@
-import fetch from "node-fetch";
+const fetch = require("node-fetch");
 
-export const getUsers = async () => {
+const getUsers = async () => {
   const users = await fetch("http://localhost:4000/users").then((res) =>
     res.json()
   );
   return users;
 };
 
-export const verifyUser = async (email) => {
+const verifyUser = async (email) => {
   const requestOptions = {
     method: "PATCH",
     credentials: "include",
@@ -32,3 +32,5 @@ export const verifyUser = async (email) => {
 
   return res;
 };
+
+module.exports = { getUsers, verifyUser };

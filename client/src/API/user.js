@@ -45,37 +45,12 @@ const validateLoginForm = (users, form) => {
   return isValid;
 };
 
-const validateRegisterForm = (users, form) => {
-  let flag = false; // true if both username and email already exists
-  const errors = {};
-
-  let length = users.length;
-  for (let x = 0; x < length && !flag; x++) {
-    if (users[x].email === form.email) errors.email = "Email already used.";
-    if (users[x].username === form.username)
-      errors.username = "Username already used.";
-    if (Object.keys(errors).length === 2) flag = true;
-  }
-  return errors;
-};
-
-export const serverValidateRegisterForm = async (registerForm) => {
-  try {
-    const users = await fetch(`http://localhost:${serverPORT}/users`);
-    const validationFeedback = validateRegisterForm(users, registerForm);
-    return validationFeedback;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const sendConfirmationEmail = (registrantEmail) => {
   const requestOptions = {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      "Sec-Fetch-Site": "cross-site",
     },
     body: JSON.stringify({
       email: registrantEmail,
@@ -93,7 +68,7 @@ export const sendConfirmationEmail = (registrantEmail) => {
   }
 };
 
-export const registerUser = (registerForm) => {
+export const registerUser = async (registerForm) => {
   const { username, password, email } = registerForm;
   const requestOptions = {
     method: "POST",
@@ -112,10 +87,13 @@ export const registerUser = (registerForm) => {
   };
 
   try {
-    fetch(`http://localhost:${serverPORT}/users`, requestOptions).then((res) =>
-      res.json()
+    const response = fetch(
+      `http://localhost:${serverPORT}/register`,
+      requestOptions
     );
+    return response;
   } catch (err) {
     console.log(err);
+    return {};
   }
 };
