@@ -1,41 +1,43 @@
 "use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Addresses", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      accountType: {
-        type: Sequelize.INTEGER,
-      },
-      username: {
+      street: {
         type: Sequelize.STRING,
       },
-      password: {
+      city: {
         type: Sequelize.STRING,
       },
-      email: {
+      area: {
         type: Sequelize.STRING,
-      },
-      verified: {
-        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("now"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn("now"),
       },
     });
+    // await queryInterface.addColumn("Addresses", "profileId", {
+    //   type: Sequelize.INTEGER,
+    //   references: {
+    //     model: "Profile",
+    //     key: "id",
+    //   },
+    //   onUpdate: "CASCADE",
+    //   onDelete: "SET NULL",
+    // });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.removeColumn("Addresses", "profileId");
+    await queryInterface.dropTable("Addresses");
   },
 };

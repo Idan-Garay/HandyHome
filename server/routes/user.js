@@ -3,6 +3,8 @@ const { Op } = require("sequelize");
 const router = express.Router();
 const db = require("../models/index.js");
 
+// endpoints: /register, /login
+
 router.post("/register", async (req, res) => {
   const userData = req.body;
 
@@ -28,7 +30,7 @@ router.post("/register", async (req, res) => {
 
     if (!flag && users.count === 0) {
       const user = await db.User.create(userData);
-      console.log(user, "here");
+
       const result = "User registered successfully.";
       res.status(200).json({ success: result });
       return { success: result };
@@ -39,6 +41,30 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     console.error(err);
   }
+});
+
+router.post("/login", async (req, res) => {
+  const form = req.body;
+  const result = { errors: {} };
+
+  const User = await db.User.findOne({ where: { email: form.email } });
+  if (User) {
+    if (User.password !== form.password)
+      result.errors.password = "Incorrect password";
+    if (User.password !== form.password && !User.verified) {
+      if (!User.verified)
+        result.errors.verified = "Only verified users can login";
+    } else if (User.password === form.password) {
+      const { accountType, username, email, profileId, verified } = User;
+      result.user = { accountType, username, email, profileId, verified };
+    }
+    res.status(203).json(result);
+  } else {
+    result.errors.email = "Email doesn't exist";
+    res.status(203).json(result);
+  }
+
+  return result;
 });
 
 router.get("/users/:userId", async (req, res) => {

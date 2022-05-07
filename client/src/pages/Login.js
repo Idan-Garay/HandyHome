@@ -7,7 +7,12 @@ import { AccountContext } from "../App";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { serverValidateLoginForm, serverVerifiedUser } from "../API/user";
+import {
+  login,
+  serverValidateLoginForm,
+  serverVerifiedUser,
+} from "../API/user";
+import LoadingScreen from "../components/LoadingScreen";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -47,6 +52,7 @@ const schema = yup
 const Login = () => {
   let navigate = useNavigate();
   const { accountState, dispatch } = useContext(AccountContext);
+
   if (accountState && accountState.isAuthorized)
     return <Navigate to="/" replace />;
 
@@ -58,79 +64,79 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      password: "12311321",
-      email: "xyz@gmail.com",
+      password: "xzy12345",
+      email: "garayidan@gmail.com",
     },
     resolver: yupResolver(schema),
   });
 
-  const [serverValErr, setServerValErr] = useState(false);
-  const [serverVerifyErr, setServerVerifyErr] = useState(false);
+  const [err, setErr] = useState({});
+  const [loadSpinner, setLoadSpinner] = useState(false);
 
   const onSubmit = async () => {
     // do some validation
     // redirect if okay
     // show errors using useform
-    const registerForm = getValues();
+    const loginForm = getValues();
 
-    // expected boolean value
-    const isValid = await serverValidateLoginForm(registerForm);
-    const user = await serverVerifiedUser(registerForm.email);
+    // expected errors messages or {}
+    let result = await login(loginForm);
 
-    if (!isValid) {
-      setServerValErr(true);
-    } else {
-      setServerValErr(false);
-      if (!user) setServerVerifyErr(true);
-      else {
-        const { accountType, username, email, profileId, verified } = user;
-        dispatch({
-          type: "LOGIN_ACCOUNT",
-          payload: {
-            accountType,
-            username,
-            email,
-            profileId,
-            isAuthorized: true,
-            verified,
-          },
-        });
+    if (!result.errors.email && !result.errors.verified) {
+      setLoadSpinner(true);
+
+      setTimeout(() => {
+        setLoadSpinner(false);
         navigate("/");
-        reset();
-      }
+
+        dispatch({ type: "LOGIN_ACCOUNT", payload: result.user });
+      }, 1000);
+      reset();
+    } else {
+      setErr(result.errors);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Box margin="auto" width={{ min: "large", max: "50%" }}>
-        <Box gap="medium">
-          <MyController name="email" control={control} errors={errors} />
-          <MyController
-            name="password"
-            control={control}
-            errors={errors}
-            type="password"
-          />
+    <>
+      {loadSpinner ? (
+        <LoadingScreen />
+      ) : (
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Box margin="auto" width={{ min: "large", max: "50%" }}>
+            <Box gap="medium">
+              <MyController name="email" control={control} errors={errors} />
+              <MyController
+                name="password"
+                control={control}
+                errors={errors}
+                type="password"
+              />
 
-          {serverValErr ? (
-            <ErrorLabel>Email or password is incorrect</ErrorLabel>
-          ) : null}
+              {err.email !== undefined ? (
+                <ErrorLabel>{err.email}</ErrorLabel>
+              ) : null}
 
-          {serverVerifyErr ? (
-            <ErrorLabel>Only verified users can login.</ErrorLabel>
-          ) : null}
-        </Box>
-        <Box
-          tag="footer"
-          margin={{ top: "medium" }}
-          direction="row"
-          justify="end"
-        >
-          <Button type="submit" primary label="Login" />
-        </Box>
-      </Box>
-    </Form>
+              {err.password !== undefined ? (
+                <ErrorLabel>{err.password}</ErrorLabel>
+              ) : null}
+
+              {err.verified !== undefined ? (
+                <ErrorLabel>{err.verified}</ErrorLabel>
+              ) : null}
+            </Box>
+            <Box
+              tag="footer"
+              margin={{ top: "medium" }}
+              direction="row"
+              justify="end"
+            >
+              <Button type="submit" primary label="Login" />
+            </Box>
+          </Box>
+        </Form>
+      )}
+    </>
   );
 };
 

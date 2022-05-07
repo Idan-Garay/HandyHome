@@ -27,7 +27,7 @@ const accountReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_ACCOUNT":
       if (action.payload.verified) {
-        newState = { ...action.payload };
+        newState = { ...action.payload, isAuthorized: true };
         localStorage.setItem("user", JSON.stringify(newState));
       }
       break;
@@ -37,6 +37,7 @@ const accountReducer = (state, action) => {
         username: "",
         email: "",
         profileId: 0,
+        isAuthorized: false,
       };
       localStorage.removeItem("user");
 

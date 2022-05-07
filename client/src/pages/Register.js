@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Form, TextInput, Text, Button, Spinner, Layer } from "grommet";
+import { Box, Form, TextInput, Text, Button } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import { registerUser } from "../API/user";
@@ -7,6 +7,7 @@ import { registerUser } from "../API/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import LoadingScreen from "../components/LoadingScreen";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -25,14 +26,6 @@ const schema = yup
     createdOn: yup.date().default(() => new Date()),
   })
   .required();
-
-const LoadingScreen = () => {
-  return (
-    <Layer position="center" plain>
-      <Spinner size="large" />
-    </Layer>
-  );
-};
 
 const Register = () => {
   const navigate = useNavigate();

@@ -1,8 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import { BrowserRouter, useLocatio } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
+import SequelizeTest from "./SequelizeTest";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -10,5 +11,6 @@ const root = createRoot(container);
 root.render(
   <BrowserRouter basename="/">
     <App tab="home" />
+    {/* <SequelizeTest /> */}
   </BrowserRouter>
 );
