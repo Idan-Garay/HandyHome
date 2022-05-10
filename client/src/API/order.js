@@ -1,4 +1,4 @@
-const PORT = 4000;
+const serverPORT = 3501;
 
 export const postRequestByEmployer = (requestForm) => {
   const { formType, contactNo, minRate, description, profileId } = requestForm;
@@ -16,7 +16,7 @@ export const postRequestByEmployer = (requestForm) => {
   };
 
   try {
-    fetch(`http://localhost:${PORT}/requests`, requestOptions)
+    fetch(`http://localhost:${serverPORT}/requests`, requestOptions)
       .then((res) => res.json())
       .then((request) => request.id);
   } catch (err) {
