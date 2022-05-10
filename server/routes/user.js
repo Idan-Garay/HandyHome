@@ -79,4 +79,34 @@ router.post("/users", async (req, res) => {
   res.json(user);
 });
 
+router.get("/seedUser", async (req, res) => {
+  try {
+    const User = await db.User.create(
+      {
+        accountType: 0,
+        username: "username1",
+        password: "12311321",
+        email: "username@gmail.com",
+        Profile: {
+          name: "Yoshi",
+          services: "masonry,construction,gardener",
+          contactNo: "09663204332",
+          Address: {
+            street: "National Highway, Reynes Building",
+            city: "Poblacion Near Compostela Public Market",
+            area: "Compostela",
+          },
+          verified: true,
+        },
+      },
+      {
+        include: [db.User.Profile],
+      }
+    );
+    res.json(User);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;
