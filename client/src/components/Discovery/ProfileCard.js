@@ -17,7 +17,7 @@ const ProfileCard = ({ profileData }) => {
   const { id, services, area, name } = profileData;
   return (
     <Link
-      to={`profile/${id}`}
+      to={`/profile/${id}`}
       state={profileData}
       style={{ textDecoration: "none" }}
     >

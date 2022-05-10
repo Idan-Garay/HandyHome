@@ -49,8 +49,9 @@ const JobCategoryList = () => {
                 {name: "Babysitting", start: [2, 1], end: [2, 1]},
             ]}
         >       
-            {List.map(({jobName,path,img_src}, index) => 
-                <ListContainer key={index} jobName={jobName} path={path} img_src={img_src} />)} 
+            {List.map(({jobName,path,img_src,jobType}, index) => 
+                <ListContainer key={index} jobName={jobName} jobType={jobType} path={path} img_src={img_src} />
+            )} 
         </Grid>
 
 

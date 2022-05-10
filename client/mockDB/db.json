@@ -285,36 +285,42 @@
   "jobs": [
     {
       "jobName": "Plumbing",
+      "jobType": "plumber",
       "path": "/list/plumbing",
       "img_src": "/assets/tap.png",
       "id": 1
     },
     {
       "jobName": "Carpentry",
+      "jobType": "construction",
       "path": "/list/carpentry",
       "img_src": "/assets/tools.png",
       "id": 2
     },
     {
       "jobName": "Masonry",
+      "jobType": "masonry",
       "path": "/list/masonry",
       "img_src": "/assets/brickwork.png",
       "id": 3
     },
     {
       "jobName": "Gardening",
+      "jobType": "gardener",
       "path": "/list/gardening",
       "img_src": "/assets/gardening.png",
       "id": 4
     },
     {
       "jobName": "Housekeeping",
+      "jobType": "housekeeper",
       "path": "/list/housekeeping",
       "img_src": "/assets/sweeping.png",
       "id": 5
     },
     {
       "jobName": "Babysitting",
+      "jobType": "babysitter",
       "path": "/list/babysitting",
       "img_src": "/assets/baby-stroller.png",
       "id": 6

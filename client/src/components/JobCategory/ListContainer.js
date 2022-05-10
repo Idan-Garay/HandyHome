@@ -5,7 +5,7 @@ const ListContainer = (props) => {
     let navigate = useNavigate();
     const routeChange = () => {
         let path = props.path;
-        navigate(path, { state: { job:props.jobName } });
+        navigate(path, { state: { jobType:props.jobType } });
     }
 
     return <Box gridArea={props.jobName} className="jobGrid" fill="vertical" focusIndicator={false} justify="center" hoverIndicator="background" onClick={routeChange} >
