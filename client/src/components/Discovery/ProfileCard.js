@@ -18,7 +18,7 @@ const ProfileCard = ({ profileData }) => {
 
   return (
     <Link
-      to={`profile/${id}`}
+      to={`profiles/${id}`}
       state={profileData}
       style={{ textDecoration: "none" }}
     >

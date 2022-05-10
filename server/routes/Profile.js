@@ -12,6 +12,21 @@ router.get("/profiles", async (req, res) => {
   }
 });
 
+router.get("/profiles/:id", async (req, res) => {
+  try {
+    console.log("here", req.params);
+    const profileId = req.params.id;
+    let profile = await db.Profile.findOne({
+      include: db.Address,
+      where: { id: profileId },
+    });
+
+    res.status(200).jsonp(profile);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 // router.post("/profiles", async (req, res) => {
 //   const addressData = req.body;
 

@@ -10,3 +10,9 @@ export const getProfiles = () => {
       });
     });
 };
+
+export const getProfile = (id) => {
+  return fetch(`http://localhost:${serverPORT}/profiles/${id}`).then((res) =>
+    res.json()
+  );
+};

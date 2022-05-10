@@ -10,7 +10,8 @@ const StyledH2 = styled.h2`
   margin-left: 26%;
 `;
 
-const ProfileComponent = ({ id, contactNo, service, area, name }) => {
+const ProfileComponent = (props) => {
+  const { id, contactNo, service, area, name } = props;
   return (
     <Box
       align="center"

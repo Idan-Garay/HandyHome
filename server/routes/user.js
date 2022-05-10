@@ -55,8 +55,8 @@ router.post("/login", async (req, res) => {
       if (!User.verified)
         result.errors.verified = "Only verified users can login";
     } else if (User.password === form.password) {
-      const { accountType, username, email, profileId, verified } = User;
-      result.user = { accountType, username, email, profileId, verified };
+      const { accountType, username, email, id, verified } = User;
+      result.user = { accountType, username, id, email, verified };
     }
     res.status(203).json(result);
   } else {

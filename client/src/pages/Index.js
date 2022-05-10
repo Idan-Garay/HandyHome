@@ -18,11 +18,11 @@ const Index = () => {
       <Route path="/register/success" element={<RegisterPrompt />} />
       <Route
         exact
-        path="/profile/:id"
+        path="/profiles/:id"
         element={<ProtectedRoute children={<Profile />} />}
       />
       <Route
-        path="/profile/:id/request"
+        path="/profiles/:id/request"
         element={<ProtectedRoute children={<RequestByEmployer />} />}
       />
       <Route path="*" element={<Navigate to="/" replace />} />

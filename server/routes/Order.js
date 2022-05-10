@@ -2,12 +2,23 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models/index.js");
 
-router.get("/profiles", async (req, res) => {
+router.post("/request", async (req, res) => {
   try {
-    let profiles = await db.Profile.findAll({ include: db.Address });
+    const { from, to, price, description, status, contactNo } = req.body;
 
-    res.status(200).jsonp(profiles);
+    let profile = await db.Order.create({
+      from,
+      to,
+      price,
+      description,
+      status,
+      contactNo,
+    });
+
+    res.status(200).jsonp(profile);
   } catch (e) {
     console.log(e);
   }
 });
+
+module.exports = router;

@@ -21,11 +21,14 @@ const sequelize = new Sequelize("handyHome", "root", "", {
     // await db.User.sync({ alter: true });
     // await db.Profile.sync({ alter: true });
     // await db.Address.sync({ alter: true });
+    // await db.Order.sync({ alter: true });
+    // await db.Feedback.sync({ alter: true });
 
     // transfer all api endpoints to server/routes
     const profileRoutes = require("./routes/Profile.js");
     const addressRoutes = require("./routes/Address.js");
     const userRoutes = require("./routes/User.js");
+    const orderRoutes = require("./routes/Order.js");
 
     const app = express();
     app.use((req, res, next) => {
@@ -40,6 +43,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
     app.use("/", userRoutes);
     app.use("/", addressRoutes);
     app.use("/", profileRoutes);
+    app.use("/", orderRoutes);
 
     app.post("/api/email/send_confirmation", async (req, res) => {
       const { email } = req.body;
