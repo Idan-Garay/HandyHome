@@ -46,8 +46,11 @@ const CustomerRoutes = () => {
 };
 
 const Index = ({ accountType }) => {
-  console.log(accountType);
-  return <>{accountType === 2 ? <AdminRoutes /> : <CustomerRoutes />}</>;
+  return (
+    <>
+      {accountType && accountType === 2 ? <AdminRoutes /> : <CustomerRoutes />}
+    </>
+  );
 };
 
 export default Index;

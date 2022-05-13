@@ -36,7 +36,8 @@ const accountReducer = (state, action) => {
         isAuthorized: false,
       };
       localStorage.removeItem("user");
-
+    case "INIT_ACCOUNTSTATE":
+      newState = { ...initialState };
       break;
     default:
       throw new Error(`action type: ${action.type} not found`);
@@ -60,7 +61,10 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(accountState));
-    if (!accountState) navigate("/login");
+    if (!accountState) {
+      dispatch({ type: "INIT_ACCOUNTSTATE" });
+      navigate("/login");
+    }
   }, [accountState]);
 
   return (
@@ -72,7 +76,9 @@ function App() {
           </Header>
 
           <Main fill="horizontal" justify="center">
-            <IndexRoutes accountType={accountState.accountType} />
+            <IndexRoutes
+              accountType={!accountState ? 0 : accountState.accountType}
+            />
           </Main>
 
           <Footer height="xsmall" border="top" justify="center">
