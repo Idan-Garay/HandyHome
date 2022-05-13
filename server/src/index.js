@@ -3,9 +3,11 @@ const app = express();
 const mysql = require("mysql2");
 const cors = require("cors");
 const { request } = require("express");
+const multer = require('multer');
 
 app.use(express.json());
 app.use(cors());
+
 
 const connection = mysql.createConnection({
   host: "localhost",

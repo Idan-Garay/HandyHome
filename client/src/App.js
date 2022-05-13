@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import styled from "styled-components";
 import RegisterPrompt from "./components/Prompts/RegisterPrompt";
 import Login from "./pages/Login";
+import ProfileValidation from "./pages/ProfileValidation";
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
@@ -51,6 +52,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/register/success" element={<RegisterPrompt />} />
             <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/profilevalidation" element={<ProfileValidation />} />
             <Route
               path="/profile/:id/request"
               element={<RequestByEmployer />}
