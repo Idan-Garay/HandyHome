@@ -12,7 +12,6 @@ const Profile = () => {
     const fn = async () => {
       const res = await getProfile(id);
       setProfileData(res);
-      console.log("hello", res);
     };
     fn();
   }, []);
