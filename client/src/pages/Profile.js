@@ -9,8 +9,8 @@ const Profile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
-  const { AccountState, dispatch } = useContext(AccountContext);
-  const isUnauthorized = !AccountState ? true : false;
+  const { accountState, dispatch } = useContext(AccountContext);
+  const isUnauthorized = !accountState ? true : false;
 
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });

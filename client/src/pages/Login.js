@@ -85,12 +85,10 @@ const Login = () => {
       !result.errors.verified
     ) {
       setLoadSpinner(true);
-      console.log(result, "here");
       setTimeout(() => {
+        dispatch({ type: "LOGIN_ACCOUNT", payload: result.user });
         setLoadSpinner(false);
         navigate("/");
-
-        dispatch({ type: "LOGIN_ACCOUNT", payload: result.user });
       }, 1000);
       reset();
     } else {

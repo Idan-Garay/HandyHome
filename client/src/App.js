@@ -19,11 +19,6 @@ const initialState = {
 const accountReducer = (state, action) => {
   let newState;
 
-  /* action: {type, payload} type & payload are conventions
-     type -> describes the action to be done
-     payload -> data accompanied by the action
-  */
-
   switch (action.type) {
     case "LOGIN_ACCOUNT":
       if (action.payload.verified) {
