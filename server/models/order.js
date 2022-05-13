@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasOne(models.Feedback);
+      this.hasOne(models.PaymentValidation);
+      this.belongsTo(models.User);
     }
   }
   Order.init(
     {
-      from: DataTypes.INTEGER,
-      to: DataTypes.INTEGER,
       price: DataTypes.FLOAT,
       description: DataTypes.STRING,
-      status: DataTypes.STRING,
+      status: { type: DataTypes.STRING, defaultValue: "pending" },
       contactNo: DataTypes.STRING,
     },
     {
