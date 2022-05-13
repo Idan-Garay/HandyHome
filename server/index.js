@@ -41,7 +41,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
     app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
     app.use(express.static(path.join(__dirname, "../client/public")));
-
+    app.use(express.json());
     app.use("/", userRoutes);
     app.use("/", addressRoutes);
     app.use("/", profileRoutes);
@@ -49,7 +49,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
 
     app.post("/api/email/send_confirmation", async (req, res) => {
       const { email } = req.body;
-      console.log(req.body);
+
       const transport = nodemailer.createTransport({
         host: process.env.MAIL_HOST,
         port: process.env.MAIL_PORT,

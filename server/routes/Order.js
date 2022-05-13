@@ -4,7 +4,7 @@ const db = require("../models/index.js");
 
 router.post("/request", async (req, res) => {
   try {
-    const { from, to, price, description, status, contactNo } = req.body;
+    const { from, to, price, description, contactNo } = req.body;
 
     let order = await db.Order.create({
       fromUserId: from,
