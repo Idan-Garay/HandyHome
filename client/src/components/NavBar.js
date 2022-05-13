@@ -25,11 +25,11 @@ const LoginOrRegisterButton = ({ isLoginPage }) => {
   );
 };
 
-const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, id }) => {
+const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
   return (
     <Box>
       {isAuthorized ? (
-        <StyledNavLink to={`/profiles/${id}`} weight="normal">
+        <StyledNavLink to={`/profile/${profileId}`} weight="normal">
           Profile
         </StyledNavLink>
       ) : (
