@@ -3,6 +3,7 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const { verifyUser } = require("./jsonServerRequests.js");
+const path = require("path");
 
 const { Sequelize } = require("sequelize");
 const db = require("./models/index.js");
@@ -18,12 +19,12 @@ const sequelize = new Sequelize("handyHome", "root", "", {
   try {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
-    await db.User.sync({ alter: true });
-    await db.Profile.sync({ alter: true });
-    await db.Address.sync({ alter: true });
-    await db.Order.sync({ alter: true });
-    await db.Feedback.sync({ alter: true });
-    await db.PaymentValidation.sync({ alter: true });
+    // await db.User.sync({ alter: true });
+    // await db.Profile.sync({ alter: true });
+    // await db.Address.sync({ alter: true });
+    // await db.Order.sync({ alter: true });
+    // await db.Feedback.sync({ alter: true });
+    // await db.PaymentValidation.sync({ alter: true });
 
     // transfer all api endpoints to server/routes
     const profileRoutes = require("./routes/Profile.js");
@@ -39,7 +40,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
 
     app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
-    app.use(express.json());
+    app.use(express.static(path.join(__dirname, "../client/public")));
 
     app.use("/", userRoutes);
     app.use("/", addressRoutes);

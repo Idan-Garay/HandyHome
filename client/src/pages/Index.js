@@ -9,6 +9,7 @@ import RequestByEmployer from "../components/Order/RequestByEmployer";
 import RegisterPrompt from "../components/Prompts/RegisterPrompt";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ProfileEdit from "../components/Profile/ProfileEdit";
+import ProfileValidation from "../components/Profile/ProfileValidation";
 
 const Index = () => {
   return (
@@ -31,6 +32,7 @@ const Index = () => {
         path="/profiles/:id/request"
         element={<ProtectedRoute children={<RequestByEmployer />} />}
       />
+      <Route path="/profilevalidation" element={<ProfileValidation />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

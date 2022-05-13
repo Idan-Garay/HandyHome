@@ -1,6 +1,37 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 const db = require("../models/index.js");
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.resolve(__dirname, "../../client/public/validationImages"));
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+router.get("/upload", (req, res) => {
+  res.send("upload here");
+});
+
+router.post(
+  "/upload",
+  upload.fields([
+    { name: "file1", maxCount: 1 },
+    { name: "file2", maxCount: 1 },
+  ]),
+  (req, res, next) => {
+    res.send("upload here");
+    next();
+  }
+);
 
 router.get("/profiles", async (req, res) => {
   try {
