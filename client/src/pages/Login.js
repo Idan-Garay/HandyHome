@@ -74,17 +74,18 @@ const Login = () => {
   const [loadSpinner, setLoadSpinner] = useState(false);
 
   const onSubmit = async () => {
-    // do some validation
-    // redirect if okay
-    // show errors using useform
     const loginForm = getValues();
 
     // expected errors messages or {}
     let result = await login(loginForm);
 
-    if (!result.errors.email && !result.errors.verified) {
+    if (
+      !result.errors.email &&
+      !result.errors.password &&
+      !result.errors.verified
+    ) {
       setLoadSpinner(true);
-
+      console.log(result, "here");
       setTimeout(() => {
         setLoadSpinner(false);
         navigate("/");
