@@ -10,8 +10,18 @@ import RegisterPrompt from "../components/Prompts/RegisterPrompt";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ProfileEdit from "../components/Profile/ProfileEdit";
 import ProfileValidation from "../components/Profile/ProfileValidation";
+import Admin from "./admin/Admin";
 
-const Index = () => {
+const AdminRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/*" element={<Admin />} />
+      <Route exact path="/login" element={<Login />} />
+    </Routes>
+  );
+};
+
+const CustomerRoutes = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Discovery />} />
@@ -32,6 +42,11 @@ const Index = () => {
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
+};
+
+const Index = ({ accountType }) => {
+  console.log(accountType);
+  return <>{accountType === 2 ? <AdminRoutes /> : <CustomerRoutes />}</>;
 };
 
 export default Index;

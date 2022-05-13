@@ -6,7 +6,6 @@ import { Grommet, Footer, Main, Header, Box } from "grommet";
 import theme from "./Theme";
 import NavBar from "./components/NavBar";
 import IndexRoutes from "./pages/Index";
-import Admin from "./pages/admin/Admin";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {
@@ -67,23 +66,19 @@ function App() {
   return (
     <AccountContext.Provider value={{ accountState, dispatch }}>
       <Grommet theme={theme}>
-        {accountState && accountState.accountType !== 2 ? (
-          <div className="App">
-            <Header justify="between" height="3.5em" pad="small-top">
-              <NavBar {...accountState} />
-            </Header>
+        <div className="App">
+          <Header justify="between" height="3.5em" pad="small-top">
+            <NavBar {...accountState} />
+          </Header>
 
-            <Main fill="horizontal" justify="center">
-              <IndexRoutes />
-            </Main>
+          <Main fill="horizontal" justify="center">
+            <IndexRoutes accountType={accountState.accountType} />
+          </Main>
 
-            <Footer height="xsmall" border="top" justify="center">
-              <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
-            </Footer>
-          </div>
-        ) : (
-          <Admin />
-        )}
+          <Footer height="xsmall" border="top" justify="center">
+            <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
+          </Footer>
+        </div>
       </Grommet>
     </AccountContext.Provider>
   );
