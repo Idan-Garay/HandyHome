@@ -17,6 +17,7 @@ const AdminRoutes = () => {
     <Routes>
       <Route path="/*" element={<Admin />} />
       <Route exact path="/login" element={<Login />} />
+      <Route exact path="/profiles/:id" element={<Profile />} />
     </Routes>
   );
 };
