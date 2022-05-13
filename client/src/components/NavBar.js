@@ -45,7 +45,9 @@ const NavBar = ({ isAuthorized, id }) => {
   return (
     <>
       <Box pad="xxsmall">
-        <StyledNavLink to="/" icon={<Tools color="accent-4" size="large" />} />
+        <StyledNavLink to="/">
+          <Tools color="accent-4" size="large" />
+        </StyledNavLink>
       </Box>
       <Box justify="evenly" direction="row" width="medium">
         <Box>
