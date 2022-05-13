@@ -10,7 +10,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
   const { accountState, dispatch } = useContext(AccountContext);
-  const isUnauthorized = !accountState ? true : false;
 
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
@@ -28,8 +27,11 @@ const Profile = () => {
   return (
     <Page kind="wide" pad="0 2em">
       <PageContent background="light" border={true} round="small" gap="medium">
-        <ProfileComponent {...profileData} isUnauthorized={isUnauthorized} />
-        {!isUnauthorized && (
+        <ProfileComponent
+          {...profileData}
+          isUnauthorized={accountState.isAuthorized}
+        />
+        {accountState.isAuthorized && (
           <Box direction="row" width="small">
             <Button primary size="medium" fill onClick={onLogout}>
               Log out
