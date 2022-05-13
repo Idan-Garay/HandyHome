@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { User, Map, Send, UserSettings } from "grommet-icons";
 import { Box, Text, Button, Avatar } from "grommet";
 
-const UserProfile = ({ id, contactNo, area, accountType, isUnauthorized }) => {
+const UserProfile = ({ id, contactNo, area, accountType, isAuthorized }) => {
   return (
     <Box
       gap="small"
@@ -18,7 +18,7 @@ const UserProfile = ({ id, contactNo, area, accountType, isUnauthorized }) => {
         gap="xlarge"
         pad={{ right: "1em" }}
       >
-        {!isUnauthorized && (
+        {isAuthorized && (
           <Avatar background="#a9a9a9" size="small">
             <UserSettings color="white" size="13em" cursor="pointer" />
           </Avatar>
