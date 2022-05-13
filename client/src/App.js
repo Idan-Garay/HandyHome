@@ -6,6 +6,8 @@ import { Grommet, Footer, Main, Header, Box } from "grommet";
 import theme from "./Theme";
 import NavBar from "./components/NavBar";
 import IndexRoutes from "./pages/Index";
+import Admin from "./pages/admin/Admin";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   accountType: 0,
@@ -46,6 +48,7 @@ const accountReducer = (state, action) => {
 export const AccountContext = React.createContext();
 
 function App() {
+  const navigate = useNavigate();
   const [accountState, dispatch] = useReducer(
     accountReducer,
     initialState,
@@ -58,24 +61,29 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(accountState));
+    if (!accountState) navigate("/login");
   }, [accountState]);
 
   return (
     <AccountContext.Provider value={{ accountState, dispatch }}>
       <Grommet theme={theme}>
-        <div className="App">
-          <Header justify="between" height="3.5em" pad="small-top">
-            <NavBar {...accountState} />
-          </Header>
+        {accountState && accountState.accountType !== 2 ? (
+          <div className="App">
+            <Header justify="between" height="3.5em" pad="small-top">
+              <NavBar {...accountState} />
+            </Header>
 
-          <Main fill="horizontal" justify="center">
-            <IndexRoutes />
-          </Main>
+            <Main fill="horizontal" justify="center">
+              <IndexRoutes />
+            </Main>
 
-          <Footer height="xsmall" border="top" justify="center">
-            <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
-          </Footer>
-        </div>
+            <Footer height="xsmall" border="top" justify="center">
+              <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
+            </Footer>
+          </div>
+        ) : (
+          <Admin />
+        )}
       </Grommet>
     </AccountContext.Provider>
   );

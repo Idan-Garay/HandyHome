@@ -64,8 +64,8 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      password: "xzy12345",
-      email: "garayidan@gmail.com",
+      password: "",
+      email: "",
     },
     resolver: yupResolver(schema),
   });
