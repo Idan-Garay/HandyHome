@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "grommet";
+import { Box } from "grommet";
 import styled from "styled-components";
 import UserProfile from "./UserProfile";
 import ProfileDetail from "./ProfileDetail";

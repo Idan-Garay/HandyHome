@@ -13,7 +13,7 @@ const UserProfile = ({ id, contactNo, area }) => {
     >
       <Box
         direction="row-reverse"
-        justify="space-evenly"
+        justify="evenly"
         width="100%"
         gap="xlarge"
         pad={{ right: "1em" }}
