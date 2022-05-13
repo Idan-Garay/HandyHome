@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.User);
       this.hasOne(models.Address);
+      this.hasOne(models.ProfileValidation);
     }
   }
   Profile.init(
