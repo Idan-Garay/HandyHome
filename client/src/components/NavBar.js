@@ -29,7 +29,7 @@ const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
   return (
     <Box>
       {isAuthorized ? (
-        <StyledNavLink to={`/profile/${profileId}`} weight="normal">
+        <StyledNavLink to={`/profiles/${profileId}`} weight="normal">
           Profile
         </StyledNavLink>
       ) : (
@@ -39,7 +39,7 @@ const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
   );
 };
 
-const NavBar = ({ isAuthorized, profileId }) => {
+const NavBar = ({ isAuthorized, id }) => {
   const isLoginPage = useLocation().pathname === "/login" ? true : false;
 
   return (
@@ -54,7 +54,7 @@ const NavBar = ({ isAuthorized, profileId }) => {
         <AuthorizedNavButtons
           isAuthorized={isAuthorized}
           isLoginPage={isLoginPage}
-          profileId={profileId}
+          profileId={id}
         />
       </Box>
     </>
