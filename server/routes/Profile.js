@@ -14,7 +14,6 @@ router.get("/profiles", async (req, res) => {
 
 router.get("/profiles/:id", async (req, res) => {
   try {
-    console.log("here", req.params);
     const profileId = req.params.id;
     let profile = await db.Profile.findOne({
       include: db.Address,
@@ -27,12 +26,24 @@ router.get("/profiles/:id", async (req, res) => {
   }
 });
 
-// router.post("/profiles", async (req, res) => {
-//   const addressData = req.body;
+router.patch("/profiles/:id/edit", async (req, res) => {
+  try {
+    let updateData = req.body;
+    let profile = await db.Profile.findOne({ where: { id: updateData.id } });
+    if (profile) {
+      const { id, ...neededData } = updateData;
+      profile.set(neededData);
+      let newProfile = await profile.save();
 
-//   const address = await db.Address.create(addressData);
-//   console.log("created address: ", address);
-//   res.status(200).jsonp(address);
-// });
+      res.status(200).json(newProfile);
+    } else {
+      res
+        .status(200)
+        .json({ error: `Profile id of ${updateData.id} doesn't exist` });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 module.exports = router;
