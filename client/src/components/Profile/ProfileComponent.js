@@ -13,7 +13,7 @@ const StyledH2 = styled.h2`
 
 const ProfileComponent = (props) => {
   const { accountState } = useContext(AccountContext);
-  const { id, contactNo, service, area, name } = props;
+  const { id, contactNo, service, area, name, isUnauthorized } = props;
   const { accountType } = accountState;
   return (
     <>
@@ -27,6 +27,7 @@ const ProfileComponent = (props) => {
       >
         <Box direction="row-responsive">
           <UserProfile
+            isUnauthorized={isUnauthorized}
             accountType={accountType}
             id={id}
             contactNo={contactNo}

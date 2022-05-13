@@ -9,7 +9,8 @@ const Profile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
-  const { dispatch } = useContext(AccountContext);
+  const { AccountState, dispatch } = useContext(AccountContext);
+  const isUnauthorized = !AccountState ? true : false;
 
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
@@ -27,12 +28,14 @@ const Profile = () => {
   return (
     <Page kind="wide" pad="0 2em">
       <PageContent background="light" border={true} round="small" gap="medium">
-        <ProfileComponent {...profileData} />
-        <Box direction="row" width="small">
-          <Button primary size="medium" fill onClick={onLogout}>
-            Log out
-          </Button>
-        </Box>
+        <ProfileComponent {...profileData} isUnauthorized={isUnauthorized} />
+        {!isUnauthorized && (
+          <Box direction="row" width="small">
+            <Button primary size="medium" fill onClick={onLogout}>
+              Log out
+            </Button>
+          </Box>
+        )}
       </PageContent>
     </Page>
   );

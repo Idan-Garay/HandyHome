@@ -18,11 +18,7 @@ const Index = () => {
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/register" element={<Register />} />
       <Route path="/register/success" element={<RegisterPrompt />} />
-      <Route
-        exact
-        path="/profiles/:id"
-        element={<ProtectedRoute children={<Profile />} />}
-      />
+      <Route exact path="/profiles/:id" element={<Profile />} />
       <Route
         exact
         path="/profiles/:id/edit"
