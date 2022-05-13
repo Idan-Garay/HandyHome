@@ -35,8 +35,11 @@ router.post(
 
 router.get("/profiles", async (req, res) => {
   try {
-    let profiles = await db.Profile.findAll({ include: db.Address });
-
+    let users = await db.User.findAll({
+      where: { accountType: 1 },
+      include: [{ model: db.Profile, include: [db.Address] }],
+    });
+    let profiles = users.map((user) => user.Profile);
     res.status(200).jsonp(profiles);
   } catch (e) {
     console.log(e);

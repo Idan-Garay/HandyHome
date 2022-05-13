@@ -6,7 +6,8 @@ export const getProfiles = () => {
     .then((data) => {
       return data.map((val) => {
         const { Address, ...data } = val;
-        return { ...data, area: Address.area };
+        const area = Address ? Address.area : "";
+        return { ...data, area: area };
       });
     });
 };
