@@ -30,6 +30,8 @@ router.post("/register", async (req, res) => {
 
     if (!flag && users.count === 0) {
       const user = await db.User.create(userData);
+      const profile = await db.Profile.create({ UserId: user.id });
+      const address = await db.Address.create({ ProfileId: profile.id });
 
       const result = "User registered successfully.";
       res.status(200).json({ success: result });
