@@ -8,12 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      from: {
-        type: Sequelize.INTEGER,
-      },
-      to: {
-        type: Sequelize.INTEGER,
-      },
       price: {
         type: Sequelize.FLOAT,
       },
