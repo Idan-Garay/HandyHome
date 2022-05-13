@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Page, PageContent } from "grommet";
+import React, { useContext, useEffect, useState } from "react";
+import { Page, PageContent, Button, Box } from "grommet";
 import ProfileComponent from "../components/Profile/ProfileComponent";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProfile } from "../API/profiles";
+import { AccountContext } from "../App";
 
 const Profile = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
+  const { dispatch } = useContext(AccountContext);
+
+  const onLogout = () => {
+    dispatch({ type: "LOGOUT_ACCOUNT" });
+    navigate("/login");
+  };
 
   useEffect(() => {
     const fn = async () => {
@@ -18,8 +26,13 @@ const Profile = () => {
 
   return (
     <Page kind="wide" pad="0 2em">
-      <PageContent background="light" border={true} round="small">
+      <PageContent background="light" border={true} round="small" gap="medium">
         <ProfileComponent {...profileData} />
+        <Box direction="row" width="small">
+          <Button primary size="medium" fill onClick={onLogout}>
+            Log out
+          </Button>
+        </Box>
       </PageContent>
     </Page>
   );

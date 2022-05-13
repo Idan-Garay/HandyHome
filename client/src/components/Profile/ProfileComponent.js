@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box } from "grommet";
 import styled from "styled-components";
 import UserProfile from "./UserProfile";
 import ProfileDetail from "./ProfileDetail";
 import CoWorker from "./CoWorker";
+import { AccountContext } from "../../App";
 
 const StyledH2 = styled.h2`
   text-align: left;
@@ -11,7 +12,9 @@ const StyledH2 = styled.h2`
 `;
 
 const ProfileComponent = (props) => {
+  const { accountState } = useContext(AccountContext);
   const { id, contactNo, service, area, name } = props;
+  const { accountType } = accountState;
   return (
     <>
       <Box
@@ -23,13 +26,20 @@ const ProfileComponent = (props) => {
         gap="large"
       >
         <Box direction="row-responsive">
-          <UserProfile id={id} contactNo={contactNo} area={area} />
+          <UserProfile
+            accountType={accountType}
+            id={id}
+            contactNo={contactNo}
+            area={area}
+          />
           <ProfileDetail service={service} name={name} />
         </Box>
-        <Box gap="small">
-          <StyledH2>Co-workers</StyledH2>
-          <CoWorker />
-        </Box>
+        {accountType === 1 && (
+          <Box gap="small">
+            <StyledH2>Co-workers</StyledH2>
+            <CoWorker />
+          </Box>
+        )}
       </Box>
     </>
   );

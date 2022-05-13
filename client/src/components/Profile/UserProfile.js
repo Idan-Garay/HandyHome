@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { User, Map, Send, UserSettings } from "grommet-icons";
 import { Box, Text, Button, Avatar } from "grommet";
 
-const UserProfile = ({ id, contactNo, area }) => {
+const UserProfile = ({ id, contactNo, area, accountType }) => {
   return (
     <Box
       gap="small"
@@ -51,9 +51,14 @@ const UserProfile = ({ id, contactNo, area }) => {
         <Text textAlign="end">6 days</Text>
       </Box>
 
-      <Link to={`/profiles/${id}/request`} state={{ profileId: id, contactNo }}>
-        <Button type="submit" fill="horizontal" primary label="Request" />
-      </Link>
+      {accountType === 1 && (
+        <Link
+          to={`/profiles/${id}/request`}
+          state={{ profileId: id, contactNo }}
+        >
+          <Button type="submit" fill="horizontal" primary label="Request" />
+        </Link>
+      )}
     </Box>
   );
 };
