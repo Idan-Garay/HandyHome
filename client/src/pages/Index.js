@@ -8,6 +8,7 @@ import Discovery from "./Discovery";
 import RequestByEmployer from "../components/Order/RequestByEmployer";
 import RegisterPrompt from "../components/Prompts/RegisterPrompt";
 import ProtectedRoute from "../components/ProtectedRoute";
+import ProfileEdit from "../components/Profile/ProfileEdit";
 
 const Index = () => {
   return (
@@ -20,6 +21,11 @@ const Index = () => {
         exact
         path="/profiles/:id"
         element={<ProtectedRoute children={<Profile />} />}
+      />
+      <Route
+        exact
+        path="/profiles/:id/edit"
+        element={<ProtectedRoute children={<ProfileEdit />} />}
       />
       <Route
         path="/profiles/:id/request"
