@@ -11,6 +11,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import ProfileEdit from "../components/Profile/ProfileEdit";
 import ProfileValidation from "../components/Profile/ProfileValidation";
 import Admin from "./admin/Admin";
+import History from "./History";
 
 const AdminRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const CustomerRoutes = () => {
       <Route exact path="/register" element={<Register />} />
       <Route path="/register/success" element={<RegisterPrompt />} />
       <Route exact path="/profiles/:id" element={<Profile />} />
+      <Route exact path="/profiles/:id/history" element={<History />} />
       <Route
         exact
         path="/profiles/:id/edit"
