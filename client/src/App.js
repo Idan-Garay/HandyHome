@@ -71,12 +71,7 @@ function App() {
     <AccountContext.Provider value={{ accountState, dispatch }}>
       <Grommet theme={theme}>
         <div className="App">
-          <Header
-            justify="between"
-            height="5em"
-            pad="small-top"
-            className="b-1"
-          >
+          <Header justify="between" height="5em" pad="small-top">
             <NavBar {...accountState} />
           </Header>
 
