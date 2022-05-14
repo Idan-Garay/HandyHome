@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { User } from "grommet-icons";
-import { Box, Text, Button, Avatar, Heading, Header, Main } from "grommet";
+import { Box, Text, Button, Avatar, Heading, Main } from "grommet";
+import EditProfile from "../../../pages/profile/EditProfile";
 
 const LabelText = (props) => (
   <Box align="start" width={{ min: "9em" }}>
@@ -19,7 +20,7 @@ const StyledBox = (props) => (
   />
 );
 
-const UserProfile = () => {
+const UserProfile = ({ onEdit }) => {
   return (
     <>
       <Box direction="column" pad="small">
@@ -42,7 +43,7 @@ const UserProfile = () => {
               </Heading>
             </Box>
             <Box margin={{ left: "60%" }} justify="center">
-              <Button primary label="Edit Profile" />
+              <Button primary label="Edit Profile" onClick={onEdit} />
             </Box>
           </Box>
         </StyledBox>
@@ -66,18 +67,33 @@ const UserProfile = () => {
             <LabelText>Description</LabelText>
             <Text>handyman@gmail.com</Text>
           </StyledBox>
+          <StyledBox>Feedbacks</StyledBox>
         </Main>
       </Box>
     </>
   );
 };
+
 const MyDetails = () => {
-  // profile: name, services, contactNo, description, picture
-  // user: username, email
+  const [isEdit, setIsEdit] = useState(false);
+
+  const onEdit = () => setIsEdit(true);
+  const onCancel = () => setIsEdit(false);
+  const onSave = () => setIsEdit(false);
+
+  const editButtons = {
+    onEdit: onEdit,
+    onCancel: onCancel,
+    onSave: onSave,
+  };
 
   return (
     <div>
-      <UserProfile />
+      {isEdit ? (
+        <EditProfile {...editButtons} />
+      ) : (
+        <UserProfile {...editButtons} />
+      )}
     </div>
   );
 };
