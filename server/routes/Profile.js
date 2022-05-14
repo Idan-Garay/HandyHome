@@ -48,10 +48,10 @@ router.get("/profiles", async (req, res) => {
 
 router.get("/profiles/:id", async (req, res) => {
   try {
-    const profileId = req.params.id;
+    const userId = req.params.id;
     let profile = await db.Profile.findOne({
       include: db.Address,
-      where: { id: profileId },
+      where: { userId: userId },
     });
 
     res.status(200).jsonp(profile);
