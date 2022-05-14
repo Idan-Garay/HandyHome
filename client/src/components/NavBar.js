@@ -33,7 +33,7 @@ const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
         // <StyledNavLink to={`/profiles/${profileId}`} weight="normal">
         //   Profile
         // </StyledNavLink>
-        <CollapsableNavbar />
+        <CollapsableNavbar profileId={profileId} />
       ) : (
         <LoginOrRegisterButton isLoginPage={isLoginPage} />
       )}
