@@ -2,7 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import "./App.css";
 // import Feedback from "./pages/Feedback";
 // import Request from "./pages/Request";
-import { Grommet, Footer, Main, Header, Box } from "grommet";
+import { Grommet, Footer, Main, Header, Box, Nav } from "grommet";
 import theme from "./Theme";
 import NavBar from "./components/NavBar";
 import IndexRoutes from "./pages/Index";
@@ -71,7 +71,12 @@ function App() {
     <AccountContext.Provider value={{ accountState, dispatch }}>
       <Grommet theme={theme}>
         <div className="App">
-          <Header justify="between" height="3.5em" pad="small-top">
+          <Header
+            justify="between"
+            height="5em"
+            pad="small-top"
+            className="b-1"
+          >
             <NavBar {...accountState} />
           </Header>
 

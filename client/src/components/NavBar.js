@@ -3,6 +3,7 @@ import { Box } from "grommet";
 import { Tools } from "grommet-icons";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import CollapsableNavbar from "./CollapsableNavbar";
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
@@ -29,9 +30,10 @@ const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
   return (
     <Box>
       {isAuthorized ? (
-        <StyledNavLink to={`/profiles/${profileId}`} weight="normal">
-          Profile
-        </StyledNavLink>
+        // <StyledNavLink to={`/profiles/${profileId}`} weight="normal">
+        //   Profile
+        // </StyledNavLink>
+        <CollapsableNavbar />
       ) : (
         <LoginOrRegisterButton isLoginPage={isLoginPage} />
       )}
@@ -49,8 +51,8 @@ const NavBar = ({ isAuthorized, id }) => {
           <Tools color="accent-4" size="large" />
         </StyledNavLink>
       </Box>
-      <Box justify="evenly" direction="row" width="medium">
-        <Box>
+      <Box justify="evenly" direction="row" width="18em">
+        <Box direction="row" align="center">
           <StyledNavLink to="/">Discover</StyledNavLink>
         </Box>
         <AuthorizedNavButtons

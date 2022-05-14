@@ -46,18 +46,19 @@ module.exports = {
   devServer: {
     static: {
       directory: path.join(__dirname, "build"),
+      watch: true,
     },
     compress: true,
     port: 3000,
     hot: true,
-    liveReload: false,
+    liveReload: true,
     historyApiFallback: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.jpe?g|png$/,
