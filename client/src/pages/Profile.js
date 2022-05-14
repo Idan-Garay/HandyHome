@@ -9,6 +9,7 @@ import {
   Nav,
   Tabs,
   Tab,
+  Heading,
 } from "grommet";
 import ProfileComponent from "../components/Profile/ProfileComponent";
 import { useNavigate, useParams } from "react-router-dom";
@@ -101,20 +102,27 @@ const Profile = () => {
   };
 
   return (
-    <Page kind="wide" pad="0 .5em" className="b-1" fill>
+    <Page kind="wide" pad="0 .5em" fill>
       <PageContent
-        background="gray"
         round="small"
         gap="medium"
-        className="b-1"
         fill
         direction="column"
         align="start"
       >
-        <Box justify="start">Settings</Box>
-        <Tabs alignControls="start">
-          <Sidebar className="b-1" width="small">
-            left
+        <Box
+          height="small"
+          direction="row"
+          align="center"
+          fill="horizontal"
+          margin={{ top: "1em" }}
+          border={{ side: "bottom", color: "#ECECEC" }}
+        >
+          <Heading level={3}>Settings</Heading>
+        </Box>
+
+        <Box direction="row-responsive" gap="large" fill>
+          <Sidebar width="small" fill="vertical">
             <Nav>
               {profileMenuBtns.map((btnName, idx) => (
                 <Button
@@ -127,7 +135,7 @@ const Profile = () => {
               ))}
             </Nav>
           </Sidebar>
-          <Main>
+          <Main fill="vertical">
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} />
               <Team value={1} />
@@ -136,7 +144,7 @@ const Profile = () => {
               <Verify value={4} />
             </OptionalRender>
           </Main>
-        </Tabs>
+        </Box>
       </PageContent>
     </Page>
   );
