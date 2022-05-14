@@ -32,11 +32,12 @@ const Profile = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
   const { accountState, dispatch } = useContext(AccountContext);
-  const [componentIndex, setComponentIndex] = useState(2);
+  const [componentIndex, setComponentIndex] = useState(0);
 
   useEffect(() => {
     const fn = async () => {
       const res = await getProfile(id);
+
       setProfileData(res);
     };
     fn();
@@ -85,7 +86,7 @@ const Profile = () => {
           </Sidebar>
           <Main fill="vertical">
             <OptionalRender componentToRender={componentIndex}>
-              <MyDetails value={0} />
+              <MyDetails value={0} myDetailsData={profileData} />
               <Team value={1} />
               <Orders value={2} />
               <Verify value={3} />

@@ -13,6 +13,7 @@ import {
 } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
+import { patchProfile } from "../../API/profiles";
 
 const LabelText = (props) => (
   <Box align="start" width={{ min: "9em" }}>
@@ -57,10 +58,10 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
   );
 };
 
-const EditProfile = ({ onEdit, onCancel, onSave }) => {
+const EditProfile = ({ onEdit, setIsEdit, id }) => {
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, reset, getValues } = useForm({
     defaultValues: {
       name: "Full name",
       contactNo: "096342341324",
@@ -70,6 +71,17 @@ const EditProfile = ({ onEdit, onCancel, onSave }) => {
       email: "handyman@gmail.com",
     },
   });
+
+  const onSave = () => {
+    const updateData = getValues();
+    patchProfile({ ...updateData, id });
+    setIsEdit(false);
+  };
+
+  const onCancel = () => {
+    reset();
+    setIsEdit(false);
+  };
 
   const navigateToEditPage = () => {
     navigate("edit");
@@ -112,9 +124,8 @@ const EditProfile = ({ onEdit, onCancel, onSave }) => {
         </StyledBox>
 
         <Main margin={{ top: "2em" }} gap="medium">
-          <ProfileField name="Name" control={control} text="Name" />
+          <ProfileField name="name" control={control} text="name" />
           <ProfileField name="services" control={control} text="Services" />
-          <ProfileField name="name" control={control} text="Name" />
           <ProfileField
             name="description"
             control={control}

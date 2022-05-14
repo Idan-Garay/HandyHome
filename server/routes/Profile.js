@@ -49,8 +49,18 @@ router.get("/profiles", async (req, res) => {
 router.get("/profiles/:id", async (req, res) => {
   try {
     const userId = req.params.id;
+    // let profile = await db.Profile.findOne({
+    //   include: db.Address,
+    //   where: { userId: userId },
+    // });
     let profile = await db.Profile.findOne({
-      include: db.Address,
+      include: [
+        { model: db.Address, attributes: ["street", "city", "area"] },
+        {
+          model: db.User,
+          attributes: ["username", "email", "verified", "accountType"],
+        },
+      ],
       where: { userId: userId },
     });
 

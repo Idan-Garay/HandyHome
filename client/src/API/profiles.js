@@ -17,3 +17,16 @@ export const getProfile = (id) => {
     res.json()
   );
 };
+
+export const patchProfile = (updateData) => {
+  console.log(updateData, "here213");
+  const requestOptions = {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updateData),
+  };
+  return fetch(
+    `http://localhost:${serverPORT}/profiles/${updateData.id}/edit`,
+    requestOptions
+  ).then((res) => res.json());
+};
