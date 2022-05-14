@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Routes, Route, Navigate } from "react-router-dom";
-import Profile from "./Profile";
+import Profile from "./profile/Profile";
 import Register from "./Register";
 import Login from "./Login";
 import Discovery from "./Discovery";
@@ -12,6 +12,7 @@ import ProfileEdit from "../components/Profile/ProfileEdit";
 import ProfileValidation from "../components/Profile/ProfileValidation";
 import Admin from "./admin/Admin";
 import History from "./History";
+import EditProfile from "./profile/EditProfile";
 
 const AdminRoutes = () => {
   return (
@@ -30,18 +31,15 @@ const CustomerRoutes = () => {
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/register" element={<Register />} />
       <Route path="/register/success" element={<RegisterPrompt />} />
+
       <Route exact path="/profiles/:id" element={<Profile />} />
       <Route exact path="/profiles/:id/history" element={<History />} />
-      <Route
-        exact
-        path="/profiles/:id/edit"
-        element={<ProtectedRoute children={<ProfileEdit />} />}
-      />
       <Route
         path="/profiles/:id/request"
         element={<ProtectedRoute children={<RequestByEmployer />} />}
       />
       <Route path="/profilevalidation" element={<ProfileValidation />} />
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
