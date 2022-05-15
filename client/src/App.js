@@ -14,6 +14,10 @@ import styled from "styled-components";
 import RegisterPrompt from "./components/Prompts/RegisterPrompt";
 import Login from "./pages/Login";
 import ProfileValidation from "./pages/ProfileValidation";
+import AdminRequests from "./pages/AdminRequests";
+import AdminFeedback from "./pages/AdminFeedback";
+import AdminProfiles from "./pages/AdminProfiles";
+import AdminPValidation from "./pages/AdminPValidation";
 
 const StyledNavLink = styled(NavLink)`
   text-decoration: none;
@@ -53,6 +57,10 @@ function App() {
             <Route path="/register/success" element={<RegisterPrompt />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/profilevalidation" element={<ProfileValidation />} />
+            <Route path="/adminrequests" element={<AdminRequests />} />
+            <Route path="/adminfeedback" element={<AdminFeedback />} />
+            <Route path="/adminprofiles" element={<AdminProfiles />} />
+            <Route path="/adminpvalidation" element={<AdminPValidation />} />
             <Route
               path="/profile/:id/request"
               element={<RequestByEmployer />}

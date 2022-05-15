@@ -146,7 +146,27 @@
         "street": "National Highway, Reynes Building",
         "city": "Poblacion Near Compostela Public Market",
         "area": "Compostela"
-      }
+      },
+      "coworkers": [
+          {
+            "name": "Mark Villar",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Bobby",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
     },
     {
       "id": 2,
@@ -160,7 +180,27 @@
         "street": "SM City Fairview, Quirino Highway corner Regalado Avenue, Fairview",
         "city": "Quezon City",
         "area": "Metro Manilla"
-      }
+      },
+      "coworkers": [
+          {
+            "name": "Mark Villar",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Bobby",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
     },
     {
       "id": 3,
@@ -174,7 +214,27 @@
         "street": "Osmena Boulevard corner Llorente Street",
         "city": "Cebu City",
         "area": "Cebu"
-      }
+      },
+      "coworkers": [
+          {
+            "name": "Mark Villar",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Bobby",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
     },
     {
       "id": 4,
@@ -188,7 +248,27 @@
         "street": "110 Gorordo Avenue",
         "city": "Cebu City",
         "area": "Cebu"
-      }
+      },
+      "coworkers": [
+          {
+            "name": "Mark Villar",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Bobby",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
     }
   ],
   "pValidation": [
