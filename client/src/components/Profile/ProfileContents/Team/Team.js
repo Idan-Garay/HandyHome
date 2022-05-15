@@ -29,14 +29,22 @@ const TeamMember = () => (
 );
 
 const AddTeamMember = ({ handleClick }) => (
-  <Card height="18em" width="small" background="light-1" onClick={handleClick}>
-    <CardHeader pad="medium" direction="column">
+  <Card
+    height="18em"
+    width="small"
+    background="light-1"
+    onClick={handleClick}
+    align="center"
+    hoverIndicator="#efefef"
+  >
+    {/* <CardHeader pad="medium" direction="column">
+    </CardHeader> */}
+    <CardBody direction="column" align="center" justify="center" gap="medium">
       <Avatar size="xlarge" background="accent-3">
         <AddCircle size="large" />
       </Avatar>
       <Heading level={5}>Add a team member</Heading>
-    </CardHeader>
-    <CardBody></CardBody>
+    </CardBody>
   </Card>
 );
 

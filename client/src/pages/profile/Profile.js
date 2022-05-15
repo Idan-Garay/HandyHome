@@ -32,7 +32,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
   const { accountState, dispatch } = useContext(AccountContext);
-  const [componentIndex, setComponentIndex] = useState(0);
+  const [componentIndex, setComponentIndex] = useState(1);
 
   useEffect(() => {
     const fn = async () => {
