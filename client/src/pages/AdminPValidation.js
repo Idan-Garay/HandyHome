@@ -14,7 +14,7 @@ const AdminPValidation = () => {
             <TableCell align="middle" border={{ color: 'brand'}}>Id</TableCell>
             <TableCell align="middle" border={{ color: 'brand'}}>Government Id</TableCell>
             <TableCell align="middle" border={{ color: 'brand'}}>Selife Verification</TableCell>
-            <TableCell align="middle" border={{ color: 'brand'}}>Verificaiton Status</TableCell>
+            <TableCell align="middle" border={{ color: 'brand'}}>Verification Status</TableCell>
             <TableCell align="middle" border={{ color: 'brand'}}>Verify?</TableCell>
           </TableRow>
         </TableHeader>
