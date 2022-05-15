@@ -14,6 +14,7 @@ import Admin from "./admin/Admin";
 import History from "./History";
 import EditProfile from "./profile/EditProfile";
 import AddMember from "../components/Profile/ProfileContents/AddMember";
+import OtherProfile from "./profile/OtherProfile";
 
 const AdminRoutes = () => {
   return (
@@ -33,7 +34,8 @@ const CustomerRoutes = () => {
       <Route exact path="/register" element={<Register />} />
       <Route path="/register/success" element={<RegisterPrompt />} />
 
-      <Route exact path="/profiles/:id" element={<Profile />} />
+      <Route exact path="/profile" element={<Profile />} />
+      <Route exact path="/profiles/:id" element={<OtherProfile />} />
       <Route exact path="/profiles/:id/history" element={<History />} />
       <Route
         path="/profiles/:id/request"
