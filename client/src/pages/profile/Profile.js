@@ -87,7 +87,7 @@ const Profile = () => {
           <Main fill="vertical">
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} myDetailsData={profileData} />
-              <Team value={1} />
+              <Team value={1} primaryProfileId={id} />
               <Orders value={2} />
               <Verify value={3} />
             </OptionalRender>

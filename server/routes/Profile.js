@@ -4,6 +4,7 @@ const path = require("path");
 const db = require("../models/index.js");
 
 const multer = require("multer");
+const { profile } = require("console");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -90,20 +91,35 @@ router.patch("/profiles/:id/edit", async (req, res) => {
   }
 });
 
+router.get("/profiles/:id/teamMembers", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (id) {
+      const primaryProfile = await db.Profile.findOne({
+        where: { UserId: id },
+      });
+      const teamMembers = await db.Profile.findAll({
+        where: { ProfileId: primaryProfile.id },
+      });
+
+      console.log("----", teamMembers);
+      res.status(200).json(teamMembers);
+    } else res.status(200).json("Profile Id doesn't exist");
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 router.post("/profiles/:id/add", async (req, res) => {
   try {
     let { profile, address } = req.body;
     const id = req.params.id;
     const primaryProfile = await db.Profile.findOne({ where: { UserId: id } });
-    // create Profile
-    // include address
-    // userId null
+
     if (primaryProfile) {
       let result = "Profile created successfully";
-      // const Profile = await db.Profile.create(
-      //   { ...profile, Address: { address } },
-      //   { include: [{ association: db.Address }] }
-      // );
+
       const Profile = await db.Profile.create({
         ...profile,
         ProfileId: primaryProfile.id,

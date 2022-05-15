@@ -19,7 +19,6 @@ export const getProfile = (id) => {
 };
 
 export const patchProfile = (updateData) => {
-  console.log(updateData, "here213");
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
