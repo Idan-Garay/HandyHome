@@ -32,7 +32,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
   const { accountState, dispatch } = useContext(AccountContext);
-  const [componentIndex, setComponentIndex] = useState(1);
+  const [componentIndex, setComponentIndex] = useState(2);
 
   useEffect(() => {
     const fn = async () => {
@@ -88,7 +88,7 @@ const Profile = () => {
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} myDetailsData={profileData} />
               <Team value={1} primaryProfileId={id} />
-              <Orders value={2} />
+              <Orders employerUserId={accountState.id} value={2} />
               <Verify value={3} />
             </OptionalRender>
           </Main>

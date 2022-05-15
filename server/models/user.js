@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasOne(models.Profile);
       this.hasOne(models.PaymentValidation);
-      this.hasOne(models.Order, { as: "toUser", foreignKey: "toUserId" });
-      this.hasOne(models.Order, { as: "fromUser", foreignKey: "fromUserId" });
+      this.hasOne(models.Order, { as: "ToUser", foreignKey: "toUserId" });
+      this.hasOne(models.Order, { as: "FromUser", foreignKey: "fromUserId" });
     }
   }
   User.init(

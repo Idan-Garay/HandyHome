@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { User } from "grommet-icons";
 import {
   Box,
@@ -7,7 +6,6 @@ import {
   Button,
   Avatar,
   Heading,
-  Main,
   TextInput,
   TextArea,
   Form,
@@ -15,12 +13,6 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import { patchProfile } from "../../../../API/profiles";
-
-const LabelText = (props) => (
-  <Box align="start" width={{ min: "9em" }}>
-    <Text color="gray" {...props} />
-  </Box>
-);
 
 const StyledBox = (props) => (
   <Box
@@ -59,9 +51,7 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
   );
 };
 
-const MemberEditProfile = ({ member, clickPrevious, changeComponentIndex }) => {
-  const navigate = useNavigate();
-
+const MemberEditProfile = ({ member, changeComponentIndex }) => {
   const { control, reset, handleSubmit } = useForm({
     defaultValues: { ...member },
   });
