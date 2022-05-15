@@ -35,7 +35,6 @@ const ProfileCard = ({ profileData }) => {
           <Box align="start">
             <LeftAlignedText>{name}</LeftAlignedText>
             <LeftAlignedText size="xsmall" color="#B6B6B6">
-              {/* {services.join(", ")} */}
               {services}
             </LeftAlignedText>
           </Box>

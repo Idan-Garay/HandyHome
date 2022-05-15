@@ -75,7 +75,7 @@ function App() {
             <NavBar {...accountState} />
           </Header>
 
-          <Main fill="vertical" justify="center">
+          <Main justify="center" height="full">
             <IndexRoutes
               accountType={!accountState ? 0 : accountState.accountType}
             />

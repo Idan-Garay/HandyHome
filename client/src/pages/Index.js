@@ -36,6 +36,7 @@ const CustomerRoutes = () => {
 
       <Route exact path="/profile" element={<Profile />} />
       <Route exact path="/profiles/:id" element={<OtherProfile />} />
+      <Route exact path="/otherProfile" element={<OtherProfile />} />
       <Route exact path="/profiles/:id/history" element={<History />} />
       <Route
         path="/profiles/:id/request"
