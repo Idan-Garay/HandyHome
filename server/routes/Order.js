@@ -1,6 +1,43 @@
 const express = require("express");
+const { sequelize } = require("../models/index.js");
 const router = express.Router();
 const db = require("../models/index.js");
+
+router.post("/orders", async (req, res) => {
+  try {
+    const { fromUserId } = req.body;
+    let Orders = await db.Order.findAll({
+      attributes: ["id", "status", "contactNo", "updatedAt", "toUserId"],
+      where: { fromUserId: fromUserId },
+    });
+
+    if (Orders) {
+      const result = await Promise.all(
+        Orders.map(async (order) => {
+          const profile = await db.Profile.findOne({
+            attributes: ["name"],
+            where: { UserId: order.toUserId },
+          });
+          let { toUserId, ...needAttrs } = order.dataValues;
+          needAttrs.name = profile.name;
+          needAttrs.updatedAt = new Date(needAttrs.updatedAt);
+          return needAttrs;
+        })
+      );
+
+      console.log("here", result);
+
+      res.status(200).json(result);
+    }
+    // orderId: 1,
+    // name: "Moon",
+    // contactNo: "09963232112",
+    // updatedAt: "June 01, 2022 06:00 AM",
+    // status: "completed",
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 router.post("/request", async (req, res) => {
   try {

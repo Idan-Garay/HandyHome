@@ -1,5 +1,22 @@
 const serverPORT = 3501;
 
+export const getOrdersByEmployer = (employerUserId) => {
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fromUserId: employerUserId,
+      }),
+    };
+    return fetch(`http://localhost:${serverPORT}/orders`, requestOptions).then(
+      (res) => res.json()
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const postRequestByEmployer = (requestForm) => {
   const { contactNo, minRate, description, to, id } = requestForm;
   const requestOptions = {

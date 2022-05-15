@@ -1,20 +1,12 @@
 import { Heading, Box, DataTable, Text, Tag } from "grommet";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getOrdersByEmployer } from "../../../API/order";
 
 const ColumnText = (props) => <Text weight="bold">{props.children}</Text>;
 
-const data = [
-  {
-    orderId: 1,
-    name: "Moon",
-    contactNo: "09963232112",
-    updatedAt: "June 01, 2022 06:00 AM",
-    status: "completed",
-  },
-];
 const columns = [
   {
-    property: "orderId",
+    property: "id",
     header: <ColumnText>Order ID</ColumnText>,
     primary: true,
   },
@@ -25,7 +17,7 @@ const columns = [
   },
   {
     property: "updatedAt",
-    header: <ColumnText>Date Completed</ColumnText>,
+    header: <ColumnText>Updated At</ColumnText>,
   },
   {
     property: "status",
@@ -38,7 +30,24 @@ const columns = [
   },
 ];
 
-const Orders = () => {
+const Orders = ({ employerUserId }) => {
+  const [data, setData] = useState([
+    {
+      id: 1,
+      name: "Moon",
+      contactNo: "09963232112",
+      updatedAt: "June 01, 2022 06:00 AM",
+      status: "completed",
+    },
+  ]);
+
+  useEffect(() => {
+    (async () => {
+      const orders = await getOrdersByEmployer(employerUserId);
+      setData(orders);
+    })();
+  }, []);
+
   return (
     <div>
       <Heading
