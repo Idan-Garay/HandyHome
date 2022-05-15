@@ -90,4 +90,35 @@ router.patch("/profiles/:id/edit", async (req, res) => {
   }
 });
 
+router.post("/profiles/:id/add", async (req, res) => {
+  try {
+    let { profile, address } = req.body;
+    const id = req.params.id;
+    const primaryProfile = await db.Profile.findOne({ where: { UserId: id } });
+    // create Profile
+    // include address
+    // userId null
+    if (primaryProfile) {
+      let result = "Profile created successfully";
+      // const Profile = await db.Profile.create(
+      //   { ...profile, Address: { address } },
+      //   { include: [{ association: db.Address }] }
+      // );
+      const Profile = await db.Profile.create({
+        ...profile,
+        ProfileId: primaryProfile.id,
+      });
+      const Address = await db.Address.create({
+        ...address,
+        ProfileId: Profile.id,
+      });
+      if (!Profile) result = "Failed to create profile.";
+
+      res.status(200).jsonp({ Profile, Address, result });
+    } else res.status(200).jsonp("Something went wrong with Primary Profile");
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;

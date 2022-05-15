@@ -10,6 +10,7 @@ import {
   Box,
 } from "grommet";
 import { Edit, User, Trash, AddCircle } from "grommet-icons";
+import { useNavigate } from "react-router-dom";
 
 const TeamMember = () => (
   <Card height="18em" width="small" background="light-1">
@@ -27,8 +28,8 @@ const TeamMember = () => (
   </Card>
 );
 
-const AddTeamMember = () => (
-  <Card height="18em" width="small" background="light-1">
+const AddTeamMember = ({ handleClick }) => (
+  <Card height="18em" width="small" background="light-1" onClick={handleClick}>
     <CardHeader pad="medium" direction="column">
       <Avatar size="xlarge" background="accent-3">
         <AddCircle size="large" />
@@ -40,9 +41,15 @@ const AddTeamMember = () => (
 );
 
 const Team = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("add");
+  };
+
   return (
     <Box direction="row-responsive" gap="medium" justify="start">
-      <AddTeamMember />
+      <AddTeamMember handleClick={handleClick} />
       <TeamMember />
     </Box>
   );

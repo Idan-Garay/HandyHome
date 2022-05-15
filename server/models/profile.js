@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User);
       this.hasOne(models.Address);
       this.hasOne(models.ProfileValidation);
+      this.hasMany(models.Profile, { as: "MembersProfiles" });
     }
   }
   Profile.init(
@@ -17,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       contactNo: { type: DataTypes.STRING, defaultValue: "" },
       description: { type: DataTypes.STRING, defaultValue: "" },
       picture: { type: DataTypes.BLOB, defaultValue: "" },
+      email: { type: DataTypes.STRING, defaultValue: "" },
     },
     {
       sequelize,

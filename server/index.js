@@ -20,7 +20,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
     // await db.User.sync({ alter: true });
-    // await db.Profile.sync({ alter: true });
+    await db.Profile.sync({ alter: true });
     // await db.Address.sync({ alter: true });
     // await db.Order.sync({ alter: true });
     // await db.Feedback.sync({ alter: true });
