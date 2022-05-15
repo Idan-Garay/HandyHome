@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Box } from "grommet";
-import { Tools } from "grommet-icons";
+import { Box, Image } from "grommet";
+import HandyHomeLogo from "../../public/HandyHome.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import CollapsableNavbar from "./CollapsableNavbar";
@@ -46,9 +46,14 @@ const NavBar = ({ isAuthorized, id }) => {
 
   return (
     <>
-      <Box pad="xxsmall">
+      <Box pad="xsmall">
         <StyledNavLink to="/">
-          <Tools color="accent-4" size="large" />
+          <Image
+            margin={{ left: "1em", top: "1em" }}
+            src={HandyHomeLogo}
+            alt="HandyHome Logo"
+            height={80}
+          />
         </StyledNavLink>
       </Box>
       <Box justify="evenly" direction="row" width="18em">
