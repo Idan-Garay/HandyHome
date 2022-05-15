@@ -28,15 +28,13 @@ const OptionalRender = (props) => {
 };
 
 const Profile = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
   const [profileData, setProfileData] = useState({});
   const { accountState, dispatch } = useContext(AccountContext);
-  const [componentIndex, setComponentIndex] = useState(2);
+  const [componentIndex, setComponentIndex] = useState(0);
 
   useEffect(() => {
     const fn = async () => {
-      const res = await getProfile(id);
+      const res = await getProfile(accountState.id);
 
       setProfileData(res);
     };
@@ -87,7 +85,7 @@ const Profile = () => {
           <Main fill="vertical">
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} myDetailsData={profileData} />
-              <Team value={1} primaryProfileId={id} />
+              <Team value={1} primaryProfileId={accountState.id} />
               <Orders employerUserId={accountState.id} value={2} />
               <Verify value={3} />
             </OptionalRender>
