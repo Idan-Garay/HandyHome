@@ -29,3 +29,19 @@ export const patchProfile = (updateData) => {
     requestOptions
   ).then((res) => res.json());
 };
+
+export const deleteMemberProfile = (userId, memberProfileId) => {
+  try {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: memberProfileId }),
+    };
+    return fetch(
+      `http://localhost:${serverPORT}/profiles/${userId}/delete`,
+      requestOptions
+    ).then((res) => res.json());
+  } catch (e) {
+    console.log(e);
+  }
+};

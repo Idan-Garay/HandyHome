@@ -74,6 +74,7 @@ router.get("/profiles/:id", async (req, res) => {
 router.patch("/profiles/:id/edit", async (req, res) => {
   try {
     let updateData = req.body;
+    console.log(updateData, "----");
     let profile = await db.Profile.findOne({ where: { id: updateData.id } });
     if (profile) {
       const { id, ...neededData } = updateData;
@@ -86,6 +87,18 @@ router.patch("/profiles/:id/edit", async (req, res) => {
         .status(200)
         .json({ error: `Profile id of ${updateData.id} doesn't exist` });
     }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.delete("/profiles/:id/delete", async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      const profile = await db.Profile.destroy({ where: { id: id } });
+      res.status(200).json(profile);
+    } else res.status(200).json({ error: `Profile id of ${id} doesn't exist` });
   } catch (e) {
     console.log(e);
   }
