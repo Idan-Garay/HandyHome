@@ -9,7 +9,7 @@ import {
   Heading,
   Grid,
 } from "grommet";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { getProfile } from "../../API/profiles";
 import { AccountContext } from "../../App";
 import { User, Send, Map } from "grommet-icons";
@@ -24,7 +24,7 @@ const OptionalRender = (props) => {
   return ChosenComponent;
 };
 
-const AvatarProfile = () => {
+const AvatarProfile = ({ profileId, contactNo }) => {
   return (
     <Box
       gap="small"
@@ -74,7 +74,10 @@ const AvatarProfile = () => {
     <Button type="submit" fill="horizontal" primary label="Request" />
   </Link> */}
 
-      <Link to={`/`}>
+      <Link
+        to={`/profiles/${profileId}/request`}
+        state={{ id: profileId, contactNo }}
+      >
         <Button type="submit" fill="horizontal" primary label="Request" />
       </Link>
     </Box>
@@ -112,27 +115,9 @@ const ProfileDetail = () => {
 };
 
 const OtherProfile = () => {
-  const { id } = useParams();
+  const { id, contactNo } = useLocation().state;
+
   const navigate = useNavigate();
-  const [profileData, setProfileData] = useState({});
-  const { accountState, dispatch } = useContext(AccountContext);
-  const [componentIndex, setComponentIndex] = useState(0);
-
-  // useEffect(() => {
-  //   const fn = async () => {
-  //     const res = await getProfile(id);
-
-  //     setProfileData(res);
-  //   };
-  //   fn();
-  // }, []);
-
-  const profileMenuBtns = ["My Details", "Team", "Orders", "Verify"];
-
-  const menuOnClick = (e) => {
-    const { value } = e.target;
-    setComponentIndex(parseInt(value));
-  };
 
   return (
     <Page kind="wide" pad="3em .5em" fill height="full">
@@ -144,7 +129,7 @@ const OtherProfile = () => {
         align="start"
       >
         <Box direction="row-responsive" gap="medium">
-          <AvatarProfile />
+          <AvatarProfile profileId={id} contactNo={contactNo} />
           <ProfileDetail />
         </Box>
         <Box direction="row-responsive">

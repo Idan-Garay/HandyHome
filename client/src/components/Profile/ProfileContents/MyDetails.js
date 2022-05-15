@@ -30,8 +30,6 @@ const MyDetails = ({ myDetailsData }) => {
     setIsEdit,
   };
 
-  console.log(isEdit);
-
   return (
     <div>
       {isEdit ? (
