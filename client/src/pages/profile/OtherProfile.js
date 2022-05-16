@@ -25,6 +25,7 @@ const OptionalRender = (props) => {
 };
 
 const AvatarProfile = ({ profileId, contactNo }) => {
+  const { accountState } = useContext(AccountContext);
   return (
     <Box
       gap="small"
@@ -74,12 +75,14 @@ const AvatarProfile = ({ profileId, contactNo }) => {
     <Button type="submit" fill="horizontal" primary label="Request" />
   </Link> */}
 
-      <Link
-        to={`/profiles/${profileId}/request`}
-        state={{ id: profileId, contactNo }}
-      >
-        <Button type="submit" fill="horizontal" primary label="Request" />
-      </Link>
+      {accountState && accountState.accountType === 0 && (
+        <Link
+          to={`/profiles/${profileId}/request`}
+          state={{ id: profileId, contactNo }}
+        >
+          <Button type="submit" fill="horizontal" primary label="Request" />
+        </Link>
+      )}
     </Box>
   );
 };
@@ -116,7 +119,6 @@ const ProfileDetail = () => {
 
 const OtherProfile = () => {
   const { id, contactNo } = useLocation().state;
-
   const navigate = useNavigate();
 
   return (

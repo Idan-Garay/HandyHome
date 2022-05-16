@@ -31,6 +31,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({});
   const { accountState, dispatch } = useContext(AccountContext);
   const [componentIndex, setComponentIndex] = useState(0);
+  const accountType = accountState ? accountState.accountType : 1;
 
   useEffect(() => {
     const fn = async () => {
@@ -40,8 +41,6 @@ const Profile = () => {
     };
     fn();
   }, []);
-
-  const profileMenuBtns = ["My Details", "Team", "Orders", "Verify"];
 
   const menuOnClick = (e) => {
     const { value } = e.target;
@@ -65,22 +64,14 @@ const Profile = () => {
           margin={{ top: "1em" }}
           border={{ side: "bottom", color: "#ECECEC" }}
         >
-          <Heading level={3}>Settings</Heading>
+          <Heading level={3}>
+            Settings: {accountType === 0 ? "Employer" : "Handyman"}
+          </Heading>
         </Box>
 
         <Box direction="row-responsive" gap="large" fill>
           <Sidebar width="small" fill="vertical">
-            <Nav>
-              {profileMenuBtns.map((btnName, idx) => (
-                <Button
-                  primary
-                  value={idx}
-                  label={btnName}
-                  onClick={menuOnClick}
-                  key={`menu-${idx}`}
-                />
-              ))}
-            </Nav>
+            <ShowButtons accountType={accountType} menuOnClick={menuOnClick} />
           </Sidebar>
           <Main fill="vertical">
             <OptionalRender componentToRender={componentIndex}>
@@ -93,6 +84,43 @@ const Profile = () => {
         </Box>
       </PageContent>
     </Page>
+  );
+};
+
+const ShowButtons = ({ accountType = 0, menuOnClick }) => {
+  return (
+    <Nav gap="small">
+      <Button
+        primary
+        value={0}
+        label="My Details"
+        onClick={menuOnClick}
+        key={`menu-0`}
+      />
+      {accountType === 1 && (
+        <Button
+          primary
+          value={1}
+          label="Team"
+          onClick={menuOnClick}
+          key={`menu-1`}
+        />
+      )}
+      <Button
+        primary
+        value={2}
+        label="Orders"
+        onClick={menuOnClick}
+        key={`menu-2`}
+      />
+      <Button
+        primary
+        value={0}
+        label="Verify"
+        onClick={menuOnClick}
+        key={`menu-3`}
+      />
+    </Nav>
   );
 };
 
