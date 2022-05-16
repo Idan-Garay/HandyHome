@@ -15,6 +15,8 @@ import History from "./History";
 import EditProfile from "./profile/EditProfile";
 import AddMember from "../components/Profile/ProfileContents/AddMember";
 import OtherProfile from "./profile/OtherProfile";
+import JobCategoryList from "./JobCategoryList";
+import CategoryUserList from "./CategoryUserList";
 
 const AdminRoutes = () => {
   return (
@@ -47,6 +49,8 @@ const CustomerRoutes = () => {
         element={<ProtectedRoute children={<AddMember />} />}
       />
       <Route path="/profilevalidation" element={<ProfileValidation />} />
+      <Route path="/list" element={<JobCategoryList />} />
+      <Route path="/list/:path" element={<CategoryUserList />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

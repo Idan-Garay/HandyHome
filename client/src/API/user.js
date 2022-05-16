@@ -43,8 +43,7 @@ export const sendConfirmationEmail = (registrantEmail) => {
     );
     return response;
   } catch (err) {
-    return {};
-    console.log(err);
+    return {err};
   }
 };
 

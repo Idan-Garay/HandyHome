@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ListContainer from "../components/JobCategory/ListContainer";
 import { getJobs } from "../API/jobs";
-import {Box, Grid, Heading} from "grommet"
+import {Box, Grid, Image, Heading} from "grommet";
+import imagesrc from "../../public/assets/tap.png"
+import logo from "../../public/HandyHome.svg"
 
 const JobCategoryList = () => {
     const [List, setList] = useState([])
     
-    // const addJob = () => {
-    //     console.log("I was here");
-    //     const requestOptions = {
-    //       method: "POST",
-    //       credentials: "include",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({jobName: job}),
-    //     };
-      
-    //     try {
-    //       fetch("http://localhost:4000/jobs", requestOptions)
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    // }
-    
     useEffect(()=> {
         getJobs().then(res => {
             setList(res);
+            console.log(res);
         })
     }, []);
     
@@ -33,7 +20,9 @@ const JobCategoryList = () => {
             alignSelf="center"
             margin={{bottom:"medium",top:"medium"}}
         >Job Categories</Heading>
-        <Grid
+        <Image src={imagesrc} alt="im an image" alignSelf="center" />
+        <img src={logo} alt="another image" />
+        {/* <Grid
             rows={['medium', 'medium']}
             columns={['medium', 'medium', 'medium']}
             gap="large"
@@ -52,7 +41,7 @@ const JobCategoryList = () => {
             {List.map(({jobName,path,img_src,jobType}, index) => 
                 <ListContainer key={index} jobName={jobName} jobType={jobType} path={path} img_src={img_src} />
             )} 
-        </Grid>
+        </Grid> */}
 
 
 

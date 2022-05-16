@@ -60,6 +60,9 @@ const NavBar = ({ isAuthorized, id }) => {
         <Box direction="row" align="center">
           <StyledNavLink to="/">Discover</StyledNavLink>
         </Box>
+        <Box direction="row" align="center">
+          <StyledNavLink to="/list">List</StyledNavLink>
+        </Box>
         <AuthorizedNavButtons
           isAuthorized={isAuthorized}
           isLoginPage={isLoginPage}

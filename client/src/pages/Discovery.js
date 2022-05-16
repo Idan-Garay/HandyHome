@@ -22,9 +22,6 @@ const Discovery = () => {
 
   return (
     <Box>
-      <Box>
-        <ListContainer />
-      </Box>
       <Box direction="row-responsive" wrap gap="small" margin="xlarge">
         {profiles.length
           ? profiles.map((profile, idx) => (
