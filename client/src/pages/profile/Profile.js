@@ -9,7 +9,6 @@ import {
   Nav,
   Heading,
 } from "grommet";
-import { useNavigate, useParams } from "react-router-dom";
 import { getProfile } from "../../API/profiles";
 import { AccountContext } from "../../App";
 import MyDetails from "../../components/Profile/ProfileContents/MyDetails";

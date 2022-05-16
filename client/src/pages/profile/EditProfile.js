@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "grommet-icons";
 import {
@@ -54,16 +54,17 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
 
 const EditProfile = ({ onEdit, setIsEdit, id }) => {
   const navigate = useNavigate();
+  const [editProfileFields, setEditProfileFields] = useState({
+    name: "Full name",
+    contactNo: "096342341324",
+    services: "masonry,gardening",
+    description: "Able to fix walls and clean gardens",
+    picture: "",
+    email: "handyman@gmail.com",
+  });
 
   const { control, reset, getValues } = useForm({
-    defaultValues: {
-      name: "Full name",
-      contactNo: "096342341324",
-      services: "masonry,gardening",
-      description: "Able to fix walls and clean gardens",
-      picture: "",
-      email: "handyman@gmail.com",
-    },
+    defaultValues: editProfileFields,
   });
 
   const onSave = () => {
@@ -76,15 +77,6 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
     reset();
     setIsEdit(false);
   };
-
-  const navigateToEditPage = () => {
-    navigate("edit");
-  };
-
-  const onSaveEdit = () => {
-    navigate("/");
-  };
-
   return (
     <>
       <Box direction="column" pad="small" margin={{ top: "2em" }}>
@@ -100,15 +92,12 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
                 {true && <User color="black" />}
               </Avatar>
             </Box>
-            <Box align="start">
-              <Heading level={3}>Name</Heading>
-              <Heading level={6} color="gray">
-                UserName
-              </Heading>
+            <Box align="start" width="large">
+              <Heading level={4}>{editProfileFields.name}</Heading>
             </Box>
-            <Box margin={{ left: "60%" }} direction="row" justify="center">
-              <Box>
-                <Button primary label="Cancel" onClick={onCancel} />
+            <Box direction="row" justify="center" gap="small">
+              <Box pad="xsmall">
+                <Button plain label="Cancel" onClick={onCancel} />
               </Box>
               <Box>
                 <Button primary label="Save" onClick={onSave} />
