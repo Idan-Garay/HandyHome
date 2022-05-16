@@ -14,10 +14,11 @@ const StyledBox = styled(Box)`
 `;
 
 const ProfileCard = ({ profileData }) => {
-  const { id, services, area, name } = profileData;
+  const { id, services, name, area } = profileData;
+
   return (
     <Link
-      to={`profile/${id}`}
+      to={`profiles/${id}`}
       state={profileData}
       style={{ textDecoration: "none" }}
     >
@@ -34,7 +35,7 @@ const ProfileCard = ({ profileData }) => {
           <Box align="start">
             <LeftAlignedText>{name}</LeftAlignedText>
             <LeftAlignedText size="xsmall" color="#B6B6B6">
-              {services.join(", ")}
+              {services}
             </LeftAlignedText>
           </Box>
         </Box>

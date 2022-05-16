@@ -1,22 +1,39 @@
-const PORT = 4000;
+const serverPORT = 3501;
+
+export const getOrdersByEmployer = (employerUserId) => {
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fromUserId: employerUserId,
+      }),
+    };
+    return fetch(`http://localhost:${serverPORT}/orders`, requestOptions).then(
+      (res) => res.json()
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const postRequestByEmployer = (requestForm) => {
-  const { formType, contactNo, minRate, description, profileId } = requestForm;
+  const { contactNo, minRate, description, to, id } = requestForm;
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: profileId,
-      formType,
+      from: id,
+      to,
       contactNo,
-      minRate,
+      price: minRate,
       description,
       status: "pending",
     }),
   };
 
   try {
-    fetch(`http://localhost:${PORT}/requests`, requestOptions)
+    fetch(`http://localhost:${serverPORT}/request`, requestOptions)
       .then((res) => res.json())
       .then((request) => request.id);
   } catch (err) {
@@ -34,7 +51,10 @@ export const acceptRequest = (requestId, isAccepted) => {
   };
 
   try {
-    fetch(`http://localhost:${PORT}/requests/${requestId}`, requestOptions)
+    fetch(
+      `http://localhost:${serverPORT}/requests/${requestId}`,
+      requestOptions
+    )
       .then((res) => res.json())
       .then((request) => request.id);
   } catch (err) {

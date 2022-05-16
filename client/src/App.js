@@ -1,68 +1,92 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 import "./App.css";
 // import Feedback from "./pages/Feedback";
 // import Request from "./pages/Request";
-import Discovery from "./pages/Discovery";
-import { Grommet, Footer, Main, Header, Box } from "grommet";
-import { Tools } from "grommet-icons";
+import { Grommet, Footer, Main, Header, Box, Nav } from "grommet";
 import theme from "./Theme";
-import { Routes, Route, NavLink } from "react-router-dom";
-import RequestByEmployer from "./components/Order/RequestByEmployer";
-import Profile from "./pages/Profile";
-import Register from "./pages/Register";
-import styled from "styled-components";
-import RegisterPrompt from "./components/Prompts/RegisterPrompt";
-import Login from "./pages/Login";
+import NavBar from "./components/NavBar";
+import IndexRoutes from "./pages/Index";
+import { useNavigate } from "react-router-dom";
 
-const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
-  color: #00c9aa;
-`;
+const initialState = {
+  accountType: 0,
+  username: "",
+  email: "",
+  profileId: 0,
+  isAuthorized: false,
+  verified: false,
+};
+
+const accountReducer = (state, action) => {
+  let newState;
+
+  switch (action.type) {
+    case "LOGIN_ACCOUNT":
+      if (action.payload.verified) {
+        newState = { ...action.payload, isAuthorized: true };
+        localStorage.setItem("user", JSON.stringify(newState));
+      }
+      break;
+    case "LOGOUT_ACCOUNT":
+      newState = {
+        accountType: 0,
+        username: "",
+        email: "",
+        profileId: 0,
+        isAuthorized: false,
+      };
+      localStorage.removeItem("user");
+    case "INIT_ACCOUNTSTATE":
+      newState = { ...initialState };
+      break;
+    default:
+      throw new Error(`action type: ${action.type} not found`);
+  }
+  return newState;
+};
+
+export const AccountContext = React.createContext();
 
 function App() {
+  const navigate = useNavigate();
+  const [accountState, dispatch] = useReducer(
+    accountReducer,
+    initialState,
+    (initial) => {
+      const user = localStorage.getItem("user");
+      if (user !== "undefined") return JSON.parse(user);
+      return initial;
+    }
+  );
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(accountState));
+    if (!accountState) {
+      dispatch({ type: "INIT_ACCOUNTSTATE" });
+      navigate("/login");
+    }
+  }, [accountState]);
+
   return (
-    <Grommet theme={theme}>
-      <div className="App">
-        <Header justify="between" height="3.5em" pad="small-top">
-          <Box pad="xxsmall">
-            <StyledNavLink
-              to="/"
-              icon={<Tools color="accent-4" size="large" />}
-            />
-          </Box>
-          <Box justify="evenly" direction="row" width="medium">
-            <Box>
-              <StyledNavLink to="/">Discover</StyledNavLink>
-            </Box>
-            <Box>
-              <StyledNavLink to="/login" weight="normal">
-                Login
-              </StyledNavLink>
-            </Box>
-          </Box>
-        </Header>
+    <AccountContext.Provider value={{ accountState, dispatch }}>
+      <Grommet theme={theme}>
+        <div className="App">
+          <Header justify="between" height="5em" pad="small-top">
+            <NavBar {...accountState} />
+          </Header>
 
-        <Main fill="horizontal" justify="center">
-          {/* <Request /> */}
-          {/* <Feedback /> */}
-          <Routes>
-            <Route path="/" element={<Discovery />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/register/success" element={<RegisterPrompt />} />
-            <Route path="/profile/:id" element={<Profile />} />
-            <Route
-              path="/profile/:id/request"
-              element={<RequestByEmployer />}
+          <Main justify="center" height="full">
+            <IndexRoutes
+              accountType={!accountState ? 0 : accountState.accountType}
             />
-          </Routes>
-        </Main>
+          </Main>
 
-        <Footer height="xsmall" border="top" justify="center">
-          <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
-        </Footer>
-      </div>
-    </Grommet>
+          <Footer height="xsmall" border="top" justify="center">
+            <b>Copyright © HandyWork 2022. All Rights Reserved.</b>
+          </Footer>
+        </div>
+      </Grommet>
+    </AccountContext.Provider>
   );
 }
 

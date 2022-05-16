@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Button, Heading, TextArea, TextInput, Text } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import { postRequestByEmployer } from "../../API/order";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AccountContext } from "../../App";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -13,8 +14,9 @@ const StyledTextArea = styled(TextArea)`
 `;
 
 const RequestByEmployer = () => {
+  const navigate = useNavigate();
   const { profileId, contactNo } = useLocation().state;
-
+  const { accountState } = useContext(AccountContext);
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       formType: "request",
@@ -25,8 +27,11 @@ const RequestByEmployer = () => {
   });
 
   const onSubmit = (data) => {
-    postRequestByEmployer({ ...data, profileId });
+    const input = { id: accountState.id, to: profileId, ...data };
+
+    postRequestByEmployer(input);
     reset();
+    navigate(`/profiles/${profileId}`);
   };
 
   return (

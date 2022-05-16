@@ -3,6 +3,10 @@ const spaceTheme = {
   rounding: 24,
   spacing: 20,
   defaultMode: "light",
+  dataTable: {
+    header: { border: { color: "#ECECEC", side: "bottom" }, font: "bold" },
+  },
+  tag: { border: { color: "#ECECEC", side: "all" } },
   textInput: { background: { extend: { color: "blue" } } },
   global: {
     colors: {

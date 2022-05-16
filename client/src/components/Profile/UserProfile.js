@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { User, Map, Send } from "grommet-icons";
+import { User, Map, Send, UserSettings } from "grommet-icons";
 import { Box, Text, Button, Avatar } from "grommet";
 
-const UserProfile = ({ id, contactNo, area }) => {
+const UserProfile = ({ id, contactNo, area, accountType, isAuthorized }) => {
   return (
     <Box
       gap="small"
@@ -11,9 +11,22 @@ const UserProfile = ({ id, contactNo, area }) => {
       align="center"
       width={{ min: "medium" }}
     >
-      <Avatar size="xlarge" background="accent-3">
-        <User size="large" />
-      </Avatar>
+      <Box
+        direction="row-reverse"
+        justify="evenly"
+        width="100%"
+        gap="xlarge"
+        pad={{ right: "1em" }}
+      >
+        {isAuthorized && (
+          <Avatar background="#a9a9a9" size="small">
+            <UserSettings color="white" size="13em" cursor="pointer" />
+          </Avatar>
+        )}
+        <Avatar size="xlarge" background="accent-3">
+          <User size="large" />
+        </Avatar>
+      </Box>
       <Box
         width={{ min: "75%", max: "90%" }}
         direction="row"
@@ -40,9 +53,14 @@ const UserProfile = ({ id, contactNo, area }) => {
         <Text textAlign="end">6 days</Text>
       </Box>
 
-      <Link to={`/profile/${id}/request`} state={{ profileId: id, contactNo }}>
-        <Button type="submit" fill="horizontal" primary label="Request" />
-      </Link>
+      {accountType === 1 && (
+        <Link
+          to={`/profiles/${id}/request`}
+          state={{ profileId: id, contactNo }}
+        >
+          <Button type="submit" fill="horizontal" primary label="Request" />
+        </Link>
+      )}
     </Box>
   );
 };
