@@ -29,7 +29,23 @@ router.post(
     { name: "file2", maxCount: 1 },
   ]),
   (req, res, next) => {
-    res.send("upload here");
+    const files = req.files;
+
+    if (files) {
+      const reqFiles = Object.entries(req.files).map(([key, file]) => {
+        const { mimetype, filename } = file[0];
+        return {
+          type: mimetype,
+          name: filename,
+          image: "/client/public/validationImages" + filename,
+          ProfileId: req.body.ProfileId,
+        };
+      });
+
+      const dbFiles = db.ProfileValidation.bulkCreate(reqFiles);
+      res.status(200).json(dbFiles);
+    }
+
     next();
   }
 );
