@@ -78,7 +78,7 @@ const Profile = () => {
               <MyDetails value={0} myDetailsData={profileData} />
               <Team value={1} primaryProfileId={accountState.id} />
               <Orders employerUserId={accountState.id} value={2} />
-              <Verify value={3} />
+              <Verify profileData={profileData} value={3} />
             </OptionalRender>
           </Main>
         </Box>

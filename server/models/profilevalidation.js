@@ -13,8 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   ProfileValidation.init(
     {
-      govDocument: DataTypes.STRING,
-      selfie: DataTypes.STRING,
+      type: DataTypes.STRING,
+      name: DataTypes.STRING,
+      image: DataTypes.BLOB,
     },
     {
       sequelize,
