@@ -4,7 +4,6 @@ import { Box } from "grommet";
 
 import { getProfiles } from "../API/profiles";
 import ListContainer from "../components/JobCategory/ListContainer";
-
 let profilesCache = [];
 
 const Discovery = () => {

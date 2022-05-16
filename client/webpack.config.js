@@ -61,6 +61,10 @@ module.exports = {
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+      {
         test: /\.jpe?g|png$/,
         exclude: /node_modules/,
         use: ["url-loader", "file-loader"],
@@ -69,17 +73,6 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
-      },
-      {
-        test: /\.(png|jp(e*)g|svg|gif)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "images/[hash]-[name].[ext]",
-            },
-          },
-        ],
       },
     ],
   },
