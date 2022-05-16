@@ -15,12 +15,6 @@ import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import { patchProfile } from "../../API/profiles";
 
-const LabelText = (props) => (
-  <Box align="start" width={{ min: "9em" }}>
-    <Text color="gray" {...props} />
-  </Box>
-);
-
 const StyledBox = (props) => (
   <Box
     direction="row-responsive"
