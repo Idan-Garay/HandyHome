@@ -3,7 +3,6 @@ import ListContainer from "../components/JobCategory/ListContainer";
 import { getJobs } from "../API/jobs";
 import {Box, Grid, Image, Heading} from "grommet";
 import imagesrc from "../../public/assets/tap.png"
-import logo from "../../public/HandyHome.svg"
 
 const JobCategoryList = () => {
     const [List, setList] = useState([])
@@ -16,13 +15,12 @@ const JobCategoryList = () => {
     }, []);
     
     return <Box>
+        {/* <Image src={imagesrc} /> */}
         <Heading 
             alignSelf="center"
             margin={{bottom:"medium",top:"medium"}}
         >Job Categories</Heading>
-        <Image src={imagesrc} alt="im an image" alignSelf="center" />
-        <img src={logo} alt="another image" />
-        {/* <Grid
+        <Grid
             rows={['medium', 'medium']}
             columns={['medium', 'medium', 'medium']}
             gap="large"
@@ -41,13 +39,7 @@ const JobCategoryList = () => {
             {List.map(({jobName,path,img_src,jobType}, index) => 
                 <ListContainer key={index} jobName={jobName} jobType={jobType} path={path} img_src={img_src} />
             )} 
-        </Grid> */}
-
-
-
-        {/* this is displaying the GET method */}
-        {/* <Box>Hello here, border</Box>
-        <Box className="b-1" direction="row">job input: <input onChange={e => setJob(e.target.value)} value={job} /><Button primary label="add job" onClick={addJob}/></Box> */}
+        </Grid>
     </Box>;
 
 };

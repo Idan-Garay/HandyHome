@@ -15,7 +15,7 @@ module.exports = {
         jobName: 'Carpentry',
         jobType: 'carpenter',
         path: '/list/carpentry',
-        img_src: '../assets/tools.png',
+        img_src: '/a6d0c2faa6483814f6b0.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -23,7 +23,7 @@ module.exports = {
         jobName: 'Plumbing',
         jobType: 'plumber',
         path: '/list/plumbing',
-        img_src: '../assets/tap.png',
+        img_src: '/7503712a3f372b9621b0.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -31,7 +31,7 @@ module.exports = {
         jobName: 'Masonry',
         jobType: 'masonry',
         path: '/list/masonry',
-        img_src: '../assets/brickwork.png',
+        img_src: '/3cb719e15dbb60502866.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -39,7 +39,7 @@ module.exports = {
         jobName: 'Gardening',
         jobType: 'gardener',
         path: '/list/gardening',
-        img_src: '../assets/gardening.png',
+        img_src: '/eada23abe2b7d8a4b15a.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -47,7 +47,7 @@ module.exports = {
         jobName: 'Housekeeping',
         jobType: 'housekeeper',
         path: '/list/housekeeping',
-        img_src: '../assets/sweeping.png',
+        img_src: '/47a592ce79de3e879c97.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -55,7 +55,7 @@ module.exports = {
         jobName: 'Babysitting',
         jobType: 'babysitter',
         path: '/list/babysitting',
-        img_src: '../assets/baby-stroller.png',
+        img_src: '/cd10deacd38ec38b4186.png',
         createdAt: new Date(),
         updatedAt: new Date()
     }], {});
