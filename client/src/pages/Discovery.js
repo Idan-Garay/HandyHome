@@ -8,6 +8,7 @@ let profilesCache = [];
 
 const Discovery = () => {
   const [profiles, setProfiles] = useState(profilesCache);
+
   useEffect(() => {
     if (profilesCache.length !== 0) {
       setProfiles(profilesCache);

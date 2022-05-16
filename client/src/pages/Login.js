@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Form, TextInput, Text, Button } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { AccountContext } from "../App";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { serverValidateLoginForm } from "../API/user";
+import {
+  login,
+  serverValidateLoginForm,
+  serverVerifiedUser,
+} from "../API/user";
+import LoadingScreen from "../components/LoadingScreen";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -16,6 +22,24 @@ const ErrorLabel = styled(Text)`
   color: red;
   text-align: left;
 `;
+
+const MyController = ({ name, control, errors, type = "text" }) => {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <>
+          <Box direction="row" gap="medium" wrap>
+            <Text text>{name}</Text>
+            <StyledTextInput {...field} type={type} />
+          </Box>
+          <ErrorLabel>{errors[name]?.message}</ErrorLabel>
+        </>
+      )}
+    />
+  );
+};
 
 const schema = yup
   .object({
@@ -27,6 +51,10 @@ const schema = yup
 
 const Login = () => {
   let navigate = useNavigate();
+  const { accountState, dispatch } = useContext(AccountContext);
+
+  if (accountState && accountState.isAuthorized)
+    return <Navigate to="/" replace />;
 
   const {
     handleSubmit,
@@ -36,77 +64,78 @@ const Login = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      password: "xzy12345",
-      email: "garayidan@gmail.com",
+      password: "",
+      email: "",
     },
     resolver: yupResolver(schema),
   });
 
-  const [serverValErr, setServerValErr] = useState(false);
+  const [err, setErr] = useState({});
+  const [loadSpinner, setLoadSpinner] = useState(false);
 
   const onSubmit = async () => {
-    // do some validation
-    // redirect if okay
-    // show errors using useform
-    const registerForm = getValues();
+    const loginForm = getValues();
 
-    // expected boolean value
-    const isValid = await serverValidateLoginForm(registerForm);
+    // expected errors messages or {}
+    let result = await login(loginForm);
 
-    if (!isValid) {
-      setServerValErr(true);
-    } else {
-      setServerValErr(false);
-      navigate("/");
+    if (
+      !result.errors.email &&
+      !result.errors.password &&
+      !result.errors.verified
+    ) {
+      setLoadSpinner(true);
+      setTimeout(() => {
+        dispatch({ type: "LOGIN_ACCOUNT", payload: result.user });
+        setLoadSpinner(false);
+        navigate("/");
+      }, 1000);
       reset();
+    } else {
+      setErr(result.errors);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Box margin="auto" width={{ min: "large", max: "50%" }}>
-        <Box gap="medium">
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <>
-                <Box direction="row" gap="medium" wrap>
-                  <Text text>Email</Text>
-                  <StyledTextInput {...field} />
-                </Box>
-                <ErrorLabel>{errors.email?.message}</ErrorLabel>
-              </>
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <>
-                <Box direction="row" gap="medium" wrap>
-                  <Text>Password</Text>
-                  <StyledTextInput type="password" {...field} />
-                </Box>
-                <ErrorLabel>{errors.password?.message}</ErrorLabel>
-              </>
-            )}
-          />
+    <>
+      {loadSpinner ? (
+        <LoadingScreen />
+      ) : (
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Box margin="auto" width={{ min: "large", max: "50%" }}>
+            <Box gap="medium">
+              <MyController name="email" control={control} errors={errors} />
+              <MyController
+                name="password"
+                control={control}
+                errors={errors}
+                type="password"
+              />
 
-          {serverValErr ? (
-            <ErrorLabel>Email or password is incorrect</ErrorLabel>
-          ) : null}
-        </Box>
-        <Box
-          tag="footer"
-          margin={{ top: "medium" }}
-          direction="row"
-          justify="end"
-        >
-          <Button type="submit" primary label="Login" />
-        </Box>
-      </Box>
-    </Form>
+              {err.email !== undefined ? (
+                <ErrorLabel>{err.email}</ErrorLabel>
+              ) : null}
+
+              {err.password !== undefined ? (
+                <ErrorLabel>{err.password}</ErrorLabel>
+              ) : null}
+
+              {err.verified !== undefined ? (
+                <ErrorLabel>{err.verified}</ErrorLabel>
+              ) : null}
+            </Box>
+            <Box
+              tag="footer"
+              margin={{ top: "medium" }}
+              direction="row"
+              justify="end"
+            >
+              <Button type="submit" primary label="Login" />
+            </Box>
+          </Box>
+        </Form>
+      )}
+    </>
   );
 };
 
