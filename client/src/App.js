@@ -15,6 +15,7 @@ const initialState = {
   profileId: 0,
   isAuthorized: false,
   verified: false,
+  picture: "",
 };
 
 const accountReducer = (state, action) => {

@@ -50,6 +50,19 @@ router.post(
   }
 );
 
+router.get("/userProfile", async (req, res) => {
+  try {
+    let users = await db.User.findOne({
+      where: { accountType: 1 },
+      include: [{ model: db.Profile, include: [db.Address] }],
+    });
+    let profiles = users.map((user) => user.Profile);
+    res.status(200).jsonp(profiles);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 router.get("/profiles", async (req, res) => {
   try {
     let users = await db.User.findAll({
