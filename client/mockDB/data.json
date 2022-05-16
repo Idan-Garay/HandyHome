@@ -1,0 +1,384 @@
+{
+  "orders": [
+    {
+      "contactNo": "09663208955",
+      "minRate": "1000",
+      "description": "Clean the garden for 3 days",
+      "id": 1,
+      "from": 1,
+      "status": "unaccepted"
+    },
+    {
+      "contactNo": "09633684937",
+      "minRate": "500",
+      "description": "Sweep and Mop the floor for 1 week",
+      "id": 2,
+      "from": 3,
+      "status": "rejected"
+    },
+    {
+      "contactNo": "09621312312",
+      "minRate": "600",
+      "description": "Fix the Kitchen Sink",
+      "id": 3,
+      "from": 4,
+      "status": "accepted"
+    },
+    {
+      "contactNo": "09663208775",
+      "minRate": "500",
+      "description": "Clean the Aircon",
+      "id": 4,
+      "from": 5,
+      "status": "accepted"
+    },
+    {
+      "contactNo": "096632423234",
+      "minRate": "1000",
+      "description": "Repair the Table and Cabinet",
+      "id": 5,
+      "from": 2,
+      "status": "unaccepted"
+    },
+    {
+      "contactNo": "096235729235",
+      "minRate": "1500",
+      "description": "Repaint the master bedroom",
+      "id": 6,
+      "from": 2,
+      "status": "rejected"
+    },
+    {
+      "contactNo": "093632425274",
+      "minRate": "800",
+      "description": "Feed and clean the dogs for 3 days",
+      "id": 7,
+      "from": 2,
+      "status": "accepted"
+    }
+  ],
+  "feedbacks": [
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "2",
+        "service": "5",
+        "recommend": "5"
+      },
+      "description": "Very good service",
+      "id": 1
+    },
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "1",
+        "service": "2",
+        "recommend": "5"
+      },
+      "description": "Punctual but with mediocre service",
+      "id": 2
+    },
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "1",
+        "service": "2",
+        "recommend": "2"
+      },
+      "description": "Hard to reach and poor service",
+      "id": 3
+    },
+    {
+      "type": "HandymanToEmployer",
+      "ratings": {
+        "communication": "5",
+        "service": "",
+        "recommend": "5"
+      },
+      "description": "Very reasonable demands and pay",
+      "id": 4
+    },
+    {
+      "type": "EmployerToHandyman",
+      "ratings": {
+        "communication": "4",
+        "service": "5",
+        "recommend": "4"
+      },
+      "description": "Overall great experience",
+      "id": 5
+    },
+    {
+      "type": "HandymanToEmployer",
+      "ratings": {
+        "communication": "4",
+        "service": "",
+        "recommend": "4"
+      },
+      "description": "Very high pay and consideration",
+      "id": 6
+    },
+    {
+      "type": "HandymanToEmployer",
+      "ratings": {
+        "communication": "2",
+        "service": "",
+        "recommend": "4"
+      },
+      "description": "Very patient but hard to communicate",
+      "id": 7
+    }
+  ],
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Jason Smith",
+      "type": "Handyman",
+      "services": [
+        "masonry",
+        "construction"
+      ],
+      "contactNo": "09663204332",
+      "address": {
+        "street": "National Highway, Reynes Building",
+        "city": "Poblacion Near Compostela Public Market",
+        "area": "Compostela"
+      },
+      "coworkers": [
+          {
+            "name": "Mark Villar",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Bobby Flay",
+            "services": [
+              "smithing",
+              "woodwork"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Gordon Ramsay",
+      "type": "Handyman",
+      "services": [
+        "baby sitting"
+      ],
+      "contactNo": "09285551705",
+      "address": {
+        "street": "SM City Fairview, Quirino Highway corner Regalado Avenue, Fairview",
+        "city": "Quezon City",
+        "area": "Metro Manilla"
+      },
+      "coworkers": [
+          {
+            "name": "Jose Riz",
+            "services": [
+              "laundry"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Nick Roger",
+            "services": [
+              "plumbing"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Paul Green",
+      "type": "Handyman",
+      "services": [
+        "construction",
+        "painting"
+      ],
+      "contactNo": "094743234332",
+      "address": {
+        "street": "Osmena Boulevard corner Llorente Street",
+        "city": "Cebu City",
+        "area": "Cebu"
+      },
+      "coworkers": [
+          {
+            "name": "Baby Mabini",
+            "services": [
+              "house chores"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          },
+          {
+            "name": "Bobby Gray",
+            "services": [
+              "gardening"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Shaun Rain",
+      "type": "Handyman",
+      "services": [
+        "electrical",
+        "wiring"
+      ],
+      "contactNo": "09235361358",
+      "address": {
+        "street": "110 Ayala Avenue",
+        "city": "Cebu City",
+        "area": "Gorordo"
+      },
+      "coworkers": [
+          {
+            "name": "Mark Juan",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Kim Chu",
+      "type": "Handyman",
+      "services": [
+        "woodwork"
+      ],
+      "contactNo": "09235361358",
+      "address": {
+        "street": "2000 Hawk Avenue",
+        "city": "Cebu City",
+        "area": "Banilad"
+      },
+      "coworkers": [
+          {
+            "name": "Jed San Juan",
+            "services": [
+              "construction",
+              "gardener"
+            ],
+            "area": "Cebu",
+            "contactNo": "09235551355"
+          }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Bob Brown",
+      "type": "Employer",
+      "contactNo": "09495760295",
+      "address": {
+        "street": "#48 Apple Road",
+        "city": "Cebu City",
+        "area": "Talamban"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Carl Sawyer",
+      "type": "Employer",
+      "contactNo": "09486037596",
+      "address": {
+        "street": "#90 Laguna Street",
+        "city": "Cebu City",
+        "area": "Banilad"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Jason Kho",
+      "type": "Employer",
+      "contactNo": "09396758205",
+      "address": {
+        "street": "#68 Mango Street",
+        "city": "Cebu City",
+        "area": "Guadalupe"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Dan Cang",
+      "type": "Employer",
+      "contactNo": "09395760847",
+      "address": {
+        "street": "#500 Seagull Road",
+        "city": "Cebu City",
+        "area": "Pit-os"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Kevin Arcilla",
+      "type": "Employer",
+      "contactNo": "09385960485",
+      "address": {
+        "street": "#47 Peach Street",
+        "city": "Cebu City",
+        "area": "Labangon"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Idan Garay",
+      "type": "Admin",
+      "contactNo": "09364859607",
+      "address": {
+        "street": "#47 Peach Street",
+        "city": "Cebu City",
+        "area": "Punta Princesa"
+      }
+    }
+  ],
+  "pValidation": [
+    {
+      "govId": "591496_princely-00_pimpmyclassic.jpg",
+      "id": 1
+    },
+    {
+      "govId": "591496_princely-00_pimpmyclassic.jpg",
+      "id": 2
+    },
+    {
+      "govId": "591496_princely-00_pimpmyclassic.jpg",
+      "id": 3
+    },
+    {
+      "govId": "591496_princely-00_pimpmyclassic.jpg",
+      "id": 4
+    },
+    {
+      "govId": {},
+      "selfie": [],
+      "id": 5
+    },
+    {
+      "govId": {},
+      "selfie": [],
+      "id": 6
+    },
+    {
+      "govId": "591496_princely-00_pimpmyclassic.jpg",
+      "selfie": "591496_princely-00_pimpmyclassic.jpg",
+      "id": 7
+    }
+  ]
+}
