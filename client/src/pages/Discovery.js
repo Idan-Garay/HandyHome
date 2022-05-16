@@ -3,6 +3,7 @@ import ProfileCard from "../components/Discovery/ProfileCard";
 import { Box } from "grommet";
 
 import { getProfiles } from "../API/profiles";
+import ListContainer from "../components/JobCategory/ListContainer";
 
 let profilesCache = [];
 
@@ -20,12 +21,17 @@ const Discovery = () => {
   }, [profiles.length]);
 
   return (
-    <Box direction="row-responsive" wrap gap="small" margin="xlarge">
-      {profiles.length
-        ? profiles.map((profile, idx) => (
-            <ProfileCard profileData={profile} key={idx} />
-          ))
-        : null}
+    <Box>
+      <Box>
+        <ListContainer />
+      </Box>
+      <Box direction="row-responsive" wrap gap="small" margin="xlarge">
+        {profiles.length
+          ? profiles.map((profile, idx) => (
+              <ProfileCard profileData={profile} key={idx} />
+            ))
+          : null}
+      </Box>
     </Box>
   );
 };
