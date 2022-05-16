@@ -115,7 +115,7 @@ const ShowButtons = ({ accountType = 0, menuOnClick }) => {
       />
       <Button
         primary
-        value={0}
+        value={3}
         label="Verify"
         onClick={menuOnClick}
         key={`menu-3`}
