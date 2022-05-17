@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import ListContainer from "../components/JobCategory/ListContainer";
 import { getJobs } from "../API/jobs";
 import {Box, Grid, Image, Heading} from "grommet";
-import imagesrc from "../../public/assets/tap.png"
 
 const JobCategoryList = () => {
     const [List, setList] = useState([])
@@ -10,7 +9,6 @@ const JobCategoryList = () => {
     useEffect(()=> {
         getJobs().then(res => {
             setList(res);
-            console.log(res);
         })
     }, []);
     

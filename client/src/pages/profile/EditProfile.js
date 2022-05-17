@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "grommet-icons";
 import {
@@ -10,6 +10,7 @@ import {
   Main,
   TextInput,
   TextArea,
+  CheckBoxGroup,
 } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
@@ -58,6 +59,33 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
   );
 };
 
+
+const ServicesField = ({control}) => {
+  const [ checkBox, setCheckbox ] = useState([]);
+  return (
+    <>
+      <Text alignSelf="start" margin={{bottom:"10px"}} >Services</Text>
+      <CheckBoxGroup 
+        valueKey="id"
+        labelKey="category"
+        options={[
+          { category: "Plumbing", id: "plumber" },
+          { category: "Carpentry", id: "carpenter" },
+          { category: "Masonry", id: "masonry" },
+          { category: "Gardening", id: "gardener" },
+          { category: "Housekeeping", id: "housekeeper" },
+          { category: "Babysitting", id: "babysitter" },
+        ]}
+        value={checkBox}
+        onChange={({ value: nextValue, option }) => {
+          setCheckbox(nextValue);
+          control = checkBox;
+        }}
+      />
+    </>
+    
+  );
+}
 const EditProfile = ({ onEdit, setIsEdit, id }) => {
   const navigate = useNavigate();
 
@@ -124,8 +152,8 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
         </StyledBox>
 
         <Main margin={{ top: "2em" }} gap="medium">
-          <ProfileField name="name" control={control} text="name" />
-          <ProfileField name="services" control={control} text="Services" />
+          <ProfileField name="name" control={control} text="Name" />
+          <ServicesField control={control} />
           <ProfileField
             name="description"
             control={control}
