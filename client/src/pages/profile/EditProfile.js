@@ -60,30 +60,36 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
 };
 
 
-const ServicesField = ({control}) => {
+const ServicesField = ({control, name, text}) => {
   const [ checkBox, setCheckbox ] = useState([]);
+
   return (
-    <>
-      <Text alignSelf="start" margin={{bottom:"10px"}} >Services</Text>
-      <CheckBoxGroup 
-        valueKey="id"
-        labelKey="category"
-        options={[
-          { category: "Plumbing", id: "plumber" },
-          { category: "Carpentry", id: "carpenter" },
-          { category: "Masonry", id: "masonry" },
-          { category: "Gardening", id: "gardener" },
-          { category: "Housekeeping", id: "housekeeper" },
-          { category: "Babysitting", id: "babysitter" },
-        ]}
-        value={checkBox}
-        onChange={({ value: nextValue, option }) => {
-          setCheckbox(nextValue);
-          control = checkBox;
-        }}
-      />
-    </>
-    
+    <Controller 
+      name={name}
+      control={control}
+      render={({ field: { onChange } }) => (
+        <Box>
+          <Text alignSelf="start" margin={{bottom:"10px"}} >{text}</Text>
+          <CheckBoxGroup 
+            valueKey="id"
+            labelKey="category"
+            options={[
+              { category: "Plumbing", id: "Plumbing" },
+              { category: "Carpentry", id: "Carpentry" },
+              { category: "Masonry", id: "Masonry" },
+              { category: "Gardening", id: "Gardening" },
+              { category: "Housekeeping", id: "Housekeeping" },
+              { category: "Babysitting", id: "Babysitting" },
+            ]}
+            value={checkBox}
+            onChange={({ value: nextValue, option }) => {
+              setCheckbox(nextValue);
+              onChange(nextValue);
+            }}
+          />
+        </Box>
+      )}
+    />
   );
 }
 const EditProfile = ({ onEdit, setIsEdit, id }) => {
@@ -93,7 +99,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
     defaultValues: {
       name: "Full name",
       contactNo: "096342341324",
-      services: "masonry,gardening",
+      services: ["Masonry","Gardening"],
       description: "Able to fix walls and clean gardens",
       picture: "",
       email: "handyman@gmail.com",
@@ -101,7 +107,9 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
   });
 
   const onSave = () => {
+    console.log(id);
     const updateData = getValues();
+    updateData.services = updateData.services.toString();
     patchProfile({ ...updateData, id });
     setIsEdit(false);
   };
@@ -116,6 +124,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
   };
 
   const onSaveEdit = () => {
+    
     navigate("/");
   };
 
@@ -153,7 +162,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
 
         <Main margin={{ top: "2em" }} gap="medium">
           <ProfileField name="name" control={control} text="Name" />
-          <ServicesField control={control} />
+          <ServicesField name="services" control={control} text="Services" />
           <ProfileField
             name="description"
             control={control}
