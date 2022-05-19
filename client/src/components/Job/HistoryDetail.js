@@ -52,6 +52,16 @@ const columns = [
 const HistoryDetail = ({element}) => {
     const size = React.useContext(ResponsiveContext);
 
+    const [rate, setRate] = useState(null);
+    useEffect(()=>{
+      fetch('http://localhost:4000/profiles')
+      .then(res=>{
+        return res.json();
+      })
+      .then(element=>{
+        setData(element);
+      });
+    },[]);
     
   return (
     <>
