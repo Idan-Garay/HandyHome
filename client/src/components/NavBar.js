@@ -41,7 +41,7 @@ const AuthorizedNavButtons = ({ isAuthorized, isLoginPage, profileId }) => {
   );
 };
 
-const NavBar = ({ isAuthorized, id }) => {
+const NavBar = ({ isAuthorized, id, accountType }) => {
   const isLoginPage = useLocation().pathname === "/login" ? true : false;
 
   return (
@@ -56,19 +56,39 @@ const NavBar = ({ isAuthorized, id }) => {
           />
         </StyledNavLink>
       </Box>
-      <Box justify="evenly" direction="row" width="18em">
-        <Box direction="row" align="center">
-          <StyledNavLink to="/">Discover</StyledNavLink>
+      {accountType === 2 ?
+        <Box justify="evenly" direction="row" width="30em">
+          <Box direction="row" align="center">
+            <StyledNavLink to="/">Requests</StyledNavLink>
+          </Box>
+          <Box direction="row" align="center">
+            <StyledNavLink to="/">Feedbacks</StyledNavLink>
+          </Box>
+          <Box direction="row" align="center">
+            <StyledNavLink to="/">Profiles</StyledNavLink>
+          </Box>
+          <Box direction="row" align="center">
+            <StyledNavLink to="/orders">Orders</StyledNavLink>
+          </Box>
+          <AuthorizedNavButtons
+            isAuthorized={isAuthorized}
+            isLoginPage={isLoginPage}
+            profileId={id}
+          />
         </Box>
-        <Box direction="row" align="center">
-          <StyledNavLink to="/list">List</StyledNavLink>
-        </Box>
-        <AuthorizedNavButtons
-          isAuthorized={isAuthorized}
-          isLoginPage={isLoginPage}
-          profileId={id}
-        />
-      </Box>
+      : <Box justify="evenly" direction="row" width="18em">
+          <Box direction="row" align="center">
+            <StyledNavLink to="/">Discover</StyledNavLink>
+          </Box>
+          <Box direction="row" align="center">
+            <StyledNavLink to="/list">List</StyledNavLink>
+          </Box>
+          <AuthorizedNavButtons
+            isAuthorized={isAuthorized}
+            isLoginPage={isLoginPage}
+            profileId={id}
+          />
+        </Box>}
     </>
   );
 };

@@ -10,6 +10,7 @@ const JobCategoryList = () => {
         getJobs().then(res => {
             setList(res);
         })
+        
     }, []);
     
     return <Box>

@@ -17,6 +17,7 @@ import AddMember from "../components/Profile/ProfileContents/AddMember";
 import OtherProfile from "./profile/OtherProfile";
 import JobCategoryList from "./JobCategoryList";
 import CategoryUserList from "./CategoryUserList";
+import AdminOrders from "./admin/AdminOrders";
 
 const AdminRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AdminRoutes = () => {
       <Route path="/*" element={<Admin />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/profiles/:id" element={<Profile />} />
+      <Route exact path="/orders" element={<AdminOrders />} />
     </Routes>
   );
 };
