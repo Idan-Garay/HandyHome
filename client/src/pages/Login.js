@@ -24,6 +24,7 @@ const ErrorLabel = styled(Text)`
 `;
 
 const MyController = ({ name, control, errors, type = "text" }) => {
+  let label = name.charAt(0).toUpperCase() + name.slice(1);
   return (
     <Controller
       name={name}
@@ -31,7 +32,7 @@ const MyController = ({ name, control, errors, type = "text" }) => {
       render={({ field }) => (
         <>
           <Box direction="row" gap="medium" wrap>
-            <Text text>{name}</Text>
+            <Text text>{label}</Text>
             <StyledTextInput {...field} type={type} />
           </Box>
           <ErrorLabel>{errors[name]?.message}</ErrorLabel>
