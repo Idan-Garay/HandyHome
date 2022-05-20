@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "grommet-icons";
+import { User as UserIcon, Edit as EditIcon } from "grommet-icons";
 import {
   Box,
   Text,
@@ -10,17 +10,14 @@ import {
   Main,
   TextInput,
   TextArea,
-  CheckBoxGroup,
+  Layer,
+  Stack,
 } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
 import { patchProfile } from "../../API/profiles";
 
-const LabelText = (props) => (
-  <Box align="start" width={{ min: "9em" }}>
-    <Text color="gray" {...props} />
-  </Box>
-);
+import ReactAvatar from "react-avatar-edit";
 
 const StyledBox = (props) => (
   <Box
@@ -59,57 +56,35 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
   );
 };
 
-
-const ServicesField = ({control, name, text}) => {
-  const [ checkBox, setCheckbox ] = useState([]);
-
-  return (
-    <Controller 
-      name={name}
-      control={control}
-      render={({ field: { onChange } }) => (
-        <Box>
-          <Text alignSelf="start" margin={{bottom:"10px"}} >{text}</Text>
-          <CheckBoxGroup 
-            valueKey="id"
-            labelKey="category"
-            options={[
-              { category: "Plumbing", id: "Plumbing" },
-              { category: "Carpentry", id: "Carpentry" },
-              { category: "Masonry", id: "Masonry" },
-              { category: "Gardening", id: "Gardening" },
-              { category: "Housekeeping", id: "Housekeeping" },
-              { category: "Babysitting", id: "Babysitting" },
-            ]}
-            value={checkBox}
-            onChange={({ value: nextValue, option }) => {
-              setCheckbox(nextValue);
-              onChange(nextValue);
-            }}
-          />
-        </Box>
-      )}
-    />
-  );
-}
 const EditProfile = ({ onEdit, setIsEdit, id }) => {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const [preview, setPreview] = useState(null);
+  const [editProfileFields, setEditProfileFields] = useState({
+    name: "Full name",
+    contactNo: "096342341324",
+    services: "masonry,gardening",
+    description: "Able to fix walls and clean gardens",
+    picture: "",
+    email: "handyman@gmail.com",
+  });
+  const [src, setSrc] = useState(editProfileFields.picture);
+  console.log(src, preview);
+  const onCrop = (preview) => setPreview(preview);
+  const onClose = () => setPreview(null);
+  const onBeforeFileLoad = (elem) => {
+    if (elem.target.files[0].size > 71680) {
+      alert("File is too big!");
+      elem.target.value = "";
+    }
+  };
 
   const { control, reset, getValues } = useForm({
-    defaultValues: {
-      name: "Full name",
-      contactNo: "096342341324",
-      services: ["Masonry","Gardening"],
-      description: "Able to fix walls and clean gardens",
-      picture: "",
-      email: "handyman@gmail.com",
-    },
+    defaultValues: editProfileFields,
   });
 
   const onSave = () => {
-    console.log(id);
     const updateData = getValues();
-    updateData.services = updateData.services.toString();
     patchProfile({ ...updateData, id });
     setIsEdit(false);
   };
@@ -118,16 +93,6 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
     reset();
     setIsEdit(false);
   };
-
-  const navigateToEditPage = () => {
-    navigate("edit");
-  };
-
-  const onSaveEdit = () => {
-    
-    navigate("/");
-  };
-
   return (
     <>
       <Box direction="column" pad="small" margin={{ top: "2em" }}>
@@ -139,19 +104,64 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
             pad={{ left: "3em" }}
           >
             <Box>
-              <Avatar className="b-1" size="large" pad="3px">
-                {true && <User color="black" />}
-              </Avatar>
+              <Stack anchor="bottom-right">
+                <Avatar className="b-1" size="large" pad="3px">
+                  {true && <UserIcon color="black" />}
+                </Avatar>
+                <Button
+                  primary
+                  hoverIndicator
+                  onClick={() => {
+                    setShow(true);
+                  }}
+                  icon={<EditIcon color="black" size="12" />}
+                />
+                {show && (
+                  <Layer
+                    onEsc={() => setShow(false)}
+                    onClickOutside={() => setShow(false)}
+                  >
+                    <Box pad="medium">
+                      <Heading level={3} textAlign="center">
+                        Edit Image
+                      </Heading>
+                      <Box
+                        direction="row"
+                        gap="small"
+                        background="white"
+                        pad="small"
+                        round
+                      >
+                        <ReactAvatar
+                          width={200}
+                          imageWidth={150}
+                          imageHeight={150}
+                          onCrop={onCrop}
+                          onClose={onClose}
+                          onBeforeFileLoad={onBeforeFileLoad}
+                          src={src}
+                        />
+                        <Box
+                          height="small"
+                          width="small"
+                          justify="center"
+                          align="center"
+                        >
+                          {preview && <img src={preview} alt="Preview" />}
+                        </Box>
+                      </Box>
+                      <Button primary label="Upload" />
+                    </Box>
+                  </Layer>
+                )}
+              </Stack>
             </Box>
-            <Box align="start">
-              <Heading level={3}>Name</Heading>
-              <Heading level={6} color="gray">
-                UserName
-              </Heading>
+            <Box align="start" width="large">
+              <Heading level={4}>{editProfileFields.name}</Heading>
             </Box>
-            <Box margin={{ left: "60%" }} direction="row" justify="center">
-              <Box>
-                <Button primary label="Cancel" onClick={onCancel} />
+            <Box direction="row" justify="center" gap="small">
+              <Box pad="xsmall">
+                <Button plain label="Cancel" onClick={onCancel} />
               </Box>
               <Box>
                 <Button primary label="Save" onClick={onSave} />
@@ -161,8 +171,8 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
         </StyledBox>
 
         <Main margin={{ top: "2em" }} gap="medium">
-          <ProfileField name="name" control={control} text="Name" />
-          <ServicesField name="services" control={control} text="Services" />
+          <ProfileField name="name" control={control} text="name" />
+          <ProfileField name="services" control={control} text="Services" />
           <ProfileField
             name="description"
             control={control}
