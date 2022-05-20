@@ -49,7 +49,11 @@ router.post("/login", async (req, res) => {
   const form = req.body;
   const result = { errors: {} };
 
-  const User = await db.User.findOne({ where: { email: form.email } });
+  const User = await db.User.findOne({
+    where: { email: form.email },
+    include: { model: db.Profile, attributes: ["picture"] },
+  });
+
   if (User) {
     if (User.password !== form.password)
       result.errors.password = "Incorrect password";
@@ -57,13 +61,21 @@ router.post("/login", async (req, res) => {
       if (!User.verified)
         result.errors.verified = "Only verified users can login";
     } else if (User.password === form.password) {
-      const { accountType, username, email, id, verified } = User;
-      result.user = { accountType, username, id, email, verified };
+      const { accountType, username, email, id, verified, Profile } = User;
+      result.user = {
+        accountType,
+        username,
+        id,
+        email,
+        verified,
+        picture: Profile.picture,
+      };
     }
-    res.status(203).json(result);
+    console.log("-----------", result);
+    res.status(200).json(result);
   } else {
     result.errors.email = "Email doesn't exist";
-    res.status(203).json(result);
+    res.status(200).json(result);
   }
 
   return result;

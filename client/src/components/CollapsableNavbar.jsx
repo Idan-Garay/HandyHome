@@ -12,7 +12,7 @@ import {
   Heading,
   Text,
 } from "grommet";
-import { Close } from "grommet-icons";
+import { Close, User as UserIcon } from "grommet-icons";
 import styled from "styled-components";
 import { AccountContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +23,25 @@ const StyledDropButton = styled(DropButton)`
   border: none;
 `;
 
+const MyAvatar = ({ src }) => {
+  console.log(src);
+  return (
+    <>
+      {src ? (
+        <Avatar src={src} />
+      ) : (
+        <Avatar background="accent-3">
+          <UserIcon color="black" />
+          <img src="/HandyHome.svg" />
+        </Avatar>
+      )}
+    </>
+  );
+};
+
 const SimpleDropButton = ({ menuList }) => {
-  const src = "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80";
+  const { accountState } = useContext(AccountContext);
+  const src = accountState.picture;
   const [open, setOpen] = React.useState();
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
@@ -33,7 +50,7 @@ const SimpleDropButton = ({ menuList }) => {
     <Box align="center">
       <StyledDropButton
         border="none"
-        label={<Avatar src={src} />}
+        label={<MyAvatar src={src} />}
         open={open}
         onOpen={onOpen}
         onClose={onClose}
@@ -62,8 +79,8 @@ const DropContent = ({ menuList }) => (
 
 const CollapsableNavbar = ({ profileId }) => {
   const navigate = useNavigate();
-  const { dispatch } = useContext(AccountContext);
-
+  const { accountState, dispatch } = useContext(AccountContext);
+  console.log(accountState, "here");
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
     navigate("/login");
