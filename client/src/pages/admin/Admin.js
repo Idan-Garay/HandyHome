@@ -20,6 +20,7 @@ const Admin = () => {
 
   useEffect(() => {
     getUsers().then(res => {
+      res = res.filter(type => type.accountType != 2)
       setUsers(res);
     })
   },[])

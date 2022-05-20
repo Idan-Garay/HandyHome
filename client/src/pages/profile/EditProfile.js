@@ -107,7 +107,6 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
   });
 
   const onSave = () => {
-    console.log(id);
     const updateData = getValues();
     updateData.services = updateData.services.toString();
     patchProfile({ ...updateData, id });

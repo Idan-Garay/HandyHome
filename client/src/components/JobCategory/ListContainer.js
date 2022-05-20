@@ -12,22 +12,6 @@ import babysitter from "../../../public/assets/baby-stroller.png";
 
 const ListContainer = (props) => {
   let navigate = useNavigate();
-  const [ image, setImage ] = useState("");
-
-  // switch(props.img_src) {
-  //   case carpenter:
-  //     setImage(carpenter);
-  //   case plumber:
-  //     setImage(plumber);
-  //   case masonry:
-  //     setImage(masonry);
-  //   case gardener:
-  //     setImage(gardener);
-  //   case housekeeper:
-  //     setImage(housekeeper);
-  //   case babysitter:
-  //     setImage(babysitter);
-  // }
 
   const routeChange = () => {
     let path = props.path;

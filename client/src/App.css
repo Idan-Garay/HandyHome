@@ -26,6 +26,7 @@
   margin: auto;
   border: 1px solid;
   border-spacing: 0;
+  border-collapse: collapse;
 }
 
 .table-header {
@@ -36,6 +37,7 @@
 
 .table-header td {
   padding: 5px;
+  border: 1px solid black;
 }
 
 .table-data {
@@ -44,10 +46,11 @@
 
 .table-data td {
   padding: 10px;
+  
 }
 
-.table-data-list {
-  border-bottom: 1px solid black;
+.table-data-list td {
+  border: 1px solid black;
 }
 
 .number {
@@ -62,5 +65,30 @@
   padding-bottom: 3%;
 }
 
+.requests-table {
+  width: 80%;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.profile-container {
+  width: 90%;
+  border: 1px solid black;
+  border-radius: 9px;
+  margin: auto;
+  padding-bottom: 3%;
+}
+
+.profile-table {
+  width: 90%;
+  margin: auto;
+  border: 1px solid;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
 
 /* font-size: calc(10px + 2vmin); */

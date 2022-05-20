@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getOrders } from "../../API/admin";
-import { Heading } from "grommet";
+import { Heading, Button } from "grommet";
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
 
 const Displayorders = ({ id, description, price, status, contactNo }) => {
+  const navigate = useNavigate();
+  onEdit = () => {
+    navigate("/orders/edit", { state: { description, price, status, contactNo } });
+  }
+
   return (
     <tr className="table-data-list">
       <td className="number">{id}</td>
@@ -11,6 +17,9 @@ const Displayorders = ({ id, description, price, status, contactNo }) => {
       <td>{contactNo}</td>
       <td className="number">Php {price.toFixed(2)}</td>
       <td className="number">{status}</td>
+      <td>
+        <Button primary label="Edit" onClick={onEdit} />
+      </td>
     </tr>
   );
 }

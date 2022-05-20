@@ -57,18 +57,21 @@ const NavBar = ({ isAuthorized, id, accountType }) => {
         </StyledNavLink>
       </Box>
       {accountType === 2 ?
-        <Box justify="evenly" direction="row" width="30em">
+        <Box justify="evenly" direction="row" width="35em">
           <Box direction="row" align="center">
-            <StyledNavLink to="/">Requests</StyledNavLink>
+            <StyledNavLink to="/requests">Validations</StyledNavLink>
           </Box>
           <Box direction="row" align="center">
-            <StyledNavLink to="/">Feedbacks</StyledNavLink>
+            <StyledNavLink to="/feedbacks">Feedbacks</StyledNavLink>
           </Box>
           <Box direction="row" align="center">
-            <StyledNavLink to="/">Profiles</StyledNavLink>
+            <StyledNavLink to="/profiles">Profiles</StyledNavLink>
           </Box>
           <Box direction="row" align="center">
             <StyledNavLink to="/orders">Orders</StyledNavLink>
+          </Box>
+          <Box direction="row" align="center">
+            <StyledNavLink to="/">Users</StyledNavLink>
           </Box>
           <AuthorizedNavButtons
             isAuthorized={isAuthorized}
