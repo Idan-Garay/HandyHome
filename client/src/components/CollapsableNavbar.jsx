@@ -24,6 +24,7 @@ const StyledDropButton = styled(DropButton)`
 `;
 
 const MyAvatar = ({ src }) => {
+  console.log(src);
   return (
     <>
       {src ? (
@@ -31,6 +32,7 @@ const MyAvatar = ({ src }) => {
       ) : (
         <Avatar background="accent-3">
           <UserIcon color="black" />
+          <img src="/HandyHome.svg" />
         </Avatar>
       )}
     </>
@@ -77,8 +79,8 @@ const DropContent = ({ menuList }) => (
 
 const CollapsableNavbar = ({ profileId }) => {
   const navigate = useNavigate();
-  const { dispatch } = useContext(AccountContext);
-
+  const { accountState, dispatch } = useContext(AccountContext);
+  console.log(accountState, "here");
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
     navigate("/login");

@@ -7,11 +7,7 @@ import { AccountContext } from "../App";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  login,
-  serverValidateLoginForm,
-  serverVerifiedUser,
-} from "../API/user";
+import { login } from "../API/user";
 import LoadingScreen from "../components/LoadingScreen";
 
 const StyledTextInput = styled(TextInput)`
