@@ -71,6 +71,7 @@ router.post("/login", async (req, res) => {
         picture: Profile.picture,
       };
     }
+    console.log("-----------", result);
     res.status(200).json(result);
   } else {
     result.errors.email = "Email doesn't exist";

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Box, Image } from "grommet";
-import HandyHomeLogo from "../../public/HandyHome.svg";
+import HandyHomeLogo from "/HandyHome.svg";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import CollapsableNavbar from "./CollapsableNavbar";
