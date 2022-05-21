@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       services: { type: DataTypes.STRING, defaultValue: "" },
       contactNo: { type: DataTypes.STRING, defaultValue: "" },
       description: { type: DataTypes.STRING, defaultValue: "" },
-      picture: { type: DataTypes.STRING, defaultValue: "" },
+      picture: { type: DataTypes.BLOB, defaultValue: "" },
       email: { type: DataTypes.STRING, defaultValue: "" },
     },
     {
