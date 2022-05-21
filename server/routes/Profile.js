@@ -4,23 +4,10 @@ const path = require("path");
 const db = require("../models/index.js");
 
 const multer = require("multer");
-const { profile } = require("console");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.resolve(__dirname, "../../client/public/validationImages"));
-  },
-
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage });
-
-router.get("/upload", (req, res) => {
-  res.send("upload here");
-});
 
 router.post(
   "/upload",
@@ -28,27 +15,46 @@ router.post(
     { name: "file1", maxCount: 1 },
     { name: "file2", maxCount: 1 },
   ]),
-  (req, res, next) => {
+  async (req, res, next) => {
     const files = req.files;
 
-    if (files) {
-      const reqFiles = Object.entries(req.files).map(([key, file]) => {
-        const { mimetype, filename } = file[0];
-        return {
-          type: mimetype,
-          name: filename,
-          image: "/client/public/validationImages" + filename,
-          ProfileId: req.body.ProfileId,
-        };
-      });
-
-      const dbFiles = db.ProfileValidation.bulkCreate(reqFiles);
-      res.status(200).json(dbFiles);
+    try {
+      if (files) {
+        // data:image/png;base64,i
+        const reqFiles = Object.entries(req.files).map(([key, file]) => {
+          const { buffer, fieldname, mimetype } = file[0];
+          const type = fieldname === "file1" ? 0 : 1;
+          const base64Data =
+            `data:${mimetype},` +
+            Buffer.from(buffer, "binary").toString("base64");
+          return {
+            type: type,
+            image: base64Data,
+            ProfileId: req.body.ProfileId,
+          };
+        });
+        const dbFiles = await db.ProfileValidation.bulkCreate(reqFiles);
+        res.status(200).json(dbFiles);
+      }
+    } catch (e) {
+      console.log(e);
     }
 
     next();
   }
 );
+
+router.post("/getFiles", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const files = await db.ProfileValidation.findAll({
+      where: { ProfileId: id },
+    });
+    res.json(files);
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 router.get("/userProfile", async (req, res) => {
   try {
@@ -79,10 +85,6 @@ router.get("/profiles", async (req, res) => {
 router.get("/profiles/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    // let profile = await db.Profile.findOne({
-    //   include: db.Address,
-    //   where: { userId: userId },
-    // });
     let profile = await db.Profile.findOne({
       include: [
         { model: db.Address, attributes: ["street", "city", "area"] },
@@ -93,6 +95,8 @@ router.get("/profiles/:id", async (req, res) => {
       ],
       where: { userId: userId },
     });
+    if (profile)
+      profile.picture = Buffer.from(profile.picture, "base64").toString();
 
     res.status(200).jsonp(profile);
   } catch (e) {
@@ -103,7 +107,7 @@ router.get("/profiles/:id", async (req, res) => {
 router.patch("/profiles/:id/edit", async (req, res) => {
   try {
     let updateData = req.body;
-    console.log(updateData, "----");
+
     let profile = await db.Profile.findOne({ where: { id: updateData.id } });
     if (profile) {
       const { id, ...neededData } = updateData;
@@ -145,7 +149,6 @@ router.get("/profiles/:id/teamMembers", async (req, res) => {
         where: { ProfileId: primaryProfile.id },
       });
 
-      console.log("----", teamMembers);
       res.status(200).json(teamMembers);
     } else res.status(200).json("Profile Id doesn't exist");
   } catch (e) {

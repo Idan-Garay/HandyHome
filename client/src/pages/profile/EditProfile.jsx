@@ -69,9 +69,14 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
     email: "handyman@gmail.com",
   });
   const [src, setSrc] = useState(editProfileFields.picture);
-  console.log(src, preview);
   const onCrop = (preview) => setPreview(preview);
   const onClose = () => setPreview(null);
+  const onUpload = () => {
+    setSrc(preview);
+    setPreview(null);
+    setShow(false);
+  };
+
   const onBeforeFileLoad = (elem) => {
     if (elem.target.files[0].size > 71680) {
       alert("File is too big!");
@@ -79,13 +84,14 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
     }
   };
 
-  const { control, reset, getValues } = useForm({
+  const { control, reset, getValues, setValue } = useForm({
     defaultValues: editProfileFields,
   });
 
   const onSave = () => {
+    setValue("picture", src);
     const updateData = getValues();
-    patchProfile({ ...updateData, id });
+    patchProfile({ ...updateData, picture: src, id });
     setIsEdit(false);
   };
 
@@ -106,7 +112,11 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
             <Box>
               <Stack anchor="bottom-right">
                 <Avatar className="b-1" size="large" pad="3px">
-                  {true && <UserIcon color="black" />}
+                  {src ? (
+                    <img src={src} alt="profile pic" />
+                  ) : (
+                    <UserIcon color="black" />
+                  )}
                 </Avatar>
                 <Button
                   primary
@@ -134,7 +144,6 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
                       >
                         <ReactAvatar
                           width={200}
-                          imageWidth={150}
                           imageHeight={150}
                           onCrop={onCrop}
                           onClose={onClose}
@@ -150,7 +159,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
                           {preview && <img src={preview} alt="Preview" />}
                         </Box>
                       </Box>
-                      <Button primary label="Upload" />
+                      <Button primary label="Upload" onClick={onUpload} />
                     </Box>
                   </Layer>
                 )}

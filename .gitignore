@@ -14,8 +14,13 @@ node_modules
 .sass-cache
 
 package-lock.json
+client/package-lock.json
+server/package-lock.json
+
 yarn.lock
 client/mockDB/db.json
 
 # Ignored especially by Bligh
 icons/
+client/package-lock.json
+client/package-lock.json

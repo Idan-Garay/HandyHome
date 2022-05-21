@@ -28,12 +28,6 @@ const StyledBox = (props) => (
   />
 );
 
-const LabelText = (props) => (
-  <Box align="start" width={{ min: "9em" }}>
-    <Text color="gray" {...props} />
-  </Box>
-);
-
 const TeamMember = (props) => {
   const userId = useParams.id;
   const { name, services, contactNo, id } = props.member;
@@ -59,7 +53,7 @@ const TeamMember = (props) => {
         </Avatar>
         <Heading level={5}>{name}</Heading>
       </CardHeader>
-      <CardBody pad="medium" onClick={chooseMember}>
+      <CardBody pad="medium" onClick={chooseMember} height="medium">
         <Text>{services}</Text>
         <Text>{contactNo}</Text>
       </CardBody>
@@ -87,6 +81,7 @@ const AddTeamMember = ({ handleClick }) => (
     onClick={handleClick}
     align="center"
     hoverIndicator="#efefef"
+    margin={{ bottom: "3em" }}
   >
     <CardBody direction="column" align="center" justify="center" gap="medium">
       <Avatar size="xlarge" background="accent-3">
@@ -107,14 +102,14 @@ const OptionalRender = (props) => {
   return ChosenComponent;
 };
 
-const Team = ({ primaryProfileId }) => {
+const Team = ({ primaryProfileId, setProfileComponentIndex }) => {
   const navigate = useNavigate();
   const [members, setMembers] = useState([]);
   const [member, setMember] = useState(null);
   const [componentIndex, setComponentIndex] = useState(0);
 
   const handleClick = () => {
-    navigate("add");
+    navigate("add", { state: { primaryProfileId } });
   };
 
   const changeComponentIndex = (val = 0) => {
@@ -127,9 +122,9 @@ const Team = ({ primaryProfileId }) => {
   };
 
   useEffect(() => {
+    setProfileComponentIndex(1);
     const fn = async () => {
       const membersResult = await getTeamMembers(primaryProfileId);
-
       setMembers(membersResult);
     };
     fn();
@@ -137,8 +132,19 @@ const Team = ({ primaryProfileId }) => {
 
   return (
     <OptionalRender componentToRender={componentIndex}>
-      <Box value={0} direction="row-responsive" gap="medium" justify="start">
-        <AddTeamMember handleClick={handleClick} />
+      <Box
+        value={0}
+        direction="row-responsive"
+        gap="medium"
+        justify="start"
+        overflow={{ vertical: "scroll" }}
+        fill
+        wrap
+      >
+        <AddTeamMember
+          handleClick={handleClick}
+          primaryProfileId={primaryProfileId}
+        />
         {members && members.length
           ? members.map((member, idx) => (
               <TeamMember

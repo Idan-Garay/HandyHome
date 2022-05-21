@@ -40,6 +40,9 @@ const accountReducer = (state, action) => {
     case "INIT_ACCOUNTSTATE":
       newState = { ...initialState };
       break;
+    case "EDIT_PROFILE":
+      newState = { ...state, ...action.payload };
+      break;
     default:
       throw new Error(`action type: ${action.type} not found`);
   }

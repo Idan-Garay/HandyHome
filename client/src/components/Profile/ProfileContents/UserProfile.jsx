@@ -38,7 +38,7 @@ const UserProfile = ({
         >
           <Box>
             <Avatar className="b-1" size="large" pad="3px">
-              <UserIcon color="black" />
+              {picture ? <img src={picture} /> : <UserIcon color="black" />}
             </Avatar>
           </Box>
           <Box align="start" width="large">
