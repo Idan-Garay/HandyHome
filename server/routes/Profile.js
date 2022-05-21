@@ -4,7 +4,6 @@ const path = require("path");
 const db = require("../models/index.js");
 
 const multer = require("multer");
-const { profile } = require("console");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -93,6 +92,8 @@ router.get("/profiles/:id", async (req, res) => {
       ],
       where: { userId: userId },
     });
+    if (profile)
+      profile.picture = Buffer.from(profile.picture, "base64").toString();
 
     res.status(200).jsonp(profile);
   } catch (e) {
@@ -103,7 +104,7 @@ router.get("/profiles/:id", async (req, res) => {
 router.patch("/profiles/:id/edit", async (req, res) => {
   try {
     let updateData = req.body;
-    console.log(updateData, "----");
+
     let profile = await db.Profile.findOne({ where: { id: updateData.id } });
     if (profile) {
       const { id, ...neededData } = updateData;
@@ -145,7 +146,6 @@ router.get("/profiles/:id/teamMembers", async (req, res) => {
         where: { ProfileId: primaryProfile.id },
       });
 
-      console.log("----", teamMembers);
       res.status(200).json(teamMembers);
     } else res.status(200).json("Profile Id doesn't exist");
   } catch (e) {
