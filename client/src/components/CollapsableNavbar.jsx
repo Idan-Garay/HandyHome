@@ -1,18 +1,6 @@
 import React, { useContext } from "react";
-import {
-  Anchor,
-  Box,
-  Header,
-  Menu,
-  Nav,
-  ResponsiveContext,
-  Avatar,
-  DropButton,
-  Button,
-  Heading,
-  Text,
-} from "grommet";
-import { Close, User as UserIcon } from "grommet-icons";
+import { Anchor, Box, Nav, Avatar, DropButton } from "grommet";
+import { User as UserIcon } from "grommet-icons";
 import styled from "styled-components";
 import { AccountContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +12,6 @@ const StyledDropButton = styled(DropButton)`
 `;
 
 const MyAvatar = ({ src }) => {
-  console.log(src);
   return (
     <>
       {src ? (
@@ -32,7 +19,6 @@ const MyAvatar = ({ src }) => {
       ) : (
         <Avatar background="accent-3">
           <UserIcon color="black" />
-          <img src="/HandyHome.svg" />
         </Avatar>
       )}
     </>
@@ -80,7 +66,6 @@ const DropContent = ({ menuList }) => (
 const CollapsableNavbar = ({ profileId }) => {
   const navigate = useNavigate();
   const { accountState, dispatch } = useContext(AccountContext);
-  console.log(accountState, "here");
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
     navigate("/login");
