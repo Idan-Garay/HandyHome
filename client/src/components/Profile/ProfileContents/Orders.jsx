@@ -30,7 +30,7 @@ const columns = [
   },
 ];
 
-const Orders = ({ employerUserId }) => {
+const Orders = ({ employerUserId, setProfileComponentIndex }) => {
   const [data, setData] = useState([
     {
       id: 1,
@@ -42,6 +42,7 @@ const Orders = ({ employerUserId }) => {
   ]);
 
   useEffect(() => {
+    setProfileComponentIndex(2);
     (async () => {
       const orders = await getOrdersByEmployer(employerUserId);
       setData(orders);

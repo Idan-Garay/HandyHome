@@ -53,7 +53,7 @@ const TeamMember = (props) => {
         </Avatar>
         <Heading level={5}>{name}</Heading>
       </CardHeader>
-      <CardBody pad="medium" onClick={chooseMember}>
+      <CardBody pad="medium" onClick={chooseMember} height="medium">
         <Text>{services}</Text>
         <Text>{contactNo}</Text>
       </CardBody>
@@ -81,6 +81,7 @@ const AddTeamMember = ({ handleClick }) => (
     onClick={handleClick}
     align="center"
     hoverIndicator="#efefef"
+    margin={{ bottom: "3em" }}
   >
     <CardBody direction="column" align="center" justify="center" gap="medium">
       <Avatar size="xlarge" background="accent-3">
@@ -101,7 +102,7 @@ const OptionalRender = (props) => {
   return ChosenComponent;
 };
 
-const Team = ({ primaryProfileId }) => {
+const Team = ({ primaryProfileId, setProfileComponentIndex }) => {
   const navigate = useNavigate();
   const [members, setMembers] = useState([]);
   const [member, setMember] = useState(null);
@@ -121,9 +122,9 @@ const Team = ({ primaryProfileId }) => {
   };
 
   useEffect(() => {
+    setProfileComponentIndex(1);
     const fn = async () => {
       const membersResult = await getTeamMembers(primaryProfileId);
-      console.log(membersResult);
       setMembers(membersResult);
     };
     fn();
@@ -131,7 +132,15 @@ const Team = ({ primaryProfileId }) => {
 
   return (
     <OptionalRender componentToRender={componentIndex}>
-      <Box value={0} direction="row-responsive" gap="medium" justify="start">
+      <Box
+        value={0}
+        direction="row-responsive"
+        gap="medium"
+        justify="start"
+        overflow={{ vertical: "scroll" }}
+        fill
+        wrap
+      >
         <AddTeamMember
           handleClick={handleClick}
           primaryProfileId={primaryProfileId}
