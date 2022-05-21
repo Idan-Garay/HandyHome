@@ -35,7 +35,7 @@ const Profile = () => {
   useEffect(() => {
     const fn = async () => {
       const res = await getProfile(accountState.id);
-
+      dispatch({ type: "EDIT_PROFILE", payload: { picture: res.picture } });
       setProfileData(res);
     };
     fn();
