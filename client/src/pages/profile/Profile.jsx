@@ -33,6 +33,12 @@ const Profile = () => {
   const accountType = accountState ? accountState.accountType : 1;
 
   useEffect(() => {
+    let profileIdx = localStorage.getItem("profileIdx");
+
+    if (profileIdx) setComponentIndex(parseInt(profileIdx));
+  }, [componentIndex]);
+
+  useEffect(() => {
     const fn = async () => {
       const res = await getProfile(accountState.id);
       dispatch({ type: "EDIT_PROFILE", payload: { picture: res.picture } });
@@ -43,6 +49,7 @@ const Profile = () => {
 
   const menuOnClick = (e) => {
     const { value } = e.target;
+    localStorage.setItem("profileIdx", value);
     setComponentIndex(parseInt(value));
   };
 
@@ -68,16 +75,28 @@ const Profile = () => {
           </Heading>
         </Box>
 
-        <Box direction="row-responsive" gap="large" fill>
-          <Sidebar width="small" fill="vertical">
+        <Box direction="row-responsive" gap="large" width="100vh" fill>
+          <Sidebar width={{ min: "20%" }}>
             <ShowButtons accountType={accountType} menuOnClick={menuOnClick} />
           </Sidebar>
-          <Main fill="vertical">
+          <Main width={{ max: "79%" }}>
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} myDetailsData={profileData} />
-              <Team value={1} primaryProfileId={accountState.id} />
-              <Orders employerUserId={accountState.id} value={2} />
-              <Verify profileData={profileData} value={3} />
+              <Team
+                value={1}
+                primaryProfileId={accountState.id}
+                setProfileComponentIndex={setComponentIndex}
+              />
+              <Orders
+                employerUserId={accountState.id}
+                value={2}
+                setProfileComponentIndex={setComponentIndex}
+              />
+              <Verify
+                profileData={profileData}
+                value={3}
+                setProfileComponentIndex={setComponentIndex}
+              />
             </OptionalRender>
           </Main>
         </Box>
