@@ -28,12 +28,6 @@ const StyledBox = (props) => (
   />
 );
 
-const LabelText = (props) => (
-  <Box align="start" width={{ min: "9em" }}>
-    <Text color="gray" {...props} />
-  </Box>
-);
-
 const TeamMember = (props) => {
   const userId = useParams.id;
   const { name, services, contactNo, id } = props.member;
@@ -114,7 +108,7 @@ const Team = ({ primaryProfileId }) => {
   const [componentIndex, setComponentIndex] = useState(0);
 
   const handleClick = () => {
-    navigate("add");
+    navigate("add", { state: { primaryProfileId } });
   };
 
   const changeComponentIndex = (val = 0) => {
@@ -129,7 +123,7 @@ const Team = ({ primaryProfileId }) => {
   useEffect(() => {
     const fn = async () => {
       const membersResult = await getTeamMembers(primaryProfileId);
-
+      console.log(membersResult);
       setMembers(membersResult);
     };
     fn();
@@ -138,7 +132,10 @@ const Team = ({ primaryProfileId }) => {
   return (
     <OptionalRender componentToRender={componentIndex}>
       <Box value={0} direction="row-responsive" gap="medium" justify="start">
-        <AddTeamMember handleClick={handleClick} />
+        <AddTeamMember
+          handleClick={handleClick}
+          primaryProfileId={primaryProfileId}
+        />
         {members && members.length
           ? members.map((member, idx) => (
               <TeamMember

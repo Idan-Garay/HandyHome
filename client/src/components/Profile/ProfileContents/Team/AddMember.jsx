@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Text,
@@ -44,7 +44,11 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
 
 const AddMember = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const primaryProfileId = useLocation().state?.primaryProfileId;
+
+  useEffect(() => {
+    if (!primaryProfileId) navigate(-1);
+  }, []);
 
   const { control, reset, getValues, handleSubmit } = useForm({
     defaultValues: {
@@ -54,26 +58,26 @@ const AddMember = () => {
       description: "Wall Fix",
       picture: "",
       email: "raymoon@gmail.com",
-      street: "",
-      city: "",
-      area: "",
+      street: "street 1",
+      city: "city 1",
+      area: "area 1",
     },
   });
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  const addMember = async (newMemberData, userId) => {
+  const addMember = async (newMemberData, primaryProfileId) => {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...newMemberData }),
+      body: JSON.stringify({ ...newMemberData, primaryProfileId }),
     };
     const res = await fetch(
-      `http://localhost:3501/profiles/${userId}/add`,
+      `http://localhost:3501/profile/team/add`,
       requestOptions
     );
-    navigate(`/profiles/${userId}`);
+    navigate(`/profile`);
   };
 
   const onAddMember = async (data) => {
@@ -87,7 +91,7 @@ const AddMember = () => {
       ...address
     } = data;
     const profile = { name, contactNo, services, description, picture, email };
-    const res = await addMember({ address, profile }, id);
+    const res = await addMember({ address, profile }, primaryProfileId);
   };
 
   return (

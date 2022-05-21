@@ -13,7 +13,7 @@ import ProfileValidation from "../components/Profile/ProfileValidation";
 import Admin from "./admin/Admin";
 import History from "./History";
 import EditProfile from "./profile/EditProfile";
-import AddMember from "../components/Profile/ProfileContents/AddMember";
+import AddMember from "../components/Profile/ProfileContents/Team/AddMember";
 import OtherProfile from "./profile/OtherProfile";
 
 const AdminRoutes = () => {
@@ -43,7 +43,7 @@ const CustomerRoutes = () => {
         element={<ProtectedRoute children={<RequestByEmployer />} />}
       />
       <Route
-        path="/profiles/:id/add"
+        path="/profile/add"
         element={<ProtectedRoute children={<AddMember />} />}
       />
       <Route path="/profilevalidation" element={<ProfileValidation />} />
