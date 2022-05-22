@@ -20,7 +20,7 @@ import { deleteMemberProfile } from "../../../../API/profiles";
 
 const TeamMember = (props) => {
   const userId = useParams.id;
-  const { name, services, contactNo, id } = props.member;
+  const { name, services, contactNo, id, picture } = props.member;
   const { handleChooseMember } = props;
   const { deleteMember } = props;
 
@@ -41,7 +41,11 @@ const TeamMember = (props) => {
     <Card height="18em" width="small" background="light-1">
       <CardHeader pad="medium" direction="column" onClick={chooseMember}>
         <Avatar size="xlarge" background="accent-3">
-          <User size="large" />
+          {picture ? (
+            <img src={picture} height="100%" width="100%" />
+          ) : (
+            <User size="large" />
+          )}
         </Avatar>
         <Heading level={5}>{name}</Heading>
       </CardHeader>
