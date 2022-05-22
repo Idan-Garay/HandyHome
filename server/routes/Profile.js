@@ -20,7 +20,6 @@ router.post(
 
     try {
       if (files) {
-        // data:image/png;base64,i
         const reqFiles = Object.entries(req.files).map(([key, file]) => {
           const { buffer, fieldname, mimetype } = file[0];
           const type = fieldname === "file1" ? 0 : 1;
@@ -64,6 +63,46 @@ router.get("/userProfile", async (req, res) => {
     });
     let profiles = users.map((user) => user.Profile);
     res.status(200).jsonp(profiles);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post("/otherProfile", async (req, res) => {
+  try {
+    const { id } = req.body;
+    let result = {};
+
+    result.primary = await db.Profile.findOne({
+      where: { id },
+      include: [
+        { model: db.Address, attributes: ["street", "city", "area"] },
+        {
+          model: db.User,
+          attributes: ["id", "username", "email", "verified", "accountType"],
+        },
+      ],
+    });
+    if (result.primary) {
+      result.secondary = await db.Profile.findAll(
+        {
+          where: {
+            ProfileId: result.primary.id,
+          },
+        },
+        {
+          include: [
+            { model: db.Address, attributes: ["street", "city", "area"] },
+            {
+              model: db.User,
+              attributes: ["username", "email", "verified", "accountType"],
+            },
+          ],
+        }
+      );
+    }
+
+    res.json(result);
   } catch (e) {
     console.log(e);
   }
