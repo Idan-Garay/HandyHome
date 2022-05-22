@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Button, Avatar, Heading, Main } from "grommet";
+import { Box, Text, Button, Avatar, Heading, Main, Image } from "grommet";
 import { User as UserIcon } from "grommet-icons";
 
 const LabelText = (props) => (
@@ -38,7 +38,15 @@ const UserProfile = ({
         >
           <Box>
             <Avatar className="b-1" size="large" pad="3px">
-              {picture ? <img src={picture} /> : <UserIcon color="black" />}
+              {picture ? (
+                <Image
+                  src={"data:image/jpg;base64," + picture}
+                  width="100%"
+                  height="100%"
+                />
+              ) : (
+                <UserIcon color="black" />
+              )}
             </Avatar>
           </Box>
           <Box align="start" width="large">
