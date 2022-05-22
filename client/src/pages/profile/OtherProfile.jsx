@@ -24,8 +24,8 @@ const OptionalRender = (props) => {
   return ChosenComponent;
 };
 
-const AvatarProfile = ({ profileId, contactNo }) => {
-  const { accountState } = useContext(AccountContext);
+const AvatarProfile = ({ primaryProfile }) => {
+  const { picture, Address, User, contactNo, id } = primaryProfile;
   return (
     <Box
       gap="small"
@@ -42,7 +42,15 @@ const AvatarProfile = ({ profileId, contactNo }) => {
         pad={{ right: "1em" }}
       >
         <Avatar size="xlarge" background="accent-3">
-          <User size="large" />
+          {picture ? (
+            <img
+              src={"data:image/jpg;base64," + picture}
+              width="100%"
+              height="100%"
+            />
+          ) : (
+            <User size="large" />
+          )}
         </Avatar>
       </Box>
       <Box
@@ -55,7 +63,7 @@ const AvatarProfile = ({ profileId, contactNo }) => {
           <Map />
           <Text color="gray">From</Text>
         </Box>
-        <Text textAlign="end"> area</Text>
+        <Text textAlign="end"> {Address ? Address.area : "_"}</Text>
       </Box>
 
       <Box
@@ -64,88 +72,108 @@ const AvatarProfile = ({ profileId, contactNo }) => {
         justify="between"
         fill="horizontal"
       >
-        <Box direction="row" gap="small">
+        {/* <Box direction="row" gap="small">
           <Send />
           <Text color="gray">Last Delivery</Text>
         </Box>
-        <Text textAlign="end">6 days</Text>
+        <Text textAlign="end">6 days</Text> */}
       </Box>
 
-      {accountState && accountState.accountType === 0 && (
-        <Link
-          to={`/profiles/${profileId}/request`}
-          state={{ id: profileId, contactNo }}
-        >
-          <Button type="submit" fill="horizontal" primary label="Request" />
-        </Link>
-      )}
+      <Link to={`/profiles/${id}/request`} state={{ to: User.id, contactNo }}>
+        <Button type="submit" fill="horizontal" primary label="Request" />
+      </Link>
     </Box>
   );
 };
 
-const ProfileDetail = () => {
+const ProfileDetail = ({ primaryProfile }) => {
+  const { name, services, description, email, contactNo } = primaryProfile;
   return (
-    <Box>
-      <Box
-        justify="start"
-        pad="small"
-        align="start"
-        gap="small"
-        fill="horizontal"
-      >
-        <Box>
-          <h2 className="textAlignLeft">name</h2>
-          <Text as="h4" color="gray" textAlign="start">
-            service
-          </Text>
-        </Box>
-        <Box fill="horizontal" wrap>
-          <Text as="p" textAlign="start">
-            Brokers and traders and money moves field bet customer value chain
-            emerging markets piker embracing ingenuity. Mortgage the colour of
-            money block chain transactions makin' chedda and money moves
-            discount window lending bitcoin protocol short traders. Billionaire
-            hedge fund manager earnings bear market all ab afdsfsdf
-          </Text>
-        </Box>
+    <Box gap="medium" width="90%">
+      <Box width="medium">
+        <Heading level={3} textAlign="start">
+          {name}
+        </Heading>
+        <Heading level={5} textAlign="start" color="gray">
+          {services
+            .split(",")
+            .map((service) => {
+              return service[0].toUpperCase() + service.slice(1);
+            })
+            .join(", ")}
+        </Heading>
+      </Box>
+      <Text textAlign="start">" {description} "</Text>
+      <Box direction="row-responsive" gap="xlarge">
+        <Text>
+          Email: <strong>{email}</strong>
+        </Text>
+        <Text>
+          Contact: <strong>{contactNo}</strong>
+        </Text>
       </Box>
     </Box>
   );
 };
 
 const OtherProfile = () => {
-  const { id, contactNo } = useLocation().state;
+  const { id } = useParams();
+  const [primaryProfile, setPrimaryProfile] = useState(null);
+  const [secondaryProfiles, setSecondaryProfiles] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fn = async () => {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      };
+      let res = await fetch(
+        "http://localhost:3501/otherProfile",
+        requestOptions
+      );
+      res = await res.json();
+      let { primary, secondary } = res;
+      setPrimaryProfile(primary);
+      setSecondaryProfiles(secondary);
+    };
+    fn();
+  }, []);
 
   return (
     <Page kind="wide" pad="3em .5em" fill height="full">
-      <PageContent
-        round="small"
-        gap="medium"
-        fill
-        direction="column"
-        align="start"
-      >
-        <Box direction="row-responsive" gap="medium">
-          <AvatarProfile profileId={id} contactNo={contactNo} />
-          <ProfileDetail />
-        </Box>
-        <Box direction="row-responsive">
-          <Heading level={3}>Team |</Heading>
-          <Heading level={3}> Feedbacks</Heading>
-        </Box>
-        <Box fill>
-          <OtherMember />
-          <OtherMember />
-          <OtherMember />
-          <OtherMember />
-        </Box>
-      </PageContent>
+      {primaryProfile && (
+        <PageContent
+          round="small"
+          gap="medium"
+          fill
+          direction="column"
+          align="start"
+        >
+          <Box direction="row-responsive" gap="medium">
+            <AvatarProfile primaryProfile={primaryProfile} />
+            <ProfileDetail primaryProfile={primaryProfile} />
+          </Box>
+          <Box direction="row-responsive">
+            <Heading level={3}>Team |</Heading>
+            <Heading level={3}> Feedbacks</Heading>
+          </Box>
+          <Box fill>
+            {secondaryProfiles.length
+              ? secondaryProfiles.map((p) => <OtherMember profile={p} />)
+              : "No Teammates"}
+          </Box>
+        </PageContent>
+      )}
     </Page>
   );
 };
 
-const OtherMember = () => {
+const OtherMember = ({ secondaryProfile }) => {
+  const { name, services, description, email, contactNo } = secondaryProfile;
   return (
     <Box height="12em">
       <Box
@@ -165,26 +193,25 @@ const OtherMember = () => {
           </Box>
           <Box width="medium">
             <Heading level={3} textAlign="start">
-              Warne Johan
+              {name}
             </Heading>
             <Heading level={5} textAlign="start">
-              Masonry, Gardening
+              {services
+                .split(",")
+                .map((service) => service[0].toUpperCase() + service.slice(1))
+                .join(", ")}
             </Heading>
           </Box>
         </Box>
 
         <Box gap="medium" width="50%">
-          <Text>
-            “Gen X are slackers I saw it on Facebook I'm videoing this if I sit
-            down I might not get back up total bummer grey nomads just took up
-            surfing"
-          </Text>
+          <Text>“ {description} "</Text>
           <Box direction="row-responsive" gap="xlarge" margin={{ left: "1em" }}>
             <Text>
-              Email: <strong>JohanWarne@gmail.com</strong>
+              Email: <strong>{email}</strong>
             </Text>
             <Text>
-              Contact: <strong>0963425342</strong>
+              Contact: <strong>{contactNo}</strong>
             </Text>
           </Box>
         </Box>
