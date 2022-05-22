@@ -12,11 +12,10 @@ const StyledDropButton = styled(DropButton)`
 `;
 
 const MyAvatar = ({ src }) => {
-  //console.log(src);
   return (
     <>
-      { typeof src !== "object" ? (
-        <Avatar src={src} />
+      {typeof src !== "object" ? (
+        <Avatar src={"data:image/jpg;base64," + src} />
       ) : (
         <Avatar background="accent-3">
           <UserIcon color="black" />
