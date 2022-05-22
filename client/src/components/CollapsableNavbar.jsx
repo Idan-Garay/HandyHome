@@ -73,7 +73,7 @@ const CollapsableNavbar = ({ profileId }) => {
 
   const menuList = [
     { label: "See Profile", to: `/profile` },
-    { label: "History", to: `/profiles/${profileId}/history` },
+    // { label: "History", to: `/profiles/${profileId}/history` },
     { label: "Log out", onClick: onLogout },
   ];
 
