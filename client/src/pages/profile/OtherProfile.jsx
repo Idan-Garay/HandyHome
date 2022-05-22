@@ -71,10 +71,6 @@ const AvatarProfile = ({ profileId, contactNo }) => {
         <Text textAlign="end">6 days</Text>
       </Box>
 
-      {/* <Link to={`/`} state={{ profileId: id, contactNo }}>
-    <Button type="submit" fill="horizontal" primary label="Request" />
-  </Link> */}
-
       {accountState && accountState.accountType === 0 && (
         <Link
           to={`/profiles/${profileId}/request`}
