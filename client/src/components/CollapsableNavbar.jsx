@@ -15,7 +15,7 @@ const MyAvatar = ({ src }) => {
   return (
     <>
       {src ? (
-        <Avatar src={src} />
+        <Avatar src={"data:image/jpg;base64," + src} />
       ) : (
         <Avatar background="accent-3">
           <UserIcon color="black" />
