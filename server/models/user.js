@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
@@ -13,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
       accountType: {
-        // find way to change into [0,1,2] values only
-        // column declaration
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
