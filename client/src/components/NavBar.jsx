@@ -56,7 +56,7 @@ const NavBar = ({ isAuthorized, id, accountType }) => {
           />
         </StyledNavLink>
       </Box>
-      {accountType === 2 ?
+      {accountType === 2 ? (
         <Box justify="evenly" direction="row" width="35em">
           <Box direction="row" align="center">
             <StyledNavLink to="/requests">Validations</StyledNavLink>
@@ -79,19 +79,18 @@ const NavBar = ({ isAuthorized, id, accountType }) => {
             profileId={id}
           />
         </Box>
-      : <Box justify="evenly" direction="row" width="18em">
+      ) : (
+        <Box justify="evenly" direction="row" width="18em">
           <Box direction="row" align="center">
             <StyledNavLink to="/">Discover</StyledNavLink>
-          </Box>
-          <Box direction="row" align="center">
-            <StyledNavLink to="/list">List</StyledNavLink>
           </Box>
           <AuthorizedNavButtons
             isAuthorized={isAuthorized}
             isLoginPage={isLoginPage}
             profileId={id}
           />
-        </Box>}
+        </Box>
+      )}
     </>
   );
 };
