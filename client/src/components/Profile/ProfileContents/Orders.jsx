@@ -50,7 +50,7 @@ const Orders = ({ employerUserId, setProfileComponentIndex }) => {
   }, []);
 
   return (
-    <div>
+    <Box height="xlarge">
       <Heading
         id="orders-heading"
         level={3}
@@ -62,7 +62,7 @@ const Orders = ({ employerUserId, setProfileComponentIndex }) => {
       <Box overflow="auto">
         <DataTable columns={columns} data={data} />
       </Box>
-    </div>
+    </Box>
   );
 };
 
