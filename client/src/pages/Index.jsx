@@ -21,6 +21,8 @@ import AdminOrders from "./admin/AdminOrders";
 import AdminRequests from "./admin/AdminRequests";
 import AdminProfiles from "./admin/AdminProfiles";
 import AdminFeedback from "./admin/AdminFeedback";
+import AdminOrdersEdit from "../components/Admin/AdminOrdersEdit";
+import AdminUserEdit from "../components/Admin/AdminUserEdit";
 
 const AdminRoutes = () => {
   return (
@@ -30,6 +32,8 @@ const AdminRoutes = () => {
       <Route exact path="/requests" element={<AdminRequests />} />
       <Route exact path="/profiles" element={<AdminProfiles />} />
       <Route exact path="/feedbacks" element={<AdminFeedback />} />
+      <Route exact path="/orders/edit/:id" element={<AdminOrdersEdit />} />
+      <Route exact path="/users/edit/:id" element={<AdminUserEdit />} />
       {/* <Route exact path="/profiles/:id" element={<Profile />} /> */}
       <Route exact path="/orders" element={<AdminOrders />} />
     </Routes>

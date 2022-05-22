@@ -1,9 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { getUsers } from "../../API/admin";
-import { Box, Heading, Text } from "grommet";
+import { deleteUser, getUsers } from "../../API/admin";
+import { Box, Heading, Text, Button } from "grommet";
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
+import AdminModal from "../../components/Admin/AdminModal";
 
 const DisplayUsers = ({ id, username, email, verified, accountType }) => {
+  const [ openModal, setOpenModal ] = useState(false);
+  const navigate = useNavigate();
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      padding: 0,
+      width: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  const handleOpen = () => {
+    setOpenModal(true)
+  }
+
+  const handleClose = () => {
+    setOpenModal(false);
+  }
+
+  const onEdit = () => {
+    navigate(`/users/edit/${id}`, { state: { id, username, email, verified, accountType } });
+  }
+
+  const onDelete = () => {
+    deleteUser(id);
+    setOpenModal(false);
+    navigate(0);
+  }
+
   return (
     <tr className="table-data-list">
       <td className="number">{id}</td>
@@ -11,6 +47,11 @@ const DisplayUsers = ({ id, username, email, verified, accountType }) => {
       <td>{email}</td>
       <td className="number">{verified.toString()}</td>
       <td className="number">{accountType}</td>
+      <td className="no-stretch">
+        <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
+        <Button primary color="red" label="Delete" onClick={handleOpen}  />
+        <AdminModal handleClose={handleClose} open={openModal} onDelete={onDelete} />
+      </td>
     </tr>
   );
 }

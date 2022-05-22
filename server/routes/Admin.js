@@ -13,6 +13,42 @@ router.get("/users", async (req, res) => {
     }
 });
 
+router.patch("/users/edit/:id", async (req, res) => {
+  try {
+    let updateData = req.body;
+    console.log(updateData, "----");
+    let user = await db.User.findOne({ where: { id: updateData.id } });
+    if (user) {
+      const { id, ...neededData } = updateData;
+      user.set(neededData);
+      let newUser = await user.save();
+
+      res.status(200).json(newUser);
+    } else {
+      res
+        .status(200)
+        .json({ error: `User id of ${updateData.id} doesn't exist` });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.delete("/users/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      const profile = await db.Profile.findOne({ where: { UserId: id } });
+      const destroy = await db.Profile.destroy({ where: { id: profile.id } });
+      res.status(200).json(destroy);
+      const user = await db.User.destroy({ where: { id: id } });
+      res.status(200).json(user);
+    } else res.status(200).json({ error: `User id of ${id} doesn't exist` });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 router.get("/orders", async (req, res) => {
     try {
       let orders = await db.Order.findAll();
@@ -21,6 +57,39 @@ router.get("/orders", async (req, res) => {
     } catch (e) {
       console.log(e);
     }
+});
+
+router.patch("/orders/edit/:id", async (req, res) => {
+  try {
+    let updateData = req.body;
+    console.log(updateData, "----");
+    let order = await db.Order.findOne({ where: { id: updateData.id } });
+    if (order) {
+      const { id, ...neededData } = updateData;
+      order.set(neededData);
+      let newOrder = await order.save();
+
+      res.status(200).json(newOrder);
+    } else {
+      res
+        .status(200)
+        .json({ error: `Order id of ${updateData.id} doesn't exist` });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.delete("/orders/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      const order = await db.Order.destroy({ where: { id: id } });
+      res.status(200).json(order);
+    } else res.status(200).json({ error: `Order id of ${id} doesn't exist` });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router.get("/payments", async (req, res) => {

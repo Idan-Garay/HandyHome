@@ -3,12 +3,12 @@ import { Box, Image } from "grommet";
 import { useNavigate } from "react-router-dom";
 
 // its funny how I need these imports line so the images will display
-import carpenter from "../../../public/assets/tools.png";
-import plumber from "../../../public/assets/tap.png";
-import masonry from "../../../public/assets/brickwork.png";
-import gardener from "../../../public/assets/gardening.png";
-import housekeeper from "../../../public/assets/sweeping.png";
-import babysitter from "../../../public/assets/baby-stroller.png";
+import carpenter from "/assets/tools.png";
+import plumber from "/assets/tap.png";
+import masonry from "/assets/brickwork.png";
+import gardener from "/assets/gardening.png";
+import housekeeper from "/assets/sweeping.png";
+import babysitter from "/assets/baby-stroller.png";
 
 const ListContainer = (props) => {
   let navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListContainer from "../components/JobCategory/ListContainer";
 import { getJobs } from "../API/jobs";
-import {Box, Grid, Image, Heading} from "grommet";
+import {Box, Grid, Heading} from "grommet";
 
 const JobCategoryList = () => {
     const [List, setList] = useState([])
@@ -14,7 +14,6 @@ const JobCategoryList = () => {
     }, []);
     
     return <Box>
-        {/* <Image src={imagesrc} /> */}
         <Heading 
             alignSelf="center"
             margin={{bottom:"medium",top:"medium"}}

@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { getOrders } from "../../API/admin";
-import { Heading, Button } from "grommet";
+import { deleteOrder, getOrders } from "../../API/admin";
+import { Heading, Button, Box, Text } from "grommet";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
+import { Close } from "grommet-icons";
+import AdminModal from "../../components/Admin/AdminModal";
 
 const Displayorders = ({ id, description, price, status, contactNo }) => {
+  const [ openModal, setOpenModal ] = useState(false);
   const navigate = useNavigate();
-  onEdit = () => {
-    navigate("/orders/edit", { state: { description, price, status, contactNo } });
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  }
+
+  const handleClose = () => {
+    setOpenModal(false);
+  }
+
+  const onEdit = () => {
+    navigate(`/orders/edit/${id}`, { state: { id, description, price, status, contactNo } });
+  }
+
+  const onDelete = () => {
+    deleteOrder(id);
+    setOpenModal(false);
+    navigate(0);
   }
 
   return (
@@ -17,8 +36,10 @@ const Displayorders = ({ id, description, price, status, contactNo }) => {
       <td>{contactNo}</td>
       <td className="number">Php {price.toFixed(2)}</td>
       <td className="number">{status}</td>
-      <td>
-        <Button primary label="Edit" onClick={onEdit} />
+      <td className="no-stretch">
+        <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
+        <Button primary color="red" label="Delete" onClick={handleOpen} />
+        <AdminModal open={openModal} handleClose={handleClose} onDelete={onDelete} />
       </td>
     </tr>
   );

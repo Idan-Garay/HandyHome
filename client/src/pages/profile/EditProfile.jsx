@@ -12,6 +12,7 @@ import {
   TextArea,
   Layer,
   Stack,
+  CheckBoxGroup
 } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
@@ -56,6 +57,39 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
   );
 };
 
+const ServicesField = ({control, name, text}) => {
+  const [ checkBox, setCheckbox ] = useState([]);
+
+  return (
+    <Controller 
+      name={name}
+      control={control}
+      render={({ field: { onChange } }) => (
+        <Box>
+          <Text alignSelf="start" margin={{bottom:"10px"}} >{text}</Text>
+          <CheckBoxGroup 
+            valueKey="id"
+            labelKey="category"
+            options={[
+              { category: "Plumbing", id: "Plumbing" },
+              { category: "Carpentry", id: "Carpentry" },
+              { category: "Masonry", id: "Masonry" },
+              { category: "Gardening", id: "Gardening" },
+              { category: "Housekeeping", id: "Housekeeping" },
+              { category: "Babysitting", id: "Babysitting" },
+            ]}
+            value={checkBox}
+            onChange={({ value: nextValue, option }) => {
+              setCheckbox(nextValue);
+              onChange(nextValue);
+            }}
+          />
+        </Box>
+      )}
+    />
+  );
+}
+
 const EditProfile = ({ onEdit, setIsEdit, id }) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -90,6 +124,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
   };
 
   const onCancel = () => {
+    console.log(getValues())
     reset();
     setIsEdit(false);
   };
@@ -171,8 +206,8 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
         </StyledBox>
 
         <Main margin={{ top: "2em" }} gap="medium">
-          <ProfileField name="name" control={control} text="name" />
-          <ProfileField name="services" control={control} text="Services" />
+          <ProfileField name="name" control={control} text="Name" />
+          <ServicesField name="services" control={control} text="Services" />
           <ProfileField
             name="description"
             control={control}

@@ -53,6 +53,12 @@
   border: 1px solid black;
 }
 
+.no-stretch {
+  text-align: center;
+  width: 1%;
+  white-space: nowrap;
+}
+
 .number {
   text-align: center;
 }

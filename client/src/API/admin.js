@@ -1,5 +1,7 @@
 const PORT = 3501;
 
+// User api calls
+
 export const getUsers = () => {
     return fetch(`http://localhost:${PORT}/users`)
         .then(res => res.json())
@@ -10,6 +12,36 @@ export const getUsers = () => {
             })
     );
 }
+
+export const patchUser = (updateData) => {
+    const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+    };
+    return fetch(
+        `http://localhost:${PORT}/users/edit/${updateData.id}`,
+        requestOptions
+    ).then((res) => res.json());
+}
+
+export const deleteUser = (orderId) => {
+    try {
+        const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: orderId }),
+        };
+        return fetch(
+        `http://localhost:${PORT}/users/delete/${orderId}`,
+        requestOptions
+        ).then((res) => res.json());
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+// Order api calls
 
 export const getOrders = () => {
     return fetch(`http://localhost:${PORT}/orders`)
@@ -22,6 +54,36 @@ export const getOrders = () => {
     );
 }
 
+export const patchOrder = (updateData) => {
+    const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+    };
+    return fetch(
+        `http://localhost:${PORT}/orders/edit/${updateData.id}`,
+        requestOptions
+    ).then((res) => res.json());
+}
+
+export const deleteOrder = (orderId) => {
+    try {
+        const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: orderId }),
+        };
+        return fetch(
+        `http://localhost:${PORT}/orders/delete/${orderId}`,
+        requestOptions
+        ).then((res) => res.json());
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+// Payment Validation api calls
+
 export const getPayments = () => {
     return fetch(`http://localhost:${PORT}/payments`)
         .then(res => res.json())
@@ -32,6 +94,8 @@ export const getPayments = () => {
             })
     );
 }
+
+// Profile Validation api calls
 
 export const getValidations = () => {
     return fetch(`http://localhost:${PORT}/validations`)
@@ -44,6 +108,8 @@ export const getValidations = () => {
     );
 }
 
+// Profile api calls
+
 export const getProfiles = () => {
     return fetch(`http://localhost:${PORT}/admin/profiles`)
         .then(res => res.json())
@@ -54,6 +120,8 @@ export const getProfiles = () => {
             })
     );
 }
+
+// Feedback api calls
 
 export const getFeedbacks = () => {
     return fetch(`http://localhost:${PORT}/feedbacks`)
