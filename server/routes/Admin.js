@@ -110,6 +110,39 @@ router.get("/payments", async (req, res) => {
   }
 });
 
+router.patch("/requests/payment/edit/:id", async (req, res) => {
+  try {
+    let updateData = req.body;
+    console.log(updateData, "----");
+    let payment = await db.PaymentValidation.findOne({ where: { id: updateData.id } });
+    if (payment) {
+      const { id, ...neededData } = updateData;
+      payment.set(neededData);
+      let newPayment = await payment.save();
+
+      res.status(200).json(newPayment);
+    } else {
+      res
+        .status(200)
+        .json({ error: `Payment id of ${updateData.id} doesn't exist` });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.delete("/requests/payment/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      const payment = await db.PaymentValidation.destroy({ where: { id: id } });
+      res.status(200).json(payment);
+    } else res.status(200).json({ error: `Payment id of ${id} doesn't exist` });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 router.get("/validations", async (req, res) => {
   try {
     let validations = await db.ProfileValidation.findAll();
@@ -176,6 +209,39 @@ router.get("/feedbacks", async (req, res) => {
     let feedbacks = await db.Feedback.findAll();
     let feedbackList = feedbacks.map((feedback) => feedback);
     res.status(200).jsonp(feedbackList);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.patch("/feedbacks/edit/:id", async (req, res) => {
+  try {
+    let updateData = req.body;
+    console.log(updateData, "----");
+    let feedback = await db.Feedback.findOne({ where: { id: updateData.id } });
+    if (feedback) {
+      const { id, ...neededData } = updateData;
+      feedback.set(neededData);
+      let newFeedback = await feedback.save();
+
+      res.status(200).json(newFeedback);
+    } else {
+      res
+        .status(200)
+        .json({ error: `Feedback id of ${updateData.id} doesn't exist` });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.delete("/feedbacks/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      const feedback = await db.Feedback.destroy({ where: { id: id } });
+      res.status(200).json(order);
+    } else res.status(200).json({ error: `Feedback id of ${id} doesn't exist` });
   } catch (e) {
     console.log(e);
   }

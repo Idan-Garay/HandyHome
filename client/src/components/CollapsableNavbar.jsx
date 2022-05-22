@@ -12,6 +12,7 @@ const StyledDropButton = styled(DropButton)`
 `;
 
 const MyAvatar = ({ src }) => {
+  //console.log(src);
   return (
     <>
       { typeof src !== "object" ? (

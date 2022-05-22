@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {  Button, Heading, Image } from "grommet";
+import {  Button, Heading, Image, Avatar } from "grommet";
+import { User as UserIcon } from "grommet-icons";
 import { getProfiles, deleteProfile } from "../../API/admin";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";

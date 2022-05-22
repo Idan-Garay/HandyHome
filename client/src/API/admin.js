@@ -25,15 +25,15 @@ export const patchUser = (updateData) => {
     ).then((res) => res.json());
 }
 
-export const deleteUser = (orderId) => {
+export const deleteUser = (userId) => {
     try {
         const requestOptions = {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: orderId }),
+        body: JSON.stringify({ id: userId }),
         };
         return fetch(
-        `http://localhost:${PORT}/users/delete/${orderId}`,
+        `http://localhost:${PORT}/users/delete/${userId}`,
         requestOptions
         ).then((res) => res.json());
     } catch (e) {
@@ -94,6 +94,34 @@ export const getPayments = () => {
             })
     );
 }
+
+export const patchPayment = (updateData) => {
+    const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+    };
+    return fetch(
+        `http://localhost:${PORT}/requests/payment/edit/${updateData.id}`,
+        requestOptions
+    ).then((res) => res.json());
+}
+
+export const deletePayment = (paymentId) => {
+    try {
+        const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: paymentId }),
+        };
+        return fetch(
+        `http://localhost:${PORT}/requests/payment/delete/${paymentId}`,
+        requestOptions
+        ).then((res) => res.json());
+    } catch (e) {
+        console.log(e);
+    }
+};
 
 // Profile Validation api calls
 
@@ -161,3 +189,31 @@ export const getFeedbacks = () => {
             })
     );
 }
+
+export const patchFeedback = (updateData) => {
+    const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+    };
+    return fetch(
+        `http://localhost:${PORT}/feedbacks/edit/${updateData.id}`,
+        requestOptions
+    ).then((res) => res.json());
+}
+
+export const deleteFeedback = (feedbackId) => {
+    try {
+        const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: feedbackId }),
+        };
+        return fetch(
+        `http://localhost:${PORT}/feedbacks/delete/${feedbackId}`,
+        requestOptions
+        ).then((res) => res.json());
+    } catch (e) {
+        console.log(e);
+    }
+};

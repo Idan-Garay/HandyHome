@@ -1,7 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { Heading } from "grommet";
-import { getFeedbacks } from "../../API/admin";
+import { Heading, Button } from "grommet";
+import { getFeedbacks, deleteFeedback } from "../../API/admin";
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
+import AdminModal from "../../components/Admin/AdminModal";
+
+const DisplayFeedback = ({ id, description, rates, OrderId }) => {
+  const [ openModal, setOpenModal ] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  }
+
+  const handleClose = () => {
+    setOpenModal(false);
+  }
+
+  const onEdit = () => {
+    navigate(`/feedbacks/edit/${id}`, { state: { id, description, rates, OrderId } });
+  }
+
+  const onDelete = () => {
+    deleteFeedback(id);
+    setOpenModal(false);
+    navigate(0);
+  }
+
+  return (
+    <tr className="table-data-list">
+      <td className="number">{id}</td>
+      <td>{description}</td>
+      <td className="number">{rates}</td>
+      <td className="number">{OrderId}</td>
+      <td className="no-stretch">
+        <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
+        <Button primary color="red" label="Delete" onClick={handleOpen} />
+        <AdminModal open={openModal} handleClose={handleClose} onDelete={onDelete} />
+      </td>
+    </tr>
+  );
+}
 
 const AdminFeedback = () => {
     const [ feedbacks, setFeedback ] = useState([]);
@@ -29,12 +68,7 @@ const AdminFeedback = () => {
         };
 
         return feedbacks.map((feedback, index) => {
-            return <tr className="table-data-list" key={index} >
-                        <td className="number">{feedback.id}</td>
-                        <td>{feedback.description}</td>
-                        <td>{feedback.rates}</td>
-                        <td className="number">{feedback.OrderId}</td>
-                    </tr>
+            return <DisplayFeedback key={index} id={feedback.id} description={feedback.description} rates={feedback.rates} OrderId={feedback.OrderId} />
         })
   }
 

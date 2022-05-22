@@ -1,6 +1,6 @@
 import { Button, Tab, Tabs, Heading, Image } from "grommet";
 import React, { useEffect, useState } from "react";
-import { getValidations, getPayments } from "../../API/admin";
+import { getValidations, getPayments, deletePayment } from "../../API/admin";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
 import AdminModal from "../../components/Admin/AdminModal";
@@ -18,7 +18,7 @@ const DisplayPayments = ({ id, UserId, OrderId, isAccepted }) => {
     }
 
     const onEdit = () => {
-        navigate(`/payments/edit/${id}`, { state: { id, UserId, OrderId, isAccepted }});
+        navigate(`/requests/payments/edit/${id}`, { state: { id, UserId, OrderId, isAccepted }});
     }
 
     const onDelete = () => {
@@ -32,7 +32,7 @@ const DisplayPayments = ({ id, UserId, OrderId, isAccepted }) => {
             <td className="number">{id}</td>
             <td className="number">{UserId}</td>
             <td className="number">{OrderId}</td>
-            <td className="number">{isAccepted}</td>
+            <td className="number">{isAccepted.toString()}</td>
             <td className="no-stretch">
                 <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
                 <Button primary color="red" label="Delete" onClick={handleOpen} />
@@ -71,9 +71,9 @@ const DisplayValidations = ({ id, type, name, image }) => {
             <td>{name}</td>
             <td><Image src={image} /></td>
             <td className="no-stretch">
-                <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
+                {/* <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
                 <Button primary color="red" label="Delete" onClick={handleOpen} />
-                <AdminModal handleClose={handleClose}  open={openModal} onDelete={onDelete} />
+                <AdminModal handleClose={handleClose}  open={openModal} onDelete={onDelete} /> */}
             </td>
         </tr>
     )
@@ -157,7 +157,7 @@ const AdminRequests = () => {
         }
         
         return paymentvalidation.map((payment, index) => {
-            return <DisplayPayments key={index} id={payment.id} UserId={payment.UserId} OrderId={payment.OrderId} isAccepted={payment.UserId} />
+            return <DisplayPayments key={index} id={payment.id} UserId={payment.UserId} OrderId={payment.OrderId} isAccepted={payment.isAccepted} />
 
         })
         
