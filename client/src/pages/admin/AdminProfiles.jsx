@@ -1,13 +1,68 @@
 import React, { useEffect, useState } from "react";
-import { Heading, Image } from "grommet";
-import { getProfiles } from "../../API/admin";
+import {  Button, Heading, Image } from "grommet";
+import { getProfiles, deleteProfile } from "../../API/admin";
 import "../../App.css";
+import { useNavigate } from "react-router-dom";
+import AdminModal from "../../components/Admin/AdminModal";
+
+const DisplayProfiles = ({ id, name, contactNo, description, services, picture, email, UserId, ProfileId }) => {
+  const [ openModal, setOpenModal ] = useState(false);
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    setOpenModal(true)
+  }
+
+  const handleClose = () => {
+    setOpenModal(false);
+  }
+
+  const onEdit = () => {
+    navigate(`/profiles/edit/${id}`, { state: { 
+      id, 
+      name, 
+      contactNo, 
+      description,
+      services,
+      picture,
+      email,
+      UserId,
+      ProfileId
+    }});
+  }
+
+  const onDelete = () => {
+    deleteProfile(id);
+    setOpenModal(false);
+    navigate(0);
+  }
+
+  return (
+    <tr className="table-data-list">
+        <td className="number">{id}</td>
+        <td>{name}</td>
+        <td>{services}</td>
+        <td className="number">{contactNo}</td>
+        <td>{description}</td>
+        <td><Image src={picture} /></td>
+        <td>{email}</td>
+        <td className="number">{UserId}</td>
+        <td className="number">{ProfileId}</td>
+        <td className="no-stretch">
+          <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
+          <Button primary color="red" label="Delete" onClick={handleOpen} />
+          <AdminModal handleClose={handleClose}  open={openModal} onDelete={onDelete} />
+        </td>
+    </tr>
+  );
+}
 
 const AdminProfiles = () => {
-    const [ profiles, setprofiles] = useState([]);
+  const [ profiles, setprofiles] = useState([]);
 
   useEffect(() => {
     getProfiles().then(res => {
+        res = res.filter(res => res.UserId != 3);
         setprofiles(res);
     })
   },[])
@@ -29,18 +84,18 @@ const AdminProfiles = () => {
         };
 
         return profiles.map((profile, index) => {
-            //profile.picture.data = URL.createObjectURL(profile.picture);
-            return <tr className="table-data-list" key={index} >
-                        <td className="number">{profile.id}</td>
-                        <td>{profile.name}</td>
-                        <td>{profile.services}</td>
-                        <td className="number">{profile.contactNo}</td>
-                        <td>{profile.description}</td>
-                        <td></td>
-                        <td>{profile.email}</td>
-                        <td className="number">{profile.UserId}</td>
-                        <td className="number">{profile.ProfileId}</td>
-                    </tr>
+            return <DisplayProfiles
+                      key={index}
+                      id={profile.id} 
+                      name={profile.name} 
+                      contactNo={profile.contactNo}
+                      description={profile.description}
+                      services={profile.services}
+                      picture={profile.picture}
+                      email={profile.email}
+                      UserId={profile.UserId}
+                      ProfileId={profile.ProfileId}
+                    />
         })
   }
 

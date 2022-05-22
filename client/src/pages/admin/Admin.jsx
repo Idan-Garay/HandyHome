@@ -9,19 +9,6 @@ const DisplayUsers = ({ id, username, email, verified, accountType }) => {
   const [ openModal, setOpenModal ] = useState(false);
   const navigate = useNavigate();
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      padding: 0,
-      width: '50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
   const handleOpen = () => {
     setOpenModal(true)
   }

@@ -125,12 +125,12 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
   const onSave = () => {
     setValue("picture", src);
     const updateData = getValues();
+    updateData.services = updateData.services.toString();
     patchProfile({ ...updateData, picture: src, id });
     setIsEdit(false);
   };
 
   const onCancel = () => {
-    console.log(getValues())
     reset();
     setIsEdit(false);
   };

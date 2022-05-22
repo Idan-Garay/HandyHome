@@ -14,8 +14,7 @@ const StyledDropButton = styled(DropButton)`
 const MyAvatar = ({ src }) => {
   return (
     <>
-      {/* Cannot use src only because it still contains values even if theres no picture (for users) */}
-      {src.data.length !== 0 ? (
+      { typeof src !== "object" ? (
         <Avatar src={src} />
       ) : (
         <Avatar background="accent-3">
@@ -69,7 +68,7 @@ const CollapsableNavbar = ({ profileId }) => {
   const { accountState, dispatch } = useContext(AccountContext);
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   const menuList = [

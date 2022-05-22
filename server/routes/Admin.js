@@ -3,6 +3,8 @@ const router = express.Router();
 const path = require("path");
 const db = require("../models/index.js");
 
+// User routes
+
 router.get("/users", async (req, res) => {
     try {
       let users = await db.User.findAll();
@@ -39,8 +41,10 @@ router.delete("/users/delete/:id", async (req, res) => {
     const { id } = req.body;
     if (id) {
       const profile = await db.Profile.findOne({ where: { UserId: id } });
-      const destroy = await db.Profile.destroy({ where: { id: profile.id } });
-      res.status(200).json(destroy);
+      if (profile != null) {
+        const destroy = await db.Profile.destroy({ where: { id: profile.id } });
+        res.status(200).json(destroy);
+      }
       const user = await db.User.destroy({ where: { id: id } });
       res.status(200).json(user);
     } else res.status(200).json({ error: `User id of ${id} doesn't exist` });
@@ -48,6 +52,8 @@ router.delete("/users/delete/:id", async (req, res) => {
     console.log(e);
   }
 });
+
+// Order routes
 
 router.get("/orders", async (req, res) => {
     try {
@@ -92,6 +98,8 @@ router.delete("/orders/delete/:id", async (req, res) => {
   }
 });
 
+// Validation routes
+
 router.get("/payments", async (req, res) => {
   try {
     let payments = await db.PaymentValidation.findAll();
@@ -112,15 +120,56 @@ router.get("/validations", async (req, res) => {
   }
 });
 
+// Profile Routes
+
 router.get("/admin/profiles", async (req, res) => {
   try {
     let profiles = await db.Profile.findAll();
-    let profileList = profiles.map((profile) => profile);
+    let profileList = profiles.map((profile) => {
+      profile.picture = Buffer.from(profile.picture, "base64").toString();
+      return profile;
+    })
+  
     res.status(200).jsonp(profileList);
   } catch (e) {
     console.log(e);
   }
 });
+
+router.patch("/admin/profiles/edit/:id", async (req, res) => {
+  try {
+    let updateData = req.body;
+    console.log(updateData, "----");
+    let profile = await db.Profile.findOne({ where: { id: updateData.id } });
+    if (profile) {
+      const { id, ...neededData } = updateData;
+      profile.set(neededData);
+      let newProfile = await profile.save();
+
+      res.status(200).json(newProfile);
+    } else {
+      res
+        .status(200)
+        .json({ error: `Order id of ${updateData.id} doesn't exist` });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.delete("/admin/profiles/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (id) {
+      const order = await db.Profile.destroy({ where: { id: id } });
+      res.status(200).json(order);
+    } else res.status(200).json({ error: `Order id of ${id} doesn't exist` });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+// Feedback Routes
 
 router.get("/feedbacks", async (req, res) => {
   try {

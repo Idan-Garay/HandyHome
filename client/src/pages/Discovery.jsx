@@ -16,6 +16,7 @@ const Discovery = () => {
 
     getProfiles().then((json) => {
       if (profilesCache != json) setProfiles(json);
+      console.log(profiles);
     });
   }, [profiles.length]);
 

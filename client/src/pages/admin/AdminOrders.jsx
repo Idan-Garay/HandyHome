@@ -3,8 +3,6 @@ import { deleteOrder, getOrders } from "../../API/admin";
 import { Heading, Button, Box, Text } from "grommet";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
-import { Close } from "grommet-icons";
 import AdminModal from "../../components/Admin/AdminModal";
 
 const Displayorders = ({ id, description, price, status, contactNo }) => {

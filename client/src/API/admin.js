@@ -121,6 +121,34 @@ export const getProfiles = () => {
     );
 }
 
+export const patchProfile = (updateData) => {
+    const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updateData),
+    };
+    return fetch(
+        `http://localhost:${PORT}/admin/profiles/edit/${updateData.id}`,
+        requestOptions
+    ).then((res) => res.json());
+}
+
+export const deleteProfile = (profileId) => {
+    try {
+        const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: profileId }),
+        };
+        return fetch(
+        `http://localhost:${PORT}/admin/profiles/delete/${profileId}`,
+        requestOptions
+        ).then((res) => res.json());
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 // Feedback api calls
 
 export const getFeedbacks = () => {
