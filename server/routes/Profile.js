@@ -95,9 +95,8 @@ router.get("/profiles/:id", async (req, res) => {
       ],
       where: { userId: userId },
     });
-    if (profile)
-      profile.picture = Buffer.from(profile.picture, "base64").toString();
 
+    // profile.picture = Buffer.from(profile.picture, "base64").toString();
     res.status(200).jsonp(profile);
   } catch (e) {
     console.log(e);
