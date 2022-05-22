@@ -6,13 +6,13 @@ const db = require("../models/index.js");
 // User routes
 
 router.get("/users", async (req, res) => {
-    try {
-      let users = await db.User.findAll();
-      let userList = users.map((user) => user);
-      res.status(200).jsonp(userList);
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    let users = await db.User.findAll();
+    let userList = users.map((user) => user);
+    res.status(200).jsonp(userList);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router.patch("/users/edit/:id", async (req, res) => {
@@ -56,13 +56,13 @@ router.delete("/users/delete/:id", async (req, res) => {
 // Order routes
 
 router.get("/orders", async (req, res) => {
-    try {
-      let orders = await db.Order.findAll();
-      let orderList = orders.map((order) => order);
-      res.status(200).jsonp(orderList);
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    let orders = await db.Order.findAll();
+    let orderList = orders.map((order) => order);
+    res.status(200).jsonp(orderList);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router.patch("/orders/edit/:id", async (req, res) => {
@@ -114,7 +114,9 @@ router.patch("/requests/payment/edit/:id", async (req, res) => {
   try {
     let updateData = req.body;
     console.log(updateData, "----");
-    let payment = await db.PaymentValidation.findOne({ where: { id: updateData.id } });
+    let payment = await db.PaymentValidation.findOne({
+      where: { id: updateData.id },
+    });
     if (payment) {
       const { id, ...neededData } = updateData;
       payment.set(neededData);
@@ -161,8 +163,8 @@ router.get("/admin/profiles", async (req, res) => {
     let profileList = profiles.map((profile) => {
       profile.picture = Buffer.from(profile.picture, "base64").toString();
       return profile;
-    })
-  
+    });
+
     res.status(200).jsonp(profileList);
   } catch (e) {
     console.log(e);
@@ -214,6 +216,21 @@ router.get("/feedbacks", async (req, res) => {
   }
 });
 
+router.get("/feedbacks/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    let feedbacks = await db.Feedback.findAll({
+      attributes: ["description", "rates"],
+      include: { model: db.Order, where: { toUserId: id } },
+    });
+
+    console.log(feedbacks);
+    res.status(200).jsonp(feedbacks);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 router.patch("/feedbacks/edit/:id", async (req, res) => {
   try {
     let updateData = req.body;
@@ -241,7 +258,8 @@ router.delete("/feedbacks/delete/:id", async (req, res) => {
     if (id) {
       const feedback = await db.Feedback.destroy({ where: { id: id } });
       res.status(200).json(order);
-    } else res.status(200).json({ error: `Feedback id of ${id} doesn't exist` });
+    } else
+      res.status(200).json({ error: `Feedback id of ${id} doesn't exist` });
   } catch (e) {
     console.log(e);
   }
