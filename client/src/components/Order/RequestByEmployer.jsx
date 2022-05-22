@@ -15,7 +15,7 @@ const StyledTextArea = styled(TextArea)`
 
 const RequestByEmployer = () => {
   const navigate = useNavigate();
-  const { profileId, contactNo } = useLocation().state;
+  const { to, contactNo } = useLocation().state;
   const { accountState } = useContext(AccountContext);
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
@@ -27,11 +27,11 @@ const RequestByEmployer = () => {
   });
 
   const onSubmit = (data) => {
-    const input = { id: accountState.id, to: profileId, ...data };
+    const input = { from: accountState.id, to: to, ...data };
 
     postRequestByEmployer(input);
     reset();
-    navigate(`/profiles/${profileId}`);
+    navigate(-1);
   };
 
   return (
