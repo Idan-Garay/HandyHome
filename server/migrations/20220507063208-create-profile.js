@@ -14,6 +14,7 @@ module.exports = {
       services: {
         type: Sequelize.STRING,
       },
+      picture: { type: Sequelize.TEXT },
       contactNo: {
         type: Sequelize.STRING,
       },
