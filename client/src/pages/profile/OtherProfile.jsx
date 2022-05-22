@@ -25,6 +25,7 @@ const OptionalRender = (props) => {
 };
 
 const AvatarProfile = ({ primaryProfile }) => {
+  const { accountState } = useContext(AccountContext);
   const { picture, Address, User, contactNo, id } = primaryProfile;
   return (
     <Box
@@ -79,9 +80,14 @@ const AvatarProfile = ({ primaryProfile }) => {
         <Text textAlign="end">6 days</Text> */}
       </Box>
 
-      <Link to={`/profiles/${id}/request`} state={{ to: User.id, contactNo }}>
-        <Button type="submit" fill="horizontal" primary label="Request" />
-      </Link>
+      {accountState.accountType === 0 ? (
+        <Link
+          to={`/profiles/${id}/request`}
+          state={{ toProfile: primaryProfile.id, contactNo }}
+        >
+          <Button type="submit" fill="horizontal" primary label="Request" />
+        </Link>
+      ) : null}
     </Box>
   );
 };
@@ -121,7 +127,6 @@ const OtherProfile = () => {
   const [primaryProfile, setPrimaryProfile] = useState(null);
   const [secondaryProfiles, setSecondaryProfiles] = useState([]);
   const navigate = useNavigate();
-
   useEffect(() => {
     const fn = async () => {
       const requestOptions = {

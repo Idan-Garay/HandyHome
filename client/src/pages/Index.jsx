@@ -26,6 +26,7 @@ import AdminUserEdit from "../components/Admin/AdminUserEdit";
 import AdminProfilesEdit from "../components/Admin/AdminProfilesEdit";
 import AdminFeedbackEdit from "../components/Admin/AdminFeedbackEdit";
 import AdminPaymentsEdit from "../components/Admin/AdminPaymentsEdit";
+import Feedback from "./Feedback";
 
 const AdminRoutes = () => {
   return (
@@ -34,11 +35,15 @@ const AdminRoutes = () => {
       <Route exact path="/users/edit/:id" element={<AdminUserEdit />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/requests" element={<AdminRequests />} />
-      <Route exact path="/requests/payments/edit/:id" element={<AdminPaymentsEdit />} />
+      <Route
+        exact
+        path="/requests/payments/edit/:id"
+        element={<AdminPaymentsEdit />}
+      />
       <Route exact path="/profiles" element={<AdminProfiles />} />
       <Route exact path="/profiles/edit/:id" element={<AdminProfilesEdit />} />
-      <Route exact path="/feedbacks" element={<AdminFeedback />} />    
-      <Route exact path="/feedbacks/edit/:id" element={<AdminFeedbackEdit />} />    
+      <Route exact path="/feedbacks" element={<AdminFeedback />} />
+      <Route exact path="/feedbacks/edit/:id" element={<AdminFeedbackEdit />} />
 
       {/* <Route exact path="/profiles/:id" element={<Profile />} /> */}
       <Route exact path="/orders" element={<AdminOrders />} />
@@ -56,6 +61,8 @@ const CustomerRoutes = () => {
       <Route path="/register/success" element={<RegisterPrompt />} />
 
       <Route exact path="/profile" element={<Profile />} />
+      <Route exact path="/order/feedback" element={<Feedback />} />
+
       <Route exact path="/profiles/:id" element={<OtherProfile />} />
       <Route exact path="/otherProfile" element={<OtherProfile />} />
       <Route exact path="/profiles/:id/history" element={<History />} />

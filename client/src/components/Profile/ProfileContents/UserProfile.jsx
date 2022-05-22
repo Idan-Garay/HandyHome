@@ -37,6 +37,7 @@ const UserProfile = ({
     };
     if (User) fn();
   }, [User]);
+  console.log("here");
   return (
     <Box direction="column" pad="small">
       <StyledBox height="small" align="end">

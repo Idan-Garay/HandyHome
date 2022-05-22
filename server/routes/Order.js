@@ -3,30 +3,95 @@ const { sequelize } = require("../models/index.js");
 const router = express.Router();
 const db = require("../models/index.js");
 
-router.post("/orders", async (req, res) => {
+router.patch("/order/validate", async (req, res) => {
   try {
-    const { fromUserId } = req.body;
-    let Orders = await db.Order.findAll({
-      attributes: ["id", "status", "contactNo", "updatedAt", "toUserId"],
-      where: { fromUserId: fromUserId },
+    const validateInfo = req.body;
+    const { isValid, orderId, from, to, accountType } = validateInfo;
+
+    const pv = await db.PaymentValidation.findOne({
+      where: { OrderId: orderId },
     });
 
-    if (Orders) {
-      const result = await Promise.all(
-        Orders.map(async (order) => {
-          const profile = await db.Profile.findOne({
-            attributes: ["name"],
-            where: { UserId: order.toUserId },
-          });
-          let { toUserId, ...needAttrs } = order.dataValues;
-          needAttrs.name = profile.name;
-          needAttrs.updatedAt = new Date(needAttrs.updatedAt);
-          return needAttrs;
-        })
-      );
-
-      res.status(200).json(result);
+    if (!pv) {
+      const pvFrom = await db.PaymentValidation.create({
+        isAccepted: accountType === 0 ? 1 : 0,
+        OrderId: orderId,
+        UserId: from,
+      });
+      const pvTo = await db.PaymentValidation.create({
+        isAccepted: accountType === 1 ? 1 : 0,
+        OrderId: orderId,
+        UserId: to,
+      });
+    } else {
+      pv.isAccepted = isValid;
+      pv.save();
     }
+    res.status(200).json(pv);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post("/orders/employer", async (req, res) => {
+  try {
+    const { employerUserId } = req.body;
+    let Orders = await db.Order.findAll({
+      attributes: [
+        "id",
+        "status",
+        "contactNo",
+        "price",
+        "description",
+        "updatedAt",
+        "toUserId",
+      ],
+      where: { fromUserId: employerUserId },
+    });
+    if (Orders) {
+      let x;
+
+      for (x = 0; x < Orders.length; x++) {
+        const profile = await db.Profile.findOne({
+          where: { UserId: employerUserId },
+          attributes: ["name", "services"],
+        });
+        Orders[x] = { ...Orders[x].dataValues, ...profile.dataValues };
+      }
+    }
+    res.status(200).json(Orders);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.post("/orders/handyman", async (req, res) => {
+  try {
+    const { handymanUserId } = req.body;
+    let Orders = await db.Order.findAll({
+      attributes: [
+        "id",
+        "status",
+        "contactNo",
+        "price",
+        "description",
+        "updatedAt",
+        "fromUserId",
+      ],
+      where: { toUserId: handymanUserId },
+    });
+    if (Orders) {
+      let x;
+
+      for (x = 0; x < Orders.length; x++) {
+        const profile = await db.Profile.findOne({
+          where: { UserId: handymanUserId },
+          attributes: ["name", "services"],
+        });
+        Orders[x] = { ...Orders[x].dataValues, ...profile.dataValues };
+      }
+    }
+    res.status(200).json(Orders);
   } catch (e) {
     console.log(e);
   }
@@ -53,8 +118,37 @@ router.post("/request", async (req, res) => {
 router.patch("/request/accept", async (req, res) => {
   try {
     const { order } = req.body;
+    console.log(order);
+    const dbOrder = await db.Order.findOne({ where: { id: order.id } });
+
+    if (dbOrder) {
+      const status = order.status == 1 ? "accepted" : "rejected";
+
+      dbOrder.set({ status: status });
+      await dbOrder.save();
+
+      res.status(200).json(`Request Order ${status}`);
+    } else {
+      res.status(200).json("Order doesn't exist");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+router.patch("/request/confirm", async (req, res) => {
+  try {
+    const { order } = req.body;
 
     const dbOrder = await db.Order.findOne({ where: { id: order.id } });
+    const toUser = await db.User.findOne({
+      where: order.toUserId,
+      attributes: ["name"],
+    });
+    const fromUser = await db.User.findOne({
+      where: order.fromUserId,
+      attributes: ["name"],
+    });
 
     if (dbOrder) {
       const status = order.status == 1 ? "accepted" : "rejected";

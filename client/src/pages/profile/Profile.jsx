@@ -88,7 +88,8 @@ const Profile = () => {
                 setProfileComponentIndex={setComponentIndex}
               />
               <Orders
-                employerUserId={accountState.id}
+                userId={accountState.id}
+                accountType={accountState.accountType}
                 value={2}
                 setProfileComponentIndex={setComponentIndex}
               />

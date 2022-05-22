@@ -39,7 +39,7 @@ const OrderDetailsFrame = styled.div`
   padding: 0.4em 0.6em;
 `;
 
-const OrderDetails = () => {
+const OrderDetails = ({ showData }) => {
   const detailsTotal = [
     { lineLabel: "Ordered by", lineValue: "nameA" },
     { lineLabel: "Delivery Date", lineValue: "Feb 27, 1:04 AM" },
