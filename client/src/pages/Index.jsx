@@ -17,13 +17,32 @@ import AddMember from "../components/Profile/ProfileContents/Team/AddMember";
 import OtherProfile from "./profile/OtherProfile";
 import JobCategoryList from "./JobCategoryList";
 import CategoryUserList from "./CategoryUserList";
+import AdminOrders from "./admin/AdminOrders";
+import AdminRequests from "./admin/AdminRequests";
+import AdminProfiles from "./admin/AdminProfiles";
+import AdminFeedback from "./admin/AdminFeedback";
+import AdminOrdersEdit from "../components/Admin/AdminOrdersEdit";
+import AdminUserEdit from "../components/Admin/AdminUserEdit";
+import AdminProfilesEdit from "../components/Admin/AdminProfilesEdit";
+import AdminFeedbackEdit from "../components/Admin/AdminFeedbackEdit";
+import AdminPaymentsEdit from "../components/Admin/AdminPaymentsEdit";
 
 const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/*" element={<Admin />} />
+      <Route exact path="/users/edit/:id" element={<AdminUserEdit />} />
       <Route exact path="/login" element={<Login />} />
-      <Route exact path="/profiles/:id" element={<Profile />} />
+      <Route exact path="/requests" element={<AdminRequests />} />
+      <Route exact path="/requests/payments/edit/:id" element={<AdminPaymentsEdit />} />
+      <Route exact path="/profiles" element={<AdminProfiles />} />
+      <Route exact path="/profiles/edit/:id" element={<AdminProfilesEdit />} />
+      <Route exact path="/feedbacks" element={<AdminFeedback />} />    
+      <Route exact path="/feedbacks/edit/:id" element={<AdminFeedbackEdit />} />    
+
+      {/* <Route exact path="/profiles/:id" element={<Profile />} /> */}
+      <Route exact path="/orders" element={<AdminOrders />} />
+      <Route exact path="/orders/edit/:id" element={<AdminOrdersEdit />} />
     </Routes>
   );
 };

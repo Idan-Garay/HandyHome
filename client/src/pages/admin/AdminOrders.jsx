@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { deleteUser, getUsers } from "../../API/admin";
-import { Box, Heading, Text, Button } from "grommet";
+import { deleteOrder, getOrders } from "../../API/admin";
+import { Heading, Button, Box, Text } from "grommet";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
 import AdminModal from "../../components/Admin/AdminModal";
 
-const DisplayUsers = ({ id, username, email, verified, accountType }) => {
+const Displayorders = ({ id, description, price, status, contactNo }) => {
   const [ openModal, setOpenModal ] = useState(false);
   const navigate = useNavigate();
 
   const handleOpen = () => {
-    setOpenModal(true)
+    setOpenModal(true);
   }
 
   const handleClose = () => {
@@ -18,11 +18,11 @@ const DisplayUsers = ({ id, username, email, verified, accountType }) => {
   }
 
   const onEdit = () => {
-    navigate(`/users/edit/${id}`, { state: { id, username, email, verified, accountType } });
+    navigate(`/orders/edit/${id}`, { state: { id, description, price, status, contactNo } });
   }
 
   const onDelete = () => {
-    deleteUser(id);
+    deleteOrder(id);
     setOpenModal(false);
     navigate(0);
   }
@@ -30,47 +30,46 @@ const DisplayUsers = ({ id, username, email, verified, accountType }) => {
   return (
     <tr className="table-data-list">
       <td className="number">{id}</td>
-      <td>{username}</td>
-      <td>{email}</td>
-      <td className="number">{verified.toString()}</td>
-      <td className="number">{accountType}</td>
+      <td>{description}</td>
+      <td>{contactNo}</td>
+      <td className="number">Php {price.toFixed(2)}</td>
+      <td className="number">{status}</td>
       <td className="no-stretch">
         <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
-        <Button primary color="red" label="Delete" onClick={handleOpen}  />
-        <AdminModal handleClose={handleClose} open={openModal} onDelete={onDelete} />
+        <Button primary color="red" label="Delete" onClick={handleOpen} />
+        <AdminModal open={openModal} handleClose={handleClose} onDelete={onDelete} />
       </td>
     </tr>
   );
 }
 
-const Admin = () => {
-  const [ users, setUsers] = useState([]);
+const AdminOrders = () => {
+  const [ orders, setOrders] = useState([]);
 
   useEffect(() => {
-    getUsers().then(res => {
-      res = res.filter(type => type.accountType != 2)
-      setUsers(res);
+    getOrders().then(res => {
+      setOrders(res);
     })
   },[])
 
-  const renderUsers = () => {
-      if (!users) {
+  const renderOrders = () => {
+      if (!orders) {
         return (
           <tr>
-            <td>Loading Users...</td>
+            <td>Loading orders...</td>
           </tr>
         );
       }
-      if (users.length === 0) {
+      if (orders.length === 0) {
         return (
           <tr>
-            <td>No users available</td>
+            <td>No orders available</td>
           </tr>
         );
       }
 
-      return users.map((user, index) => {
-        return <DisplayUsers key={index} id={user.id} username={user.username} email={user.email} verified={user.verified} accountType={user.accountType} />
+      return orders.map((order, index) => {
+        return <Displayorders key={index} id={order.id} description={order.description} price={order.price} status={order.status} contactNo={order.contactNo} />
       })
         
   }
@@ -81,22 +80,22 @@ const Admin = () => {
             alignSelf="center"
             margin={{bottom:"medium",top:"medium"}}
             fill
-        >User List
+        >Order List
       </Heading>
       <div className="table-list">
         <table className="table">
           <thead className="table-header">
             <tr>
               <td>ID</td>
-              <td>Username</td>
-              <td>Email</td>
-              <td>Verified</td>
-              <td>Account Type</td>
+              <td>Description</td>
+              <td>Contact No</td>
+              <td>Price</td>
+              <td>Status</td>
               <td>Actions</td>
             </tr>
           </thead>
           <tbody className="table-data">
-            {renderUsers()}
+            {renderOrders()}
           </tbody>
         </table>
       </div>
@@ -104,4 +103,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminOrders;

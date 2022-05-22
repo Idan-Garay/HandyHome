@@ -192,7 +192,7 @@ const ListItem = ({ profile }) => {
 };
 
 const DiscoveryList = ({ profiles }) => {
-  console.log(profiles[0]);
+  //console.log(profiles[0]);
   return (
     <>
       {profiles.length

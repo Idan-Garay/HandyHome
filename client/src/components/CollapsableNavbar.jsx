@@ -12,10 +12,11 @@ const StyledDropButton = styled(DropButton)`
 `;
 
 const MyAvatar = ({ src }) => {
+  //console.log(src);
   return (
     <>
-      {src ? (
-        <Avatar src={"data:image/jpg;base64," + src} />
+      { typeof src !== "object" ? (
+        <Avatar src={src} />
       ) : (
         <Avatar background="accent-3">
           <UserIcon color="black" />
@@ -68,7 +69,7 @@ const CollapsableNavbar = ({ profileId }) => {
   const { accountState, dispatch } = useContext(AccountContext);
   const onLogout = () => {
     dispatch({ type: "LOGOUT_ACCOUNT" });
-    navigate("/login");
+    navigate("/login", { replace: true });
   };
 
   const menuList = [
