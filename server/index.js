@@ -34,6 +34,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
     const orderRoutes = require("./routes/Order.js");
     const jobRoutes = require("./routes/Job.js");
     const adminRoutes = require("./routes/Admin.js");
+    const teamRoutes = require("./routes/Team.js");
 
     const app = express();
     app.use((req, res, next) => {
@@ -51,6 +52,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
     app.use("/", orderRoutes);
     app.use("/", jobRoutes);
     app.use("/", adminRoutes);
+    app.use("/", teamRoutes);
 
     app.post("/api/email/send_confirmation", async (req, res) => {
       const { email } = req.body;

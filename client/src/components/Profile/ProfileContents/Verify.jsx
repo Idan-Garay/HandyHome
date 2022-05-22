@@ -12,9 +12,8 @@ import {
   Heading,
   Layer,
 } from "grommet";
-import { Save, Clear } from "grommet-icons";
 
-const Verify = ({ profileData }) => {
+const Verify = ({ profileData, setProfileComponentIndex }) => {
   const [file1, setFile1] = useState("");
   const [file2, setFile2] = useState("");
 
@@ -31,9 +30,14 @@ const Verify = ({ profileData }) => {
       body: data,
     };
     const res = await fetch("http://localhost:3501/upload", requestOptions);
+
     setFile1("");
     setFile2("");
   };
+
+  useEffect(() => {
+    setProfileComponentIndex(3);
+  }, []);
 
   return (
     <Box align="center">
