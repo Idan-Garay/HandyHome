@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text, Button, Avatar, Heading, Main, Image } from "grommet";
 import { User as UserIcon } from "grommet-icons";
+import { getFeedbacksToUserId } from "../../../API/admin";
 
 const LabelText = (props) => (
   <Box align="start" width={{ min: "9em" }}>
@@ -25,8 +26,17 @@ const UserProfile = ({
   name,
   contactNo,
   services,
+  id,
   User,
 }) => {
+  const [feedbacks, setFeedbacks] = useState([]);
+  useEffect(() => {
+    const fn = async () => {
+      const res = await getFeedbacksToUserId(id);
+      console.log("fn", res);
+    };
+    if (User) fn();
+  }, [User]);
   return (
     <Box direction="column" pad="small">
       <StyledBox height="small" align="end">
@@ -37,12 +47,13 @@ const UserProfile = ({
           pad={{ left: "3em" }}
         >
           <Box>
-            <Avatar className="b-1" size="large" pad="3px">
+            <Avatar className="b-1" size="large">
               {picture ? (
                 <Image
                   src={"data:image/jpg;base64," + picture}
                   width="100%"
                   height="100%"
+                  style={{ borderRadius: "25em" }}
                 />
               ) : (
                 <UserIcon color="black" />
@@ -80,7 +91,7 @@ const UserProfile = ({
           <LabelText>Description</LabelText>
           <Text>{description}</Text>
         </StyledBox>
-        <StyledBox>Feedbacks</StyledBox>
+        {/* <StyledBox>Feedbacks</StyledBox> */}
       </Main>
     </Box>
   );
