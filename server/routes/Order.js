@@ -25,15 +25,8 @@ router.post("/orders", async (req, res) => {
         })
       );
 
-      console.log("here", result);
-
       res.status(200).json(result);
     }
-    // orderId: 1,
-    // name: "Moon",
-    // contactNo: "09963232112",
-    // updatedAt: "June 01, 2022 06:00 AM",
-    // status: "completed",
   } catch (e) {
     console.log(e);
   }

@@ -200,10 +200,6 @@ const ListItem = ({ profile }) => {
 };
 
 const DiscoveryList = ({ profiles }) => {
-<<<<<<< Updated upstream
-  //console.log(profiles[0]);
-=======
->>>>>>> Stashed changes
   return (
     <>
       {profiles.length
