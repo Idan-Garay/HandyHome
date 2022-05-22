@@ -115,7 +115,7 @@ router.get("/profiles", async (req, res) => {
       include: [{ model: db.Profile, include: [db.Address] }],
     });
     let profiles = users.map((user) => {
-      if (user.Profile.picture.type === "buffer") {
+      if (user.Profile.picture && user.Profile.picture.type === "buffer") {
         user.Profile.picture = Buffer.from(
           user.Profile.picture,
           "base64"
