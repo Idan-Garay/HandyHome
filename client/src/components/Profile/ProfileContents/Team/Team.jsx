@@ -18,20 +18,11 @@ import MemberProfile from "./MemberProfile";
 import MemberEditProfile from "./MemberEditProfile";
 import { deleteMemberProfile } from "../../../../API/profiles";
 
-const StyledBox = (props) => (
-  <Box
-    direction="row-responsive"
-    gap="small"
-    height="4em"
-    align="center"
-    {...props}
-  />
-);
-
 const TeamMember = (props) => {
   const userId = useParams.id;
   const { name, services, contactNo, id } = props.member;
   const { handleChooseMember } = props;
+  const { deleteMember } = props;
 
   const editMemberProfile = () => {
     handleChooseMember(props.member, 2);
@@ -41,7 +32,8 @@ const TeamMember = (props) => {
     handleChooseMember(props.member, 1);
   };
 
-  const deleteMember = () => {
+  const deleteMemberTeam = () => {
+    deleteMember(props.member);
     deleteMemberProfile(userId, id);
   };
 
@@ -65,7 +57,7 @@ const TeamMember = (props) => {
         />
         <Button
           icon={<Trash color="red" />}
-          onClick={deleteMember}
+          onClick={deleteMemberTeam}
           hoverIndicator
         />
       </CardFooter>
@@ -121,6 +113,11 @@ const Team = ({ primaryProfileId, setProfileComponentIndex }) => {
     setMember(member);
   };
 
+  const deleteMember = (member) => {
+    const newMembers = members.filter((mem) => mem.id !== member.id);
+    setMembers(newMembers);
+  };
+
   useEffect(() => {
     setProfileComponentIndex(1);
     const fn = async () => {
@@ -152,6 +149,7 @@ const Team = ({ primaryProfileId, setProfileComponentIndex }) => {
                 member={member}
                 changeComponentIndex={changeComponentIndex}
                 handleChooseMember={handleChooseMember}
+                deleteMember={deleteMember}
               />
             ))
           : null}
