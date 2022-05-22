@@ -148,7 +148,10 @@ router.delete("/requests/payment/delete/:id", async (req, res) => {
 router.get("/validations", async (req, res) => {
   try {
     let validations = await db.ProfileValidation.findAll();
-    let validationList = validations.map((validation) => validation);
+    let validationList = validations.map((validation) => {
+      console.log(validation, 1);
+      return validation;
+    });
     res.status(200).jsonp(validationList);
   } catch (e) {
     console.log(e);
@@ -161,7 +164,7 @@ router.get("/admin/profiles", async (req, res) => {
   try {
     let profiles = await db.Profile.findAll();
     let profileList = profiles.map((profile) => {
-      profile.picture = Buffer.from(profile.picture, "base64").toString();
+      // profile.picture = Buffer.from(profile.picture, "base64").toString();
       return profile;
     });
 

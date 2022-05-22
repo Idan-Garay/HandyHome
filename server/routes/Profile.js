@@ -22,12 +22,9 @@ router.post(
       if (files) {
         const reqFiles = Object.entries(req.files).map(([key, file]) => {
           const { buffer, fieldname, mimetype } = file[0];
-          const type = fieldname === "file1" ? 0 : 1;
-          const base64Data =
-            `data:${mimetype},` +
-            Buffer.from(buffer, "binary").toString("base64");
+          const base64Data = Buffer.from(buffer, "binary");
           return {
-            type: type,
+            type: mimetype,
             image: base64Data,
             ProfileId: req.body.ProfileId,
           };

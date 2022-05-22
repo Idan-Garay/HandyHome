@@ -33,7 +33,7 @@ module.exports = {
     let primaryProfIds = dbPrimaryProfiles.map((p) => p.id);
 
     const createSecondaryProfile = async () => {
-      const base64Img = "data:image/jpg;base64," + (await randImgUrlToBase64());
+      const base64Img = await randImgUrlToBase64();
       const dbProfId = await queryInterface.bulkInsert("Profiles", [
         {
           name: randFullName({ size: 12 }),
