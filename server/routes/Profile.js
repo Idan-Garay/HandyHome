@@ -115,9 +115,15 @@ router.get("/profiles", async (req, res) => {
       include: [{ model: db.Profile, include: [db.Address] }],
     });
     let profiles = users.map((user) => {
-      user.Profile.picture = Buffer.from(user.Profile.picture, "base64").toString();
+      if (user.Profile.picture.type === "buffer") {
+        user.Profile.picture = Buffer.from(
+          user.Profile.picture,
+          "base64"
+        ).toString();
+      }
       return user.Profile;
     });
+
     res.status(200).jsonp(profiles);
   } catch (e) {
     console.log(e);
@@ -138,7 +144,7 @@ router.get("/profiles/:id", async (req, res) => {
       where: { userId: userId },
     });
 
-    profile.picture = Buffer.from(profile.picture, "base64").toString();
+    // profile.picture = Buffer.from(profile.picture, "base64").toString();
     res.status(200).jsonp(profile);
   } catch (e) {
     console.log(e);
