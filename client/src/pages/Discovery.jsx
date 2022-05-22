@@ -170,7 +170,7 @@ const ListItem = ({ profile }) => {
               <Heading level={5} textAlign="start" color="gray">
                 {services
                   .map((service) => {
-                    return service[0].toUpperCase() + service.slice(1);
+                    return String(service[0]).toUpperCase() + service.slice(1);
                   })
                   .join(", ")}
               </Heading>
