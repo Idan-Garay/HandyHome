@@ -10,6 +10,7 @@ const EmployerFeedback = (props) => {
     service: 0,
     recommend: 0,
   });
+  const { showData } = props.state;
 
   const [description, setDescription] = useState("");
 
@@ -26,9 +27,15 @@ const EmployerFeedback = (props) => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    postFeedback({ type: "EmployerToHandyman", ratings, description });
+    postFeedback({
+      type: "EmployerToHandyman",
+      ratings,
+      description,
+      orderId: showData.id,
+    });
     setDescription("");
     setRatings({ communication: 0, service: 0, recommend: 0 });
+    navigate("-1");
   };
 
   return (
@@ -58,8 +65,8 @@ const EmployerFeedback = (props) => {
           />
         </Box>
         <Box direction="column">
-          <OrderDetails />
-          <Box direction="column" gap="xxsmall" wrap margin={{ top: "1em" }}>
+          {/* <OrderDetails /> */}
+          <Box direction="column" gap="xxsmall" wrap>
             <Text textAlign="start" weight={500}>
               Description
             </Text>

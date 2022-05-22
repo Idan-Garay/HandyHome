@@ -3,8 +3,12 @@ import { Form, Button, Box, Text, TextArea } from "grommet";
 import Rating from "./Rating";
 import OrderDetails from "./OrderDetails";
 import { postFeedback } from "../../API/feedback";
+import { useNavigate } from "react-router-dom";
 
 const HandymanFeedback = (props) => {
+  const navigate = useNavigate();
+  const { showData } = props.state;
+
   const [ratings, setRatings] = useState({
     experience: 0,
   });
@@ -24,9 +28,15 @@ const HandymanFeedback = (props) => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    postFeedback({ type: "HandymanToEmployer", ratings, description });
+    postFeedback({
+      type: "HandymanToEmployer",
+      ratings,
+      description,
+      orderId: showData.id,
+    });
     setDescription("");
     setRatings({ experience: 0 });
+    navigate("-1");
   };
 
   return (
@@ -34,7 +44,7 @@ const HandymanFeedback = (props) => {
       <Text as="h1" size="xlarge">
         Handyman's Feedback
       </Text>
-      <Box width="xlarge" direction="row" pad="medium" justify="evenly" wrap>
+      <Box width="fill" direction="row" pad="medium" justify="center" wrap>
         <Box>
           <Rating
             ratingLabel="Rate your experience"
@@ -68,9 +78,9 @@ const HandymanFeedback = (props) => {
           </Box>
         </Box>
 
-        <Box direction="column">
-          <OrderDetails />
-        </Box>
+        {/* <Box direction="column">
+          <OrderDetails showData={showData} />
+        </Box> */}
       </Box>
     </Form>
   );
