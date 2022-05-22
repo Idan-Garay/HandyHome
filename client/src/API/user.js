@@ -43,11 +43,11 @@ export const sendConfirmationEmail = (registrantEmail) => {
     );
     return response;
   } catch (err) {
-    return {err};
+    return { err };
   }
 };
 
-export const registerUser = async (registerForm) => {
+export const registerUser = async (registerForm, accType) => {
   const { username, password, email } = registerForm;
   const requestOptions = {
     method: "POST",
@@ -56,7 +56,7 @@ export const registerUser = async (registerForm) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      accountType: 0,
+      accountType: accType,
       username,
       password,
       email,

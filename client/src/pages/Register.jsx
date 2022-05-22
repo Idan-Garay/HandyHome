@@ -27,6 +27,35 @@ const schema = yup
   })
   .required();
 
+const TypeButtons = ({ accType, handleAccType }) => {
+  const bgColor1 = accType === 0 ? "brand" : "white";
+  const bgColor2 = accType === 1 ? "brand" : "white";
+  return (
+    <Box direction="row" round margin="2em" gap="small">
+      <Box
+        fill
+        round
+        background={bgColor1}
+        onClick={() => {
+          handleAccType(0);
+        }}
+      >
+        <Text color="black">Employer</Text>
+      </Box>
+      <Box
+        fill
+        round
+        background={bgColor2}
+        onClick={() => {
+          handleAccType(1);
+        }}
+      >
+        <Text color="black">Handyman</Text>
+      </Box>
+    </Box>
+  );
+};
+
 const Register = () => {
   const navigate = useNavigate();
 
@@ -45,13 +74,19 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
+  const [accType, setAccType] = useState(0);
+
   const [result, setResult] = useState({});
   const [loadSpinner, setLoadSpinner] = useState(false);
+
+  const handleAccType = (type = 0) => {
+    setAccType(type);
+  };
 
   const onSubmit = async () => {
     const registerForm = getValues();
 
-    let res = await registerUser(registerForm);
+    let res = await registerUser(registerForm, accType);
     res = await res.json();
     setResult(res);
     if (res.success !== undefined) {
@@ -116,6 +151,7 @@ const Register = () => {
                 <ErrorLabel>Username or email already exists.</ErrorLabel>
               ) : null}
             </Box>
+            <TypeButtons accType={accType} handleAccType={handleAccType} />
             <Box
               tag="footer"
               margin={{ top: "medium" }}
