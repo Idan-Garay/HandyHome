@@ -18,12 +18,12 @@ export const getOrdersByEmployer = (employerUserId) => {
 };
 
 export const postRequestByEmployer = (requestForm) => {
-  const { contactNo, minRate, description, to, id } = requestForm;
+  const { contactNo, minRate, description, to, from } = requestForm;
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      from: id,
+      from,
       to,
       contactNo,
       price: minRate,
