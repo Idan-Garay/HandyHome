@@ -121,6 +121,7 @@ router.get("/profiles", async (req, res) => {
           "base64"
         ).toString();
       }
+      user.Profile.services = user.Profile.services.split(",");
       return user.Profile;
     });
 

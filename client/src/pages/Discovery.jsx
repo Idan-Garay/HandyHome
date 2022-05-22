@@ -72,7 +72,6 @@ const Discovery = () => {
       setJobCategories([...jobCategories]);
     }
   };
-
   const filterProfiles = () => {
     let filteredProfiles = [];
     if (jobCategories[0].isSelected) {
@@ -82,32 +81,26 @@ const Discovery = () => {
         const categoryFilters = jobCategories
           .filter((cat) => cat.isSelected === true)
           .map((cat) => cat.text.toLowerCase());
-        filteredProfiles = profilesCache.filter((profile) => {
-          const services = profile.services.replace(/\s/gm, "").split(",");
-          let condition = false;
-          services.forEach((service) => {
-            const idx = categoryFilters.findIndex(service);
-            if (idx) {
-              condition = true;
-              return;
-            }
-          });
-          return condition ? true : false;
+        const result = profiles.filter((prof) => {
+          return categoryFilters.some((category) =>
+            prof.services.includes(category)
+          );
         });
+        filteredProfiles = result;
       }
     }
     setProfiles(filteredProfiles);
   };
 
   useEffect(() => {
-    if (profilesCache.length !== 0) {
+    if (profilesCache.length !== 0 && profiles.length === 0) {
       setProfiles(profilesCache);
+    } else if (profiles.length === 0) {
+      getProfiles().then((json) => {
+        profilesCache = json;
+        setProfiles(profilesCache);
+      });
     }
-
-    getProfiles().then((json) => {
-      profilesCache = json;
-      setProfiles(profilesCache);
-    });
   }, [profiles.length]);
 
   return (
@@ -176,7 +169,6 @@ const ListItem = ({ profile }) => {
               </Heading>
               <Heading level={5} textAlign="start" color="gray">
                 {services
-                  .split(",")
                   .map((service) => {
                     return service[0].toUpperCase() + service.slice(1);
                   })
