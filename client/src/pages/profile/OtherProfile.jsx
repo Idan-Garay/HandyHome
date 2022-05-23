@@ -8,6 +8,7 @@ import {
   Text,
   Heading,
   Grid,
+  Image,
 } from "grommet";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { getProfile } from "../../API/profiles";
@@ -80,7 +81,7 @@ const AvatarProfile = ({ primaryProfile }) => {
         <Text textAlign="end">6 days</Text> */}
       </Box>
 
-      {accountState.accountType === 0 ? (
+      {accountState.accountType === 0 && accountState.isAuthorized ? (
         <Link
           to={`/profiles/${id}/request`}
           state={{ toProfile: primaryProfile.id, contactNo }}
@@ -142,6 +143,7 @@ const OtherProfile = () => {
       );
       res = await res.json();
       let { primary, secondary } = res;
+
       setPrimaryProfile(primary);
       setSecondaryProfiles(secondary);
     };
@@ -168,7 +170,9 @@ const OtherProfile = () => {
           </Box>
           <Box fill>
             {secondaryProfiles.length
-              ? secondaryProfiles.map((p) => <OtherMember profile={p} />)
+              ? secondaryProfiles.map((p, idx) => (
+                  <OtherMember key={"other" + idx} secondaryProfile={p} />
+                ))
               : "No Teammates"}
           </Box>
         </PageContent>
@@ -178,7 +182,8 @@ const OtherProfile = () => {
 };
 
 const OtherMember = ({ secondaryProfile }) => {
-  const { name, services, description, email, contactNo } = secondaryProfile;
+  const { name, services, description, email, contactNo, picture } =
+    secondaryProfile;
   return (
     <Box height="12em">
       <Box
@@ -193,14 +198,18 @@ const OtherMember = ({ secondaryProfile }) => {
         <Box direction="row" gap="medium">
           <Box>
             <Avatar size="xlarge" background="accent-3">
-              <User size="large" />
+              {picture.length ? (
+                <Image src={"data:image/jpg;base64," + picture} fill />
+              ) : (
+                <User size="large" />
+              )}
             </Avatar>
           </Box>
           <Box width="medium">
             <Heading level={3} textAlign="start">
               {name}
             </Heading>
-            <Heading level={5} textAlign="start">
+            <Heading level={5} textAlign="start" color="gray">
               {services
                 .split(",")
                 .map((service) => service[0].toUpperCase() + service.slice(1))
@@ -210,7 +219,9 @@ const OtherMember = ({ secondaryProfile }) => {
         </Box>
 
         <Box gap="medium" width="50%">
-          <Text>“ {description} "</Text>
+          <Text textAlign="start" margin={{ left: "1em" }}>
+            Description:“ {description} "
+          </Text>
           <Box direction="row-responsive" gap="xlarge" margin={{ left: "1em" }}>
             <Text>
               Email: <strong>{email}</strong>
