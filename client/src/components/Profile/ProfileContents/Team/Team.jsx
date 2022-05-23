@@ -10,6 +10,7 @@ import {
   Box,
   Text,
   Main,
+  Image,
 } from "grommet";
 import { Edit, User, Trash, AddCircle, User as UserIcon } from "grommet-icons";
 import { useNavigate, useParams } from "react-router-dom";
@@ -36,22 +37,20 @@ const TeamMember = (props) => {
     deleteMember(props.member);
     deleteMemberProfile(userId, id);
   };
-
+  const imgSrc = "data:image/jpg;base64," + picture;
   return (
-    <Card height="18em" width="small" background="light-1">
+    <Card height="20em" width="16em" background="light-1">
       <CardHeader pad="medium" direction="column" onClick={chooseMember}>
         <Avatar size="xlarge" background="accent-3">
-          {picture ? (
-            <img src={picture} height="100%" width="100%" />
-          ) : (
-            <User size="large" />
-          )}
+          {picture ? <Image src={imgSrc} fill /> : <User size="large" />}
         </Avatar>
         <Heading level={5}>{name}</Heading>
       </CardHeader>
       <CardBody pad="medium" onClick={chooseMember} height="medium">
-        <Text>{services}</Text>
-        <Text>{contactNo}</Text>
+        <Text wordBreak="break-word" size="small" weight="bold" color="gray">
+          {services}
+        </Text>
+        <Text textAlign="center">{contactNo}</Text>
       </CardBody>
       <CardFooter pad={{ horizontal: "small" }} background="light-2">
         <Button
@@ -71,8 +70,8 @@ const TeamMember = (props) => {
 
 const AddTeamMember = ({ handleClick }) => (
   <Card
-    height="18em"
-    width="small"
+    height="20em"
+    width="15em"
     background="light-1"
     onClick={handleClick}
     align="center"
