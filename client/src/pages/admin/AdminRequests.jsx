@@ -76,20 +76,28 @@ const DisplayValidations = ({ id, type, name, image }) => {
     navigate(0);
   };
   const imgSrc =
-    `date:${type}/;base64,` + Buffer.from(image).toString("base64");
-  console.log(imgSrc);
+    `data:${type}/;base64,` + Buffer.from(image).toString("base64");
+
   return (
     <tr className="table-data-list">
       <td className="number">{id}</td>
       <td>{type}</td>
-      <td>{name}</td>
       <td>
-        <Image src={imgSrc} />
+        <Image src={imgSrc} fill height="small" />
       </td>
       <td className="no-stretch">
-        {/* <Button primary margin={{right:"5px"}} label="Edit" onClick={onEdit} />
-                <Button primary color="red" label="Delete" onClick={handleOpen} />
-                <AdminModal handleClose={handleClose}  open={openModal} onDelete={onDelete} /> */}
+        <Button
+          primary
+          margin={{ right: "5px" }}
+          label="Edit"
+          onClick={onEdit}
+        />
+        <Button primary color="red" label="Delete" onClick={handleOpen} />
+        <AdminModal
+          handleClose={handleClose}
+          open={openModal}
+          onDelete={onDelete}
+        />
       </td>
     </tr>
   );
@@ -113,9 +121,7 @@ const AdminRequests = () => {
       <thead className="table-header">
         <tr>
           <td>ID</td>
-          <td>Profile ID</td>
           <td>Type</td>
-          <td>Name</td>
           <td>Image</td>
           <td>Actions</td>
         </tr>
