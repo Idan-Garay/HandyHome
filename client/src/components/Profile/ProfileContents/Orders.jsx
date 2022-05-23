@@ -139,7 +139,7 @@ const Orders = ({ userId, accountType, setProfileComponentIndex }) => {
               </Text>
             ) : null}
             <Box direction="row" justify="end" gap="small" align="center">
-              {showData.status === "pending" ? (
+              {showData.status === "pending" && accountType === 1 ? (
                 <>
                   <Box>
                     <Button
