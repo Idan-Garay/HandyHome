@@ -67,9 +67,9 @@ const Register = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: "Joshzxy",
-      password: "xzy12345",
-      email: "garayidan@gmail.com",
+      username: "",
+      password: "",
+      email: "",
     },
     resolver: yupResolver(schema),
   });
