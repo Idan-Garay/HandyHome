@@ -8,11 +8,9 @@ import Discovery from "./Discovery";
 import RequestByEmployer from "../components/Order/RequestByEmployer";
 import RegisterPrompt from "../components/Prompts/RegisterPrompt";
 import ProtectedRoute from "../components/ProtectedRoute";
-import ProfileEdit from "../components/Profile/ProfileEdit";
 import ProfileValidation from "../components/Profile/ProfileValidation";
 import Admin from "./admin/Admin";
 import History from "./History";
-import EditProfile from "./profile/EditProfile";
 import AddMember from "../components/Profile/ProfileContents/Team/AddMember";
 import OtherProfile from "./profile/OtherProfile";
 import JobCategoryList from "./JobCategoryList";
@@ -37,8 +35,8 @@ const AdminRoutes = () => {
       <Route exact path="/requests/payments/edit/:id" element={<AdminPaymentsEdit />} />
       <Route exact path="/profiles" element={<AdminProfiles />} />
       <Route exact path="/profiles/edit/:id" element={<AdminProfilesEdit />} />
-      <Route exact path="/feedbacks" element={<AdminFeedback />} />    
-      <Route exact path="/feedbacks/edit/:id" element={<AdminFeedbackEdit />} />    
+      <Route exact path="/feedbacks" element={<AdminFeedback />} />
+      <Route exact path="/feedbacks/edit/:id" element={<AdminFeedbackEdit />} />
 
       {/* <Route exact path="/profiles/:id" element={<Profile />} /> */}
       <Route exact path="/orders" element={<AdminOrders />} />
