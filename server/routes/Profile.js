@@ -156,6 +156,7 @@ router.patch("/profiles/:id/edit", async (req, res) => {
     let profile = await db.Profile.findOne({ where: { id: updateData.id } });
     if (profile) {
       const { id, ...neededData } = updateData;
+      neededData.picture = neededData.picture.slice(22);
       profile.set(neededData);
       let newProfile = await profile.save();
 
