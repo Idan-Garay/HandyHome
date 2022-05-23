@@ -12,7 +12,8 @@ import {
   TextArea,
   Layer,
   Stack,
-  CheckBoxGroup
+  CheckBoxGroup,
+  Image,
 } from "grommet";
 import { useForm, Controller } from "react-hook-form";
 import styled from "styled-components";
@@ -57,17 +58,19 @@ const ProfileField = ({ name, control, text, textArea = false }) => {
   );
 };
 
-const ServicesField = ({control, name, text}) => {
-  const [ checkBox, setCheckbox ] = useState([]);
+const ServicesField = ({ control, name, text }) => {
+  const [checkBox, setCheckbox] = useState([]);
 
   return (
-    <Controller 
+    <Controller
       name={name}
       control={control}
       render={({ field: { onChange } }) => (
         <Box>
-          <Text alignSelf="start" margin={{bottom:"10px"}} >{text}</Text>
-          <CheckBoxGroup 
+          <Text alignSelf="start" margin={{ bottom: "10px" }}>
+            {text}
+          </Text>
+          <CheckBoxGroup
             valueKey="id"
             labelKey="category"
             options={[
@@ -88,21 +91,32 @@ const ServicesField = ({control, name, text}) => {
       )}
     />
   );
-}
+};
 
-const EditProfile = ({ onEdit, setIsEdit, id }) => {
+const EditProfile = ({
+  setIsEdit,
+  picture,
+  description,
+  name,
+  email,
+  contactNo,
+  services,
+  id,
+  User,
+}) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [preview, setPreview] = useState(null);
   const [editProfileFields, setEditProfileFields] = useState({
-    name: "Full name",
-    contactNo: "096342341324",
-    services: "masonry,gardening",
-    description: "Able to fix walls and clean gardens",
-    picture: "",
-    email: "handyman@gmail.com",
+    name: name,
+    contactNo: contactNo,
+    services: services,
+    description: description,
+    picture: picture,
+    email: email,
   });
-  const [src, setSrc] = useState(editProfileFields.picture);
+  const imgSrc = "data:image/jpg;base64," + picture;
+  const [src, setSrc] = useState(imgSrc);
   const onCrop = (preview) => setPreview(preview);
   const onClose = () => setPreview(null);
   const onUpload = () => {
@@ -134,6 +148,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
     reset();
     setIsEdit(false);
   };
+
   return (
     <>
       <Box direction="column" pad="small" margin={{ top: "2em" }}>
@@ -148,7 +163,7 @@ const EditProfile = ({ onEdit, setIsEdit, id }) => {
               <Stack anchor="bottom-right">
                 <Avatar className="b-1" size="large" pad="3px">
                   {src ? (
-                    <img src={src} alt="profile pic" />
+                    <Image src={imgSrc} alt="profile pic" height="110%" />
                   ) : (
                     <UserIcon color="black" />
                   )}
