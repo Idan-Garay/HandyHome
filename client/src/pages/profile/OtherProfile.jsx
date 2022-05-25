@@ -28,6 +28,7 @@ const OptionalRender = (props) => {
 const AvatarProfile = ({ primaryProfile }) => {
   const { accountState } = useContext(AccountContext);
   const { picture, Address, User, contactNo, id } = primaryProfile;
+
   return (
     <Box
       gap="small"
@@ -73,18 +74,12 @@ const AvatarProfile = ({ primaryProfile }) => {
         direction="row"
         justify="between"
         fill="horizontal"
-      >
-        {/* <Box direction="row" gap="small">
-          <Send />
-          <Text color="gray">Last Delivery</Text>
-        </Box>
-        <Text textAlign="end">6 days</Text> */}
-      </Box>
+      ></Box>
 
       {accountState.accountType === 0 && accountState.isAuthorized ? (
         <Link
           to={`/profiles/${id}/request`}
-          state={{ toProfile: primaryProfile.id, contactNo }}
+          state={{ toUserId: User.id, contactNo }}
         >
           <Button type="submit" fill="horizontal" primary label="Request" />
         </Link>
