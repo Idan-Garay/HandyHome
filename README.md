@@ -21,7 +21,7 @@ A web application for profile marketplace. A marketplace for service provider an
 ## Run the client
 (Open new terminal)
 1. cd ./client
-- npm run start
+- npm run dev
 
 
 ### Demo Users: (Alternative to accessing db just to login)
