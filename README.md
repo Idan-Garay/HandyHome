@@ -26,13 +26,13 @@ A web application for profile marketplace. A marketplace for service provider an
 
 ### Demo Users: (Alternative to accessing db just to login)
 #### Admin
-username: "Admin123", 
+email: "Admin123@gmail.com", 
 password: "Admin123",
 
 #### Employer
-username: "Employer123",
+email: "Employer123@gmail.com",
 password: "Employer123",
 
 #### Handyman
-username: "Handyman123", 
+email: "Handyman123@gmail.com", 
 password: "Handyman123",
