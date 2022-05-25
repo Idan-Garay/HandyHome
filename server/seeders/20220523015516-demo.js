@@ -16,7 +16,7 @@ module.exports = {
      * }], {});
      *
      */
-    const result = await queryInterface.bulkInsert("Users", [
+    let result = await queryInterface.bulkInsert("Users", [
       {
         accountType: 0,
         username: "Employer123",
@@ -68,7 +68,7 @@ module.exports = {
           { length: 3 }
         ).toString(),
         contactNo: randPhoneNumber({ countryCode: "PH" }),
-        UserId: result[0],
+        UserId: result,
         description: randText(),
         picture: base64Img,
         email: randEmail({ size: 8 }),
@@ -90,7 +90,7 @@ module.exports = {
           { length: 3 }
         ).toString(),
         contactNo: randPhoneNumber({ countryCode: "PH" }),
-        UserId: result[1],
+        UserId: ++result,
         description: randText(),
         picture: base64Img,
         email: randEmail({ size: 8 }),
@@ -112,7 +112,7 @@ module.exports = {
           { length: 3 }
         ).toString(),
         contactNo: randPhoneNumber({ countryCode: "PH" }),
-        UserId: result[2],
+        UserId: ++result,
         description: randText(),
         picture: base64Img,
         email: randEmail({ size: 8 }),
