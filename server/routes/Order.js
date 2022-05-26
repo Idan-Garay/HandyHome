@@ -7,27 +7,46 @@ router.patch("/order/validate", async (req, res) => {
   try {
     const validateInfo = req.body;
     const { isValid, orderId, from, to, accountType } = validateInfo;
+    const result = { status: isValid ? "rejected" : "accepted" };
 
     const pv = await db.PaymentValidation.findOne({
-      where: { OrderId: orderId },
+      where: { OrderId: orderId, UserId: accountType === 0 ? from : to },
     });
 
     if (!pv) {
       const pvFrom = await db.PaymentValidation.create({
-        isAccepted: accountType === 0 ? 1 : 0,
+        isAccepted: 1,
         OrderId: orderId,
-        UserId: from,
+        UserId: accountType === 0 ? from : to,
       });
       const pvTo = await db.PaymentValidation.create({
-        isAccepted: accountType === 1 ? 1 : 0,
+        isAccepted: 0,
         OrderId: orderId,
-        UserId: to,
+        UserId: accountType === 0 ? to : from,
       });
     } else {
       pv.isAccepted = isValid;
       pv.save();
+      const order = await db.Order.findOne({
+        where: { status: "accepted", toUserId: to, fromUserId: from },
+      });
+      const fromPv = await db.PaymentValidation.findOne({
+        where: { UserId: from, OrderId: order.id },
+        attributes: ["isAccepted"],
+      });
+      const toPv = await db.PaymentValidation.findOne({
+        where: { UserId: to, OrderId: order.id },
+        attributes: ["isAccepted"],
+      });
+
+      if (fromPv && toPv) {
+        if (fromPv.isAccepted && toPv.isAccepted) {
+          result.status = "completed";
+          await order.save({ status: "completed" });
+        }
+      }
     }
-    res.status(200).json(pv);
+    res.status(200).json(result);
   } catch (e) {
     console.log(e);
   }
