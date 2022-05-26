@@ -19,13 +19,13 @@ const sequelize = new Sequelize("handyHome", "root", "", {
   try {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
-    await db.User.sync({ alter: true });
-    await db.Profile.sync({ alter: true });
-    await db.Address.sync({ alter: true });
-    await db.Order.sync({ alter: true });
-    await db.Feedback.sync({ alter: true });
-    await db.PaymentValidation.sync({ alter: true });
-    await db.ProfileValidation.sync({ alter: true });
+    // await db.User.sync({ alter: true });
+    // await db.Profile.sync({ alter: true });
+    // await db.Address.sync({ alter: true });
+    // await db.Order.sync({ alter: true });
+    // await db.Feedback.sync({ alter: true });
+    // await db.PaymentValidation.sync({ alter: true });
+    // await db.ProfileValidation.sync({ alter: true });
 
     // transfer all api endpoints to server/routes
     const profileRoutes = require("./routes/Profile.js");
