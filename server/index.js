@@ -35,8 +35,8 @@ const sequelize = new Sequelize(
     // transfer all api endpoints to server/routes
     const profileRoutes = require("./routes/Profile.js");
     const addressRoutes = require("./routes/Address.js");
-    const userRoutes = require("./routes/User.js");
     const orderRoutes = require("./routes/Order.js");
+    const userRoutes = require("./routes/User.js");
     const jobRoutes = require("./routes/Job.js");
     const adminRoutes = require("./routes/Admin.js");
     const teamRoutes = require("./routes/Team.js");
