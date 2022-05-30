@@ -7,13 +7,18 @@ const path = require("path");
 
 const { Sequelize } = require("sequelize");
 const db = require("./models/index.js");
-// require("./associations")();
+const { production } = require("./config/config.json");
 require("dotenv").config();
 
-const sequelize = new Sequelize("handyHome", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  production.database,
+  production.username,
+  production.password,
+  {
+    host: production.host,
+    dialect: "mysql",
+  }
+);
 
 (async () => {
   try {
@@ -102,7 +107,7 @@ const sequelize = new Sequelize("handyHome", "root", "", {
       );
     });
 
-    app.listen(3501, () => {
+    app.listen(process.env.PORT || 3501, () => {
       console.log("here:\n Server is listening on port 3501");
     });
 
