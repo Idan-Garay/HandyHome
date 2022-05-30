@@ -1,5 +1,5 @@
-# CS3205_FinalProject
-A web application for profile marketplace. A marketplace for service provider and service buyer where service providers can post their profile and their companions for the service buyer to know. 
+# HandyHOme
+A web application for profile marketplace. A marketplace for Employers and handyman where a handyman can post a profile and their companions' for the employer to know. 
 
 # Steps in using the application
 1. Start the server 
