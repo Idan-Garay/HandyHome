@@ -1,4 +1,4 @@
-# HandyHOme
+# HandyHome
 A web application for profile marketplace. A marketplace for Employers and handyman where a handyman can post a profile and their companions' for the employer to know. 
 
 # Steps in using the application
