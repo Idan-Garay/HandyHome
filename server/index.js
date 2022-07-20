@@ -50,7 +50,8 @@ const sequelize = new Sequelize(
 
     app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
-    app.use(express.static(path.join(__dirname, "../client/public")));
+    // app.use(express.static(path.join(__dirname, "../client/public")));
+    app.use(express.static("public"));
     app.use(express.json());
     app.use("/", userRoutes);
     app.use("/", addressRoutes);
