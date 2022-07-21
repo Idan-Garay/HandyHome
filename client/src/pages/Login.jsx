@@ -1,25 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Box, Form, TextInput, Text, Button } from "grommet";
-import { useForm, Controller } from "react-hook-form";
-import styled from "styled-components";
+import { Box, Form, Button } from "grommet";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AccountContext } from "../App";
-
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { login } from "../API/user";
 import LoadingScreen from "../components/LoadingScreen";
 import { fieldsControllers, useLoginForm } from "../components/Form/loginForm";
-import { ControllerFields } from "../components/Form/Index";
+import { ControllerFields, ErrorLabel } from "../components/Form/Index";
 
-const StyledTextInput = styled(TextInput)`
-  background-color: #f8f8f8;
-`;
-
-const ErrorLabel = styled(Text)`
-  color: red;
-  text-align: left;
-`;
 const Login = () => {
   let navigate = useNavigate();
   const { accountState, dispatch } = useContext(AccountContext);
