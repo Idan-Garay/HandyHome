@@ -32,10 +32,6 @@ const Register = () => {
   };
 
   const onSubmit = async () => {
-    console.log(
-      "🚀 ~ file: Register.jsx ~ line 37 ~ onSubmit ~ registerForm",
-      getValues()
-    );
     const registerForm = getValues();
 
     let res = await registerUser(registerForm, accType);
