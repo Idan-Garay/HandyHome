@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { login } from "../API/user";
 import LoadingScreen from "../components/LoadingScreen";
+import { fieldsControllers, useLoginForm } from "../components/Form/loginForm";
+import { ControllerFields } from "../components/Form/Index";
 
 const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
@@ -18,34 +20,6 @@ const ErrorLabel = styled(Text)`
   color: red;
   text-align: left;
 `;
-
-const MyController = ({ name, control, errors, type = "text" }) => {
-  let label = name.charAt(0).toUpperCase() + name.slice(1);
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <>
-          <Box direction="row" gap="medium" wrap>
-            <Text text>{label}</Text>
-            <StyledTextInput {...field} type={type} />
-          </Box>
-          <ErrorLabel>{errors[name]?.message}</ErrorLabel>
-        </>
-      )}
-    />
-  );
-};
-
-const schema = yup
-  .object({
-    email: yup.string().email(),
-    password: yup.string().min(8).max(20).required(),
-    loggedOn: yup.date().default(() => new Date()),
-  })
-  .required();
-
 const Login = () => {
   let navigate = useNavigate();
   const { accountState, dispatch } = useContext(AccountContext);
@@ -59,13 +33,7 @@ const Login = () => {
     getValues,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      password: "",
-      email: "",
-    },
-    resolver: yupResolver(schema),
-  });
+  } = useLoginForm();
 
   const [err, setErr] = useState({});
   const [loadSpinner, setLoadSpinner] = useState(false);
@@ -101,14 +69,13 @@ const Login = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Box margin="auto" width={{ min: "large", max: "50%" }}>
             <Box gap="medium">
-              <MyController name="email" control={control} errors={errors} />
-              <MyController
-                name="password"
+              <ControllerFields
+                fieldsControllers={fieldsControllers.map((fieldData) => {
+                  fieldData.errorMessage = errors[fieldData.name]?.message;
+                  return fieldData;
+                })}
                 control={control}
-                errors={errors}
-                type="password"
               />
-
               {err.email !== undefined ? (
                 <ErrorLabel>{err.email}</ErrorLabel>
               ) : null}
