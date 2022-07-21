@@ -1,60 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Box, Form, TextInput, Text, Button } from "grommet";
-import { useForm, Controller } from "react-hook-form";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { Box, Form, Text, Button } from "grommet";
+import { Controller } from "react-hook-form";
 import { registerUser } from "../API/user";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
+import { StyledTextInput, ErrorLabel } from "../components/Form/Index";
 
-const StyledTextInput = styled(TextInput)`
-  background-color: #f8f8f8;
-`;
-
-const ErrorLabel = styled(Text)`
-  color: red;
-  text-align: left;
-`;
-
-const schema = yup
-  .object({
-    username: yup.string().min(5).max(20).required(),
-    password: yup.string().min(8).max(20).required(),
-    email: yup.string().email(),
-    createdOn: yup.date().default(() => new Date()),
-  })
-  .required();
-
-const TypeButtons = ({ accType, handleAccType }) => {
-  const bgColor1 = accType === 0 ? "brand" : "white";
-  const bgColor2 = accType === 1 ? "brand" : "white";
-  return (
-    <Box direction="row" round margin="2em" gap="small">
-      <Box
-        fill
-        round
-        background={bgColor1}
-        onClick={() => {
-          handleAccType(0);
-        }}
-      >
-        <Text color="black">Employer</Text>
-      </Box>
-      <Box
-        fill
-        round
-        background={bgColor2}
-        onClick={() => {
-          handleAccType(1);
-        }}
-      >
-        <Text color="black">Handyman</Text>
-      </Box>
-    </Box>
-  );
-};
+import { useRegisterForm } from "../components/Form/SchemaValidation";
+import TypeButtons from "../components/Form/TypeButtons";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -65,14 +19,7 @@ const Register = () => {
     getValues,
     reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      username: "",
-      password: "",
-      email: "",
-    },
-    resolver: yupResolver(schema),
-  });
+  } = useRegisterForm();
 
   const [accType, setAccType] = useState(0);
 
@@ -114,7 +61,7 @@ const Register = () => {
                 render={({ field }) => (
                   <>
                     <Box direction="row" gap="medium" wrap>
-                      <Text text>Username</Text>
+                      <Text>Username</Text>
                       <StyledTextInput {...field} />
                     </Box>
                     <ErrorLabel>{errors.username?.message}</ErrorLabel>
