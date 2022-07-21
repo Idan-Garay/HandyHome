@@ -7,23 +7,11 @@ import {
   Avatar,
   Text,
   Heading,
-  Grid,
   Image,
 } from "grommet";
-import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
-import { getProfile } from "../../API/profiles";
+import { useParams, Link } from "react-router-dom";
 import { AccountContext } from "../../App";
-import { User, Send, Map } from "grommet-icons";
-
-const OptionalRender = (props) => {
-  const { componentToRender, children } = props;
-
-  const ChosenComponent = children.find(
-    (component) => component.props.value === componentToRender
-  );
-
-  return ChosenComponent;
-};
+import { User, Map } from "grommet-icons";
 
 const AvatarProfile = ({ primaryProfile }) => {
   const { accountState } = useContext(AccountContext);
@@ -122,7 +110,7 @@ const OtherProfile = () => {
   const { id } = useParams();
   const [primaryProfile, setPrimaryProfile] = useState(null);
   const [secondaryProfiles, setSecondaryProfiles] = useState([]);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const fn = async () => {
       const requestOptions = {

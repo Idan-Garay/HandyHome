@@ -1,25 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { User as UserIcon, Edit as EditIcon } from "grommet-icons";
 import {
   Box,
-  Text,
   Button,
   Avatar,
   Heading,
   Main,
   TextInput,
   TextArea,
-  Layer,
   Stack,
-  CheckBoxGroup,
   Image,
 } from "grommet";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { patchProfile } from "../../API/profiles";
 
-import ReactAvatar from "react-avatar-edit";
+import ProfileField from "../../components/Profile/ProfileField";
+import ServicesField from "../../components/Profile/ServicesField";
+import UploadPicture from "../../components/Profile/UploadPicture";
 
 const StyledBox = (props) => (
   <Box
@@ -31,67 +29,13 @@ const StyledBox = (props) => (
   />
 );
 
-const StyledTextInput = styled(TextInput)`
+export const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
 `;
 
-const StyledTextArea = styled(TextArea)`
+export const StyledTextArea = styled(TextArea)`
   background-color: #f8f8f8;
 `;
-
-const ProfileField = ({ name, control, text, textArea = false }) => {
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <Box direction="row" gap="medium" wrap>
-          <Text text>{text}</Text>
-          {textArea ? (
-            <StyledTextArea rows={5} resize={false} {...field} />
-          ) : (
-            <StyledTextInput {...field} />
-          )}
-        </Box>
-      )}
-    />
-  );
-};
-
-const ServicesField = ({ control, name, text }) => {
-  const [checkBox, setCheckbox] = useState([]);
-
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field: { onChange } }) => (
-        <Box>
-          <Text alignSelf="start" margin={{ bottom: "10px" }}>
-            {text}
-          </Text>
-          <CheckBoxGroup
-            valueKey="id"
-            labelKey="category"
-            options={[
-              { category: "Plumbing", id: "Plumbing" },
-              { category: "Carpentry", id: "Carpentry" },
-              { category: "Masonry", id: "Masonry" },
-              { category: "Gardening", id: "Gardening" },
-              { category: "Housekeeping", id: "Housekeeping" },
-              { category: "Babysitting", id: "Babysitting" },
-            ]}
-            value={checkBox}
-            onChange={({ value: nextValue, option }) => {
-              setCheckbox(nextValue);
-              onChange(nextValue);
-            }}
-          />
-        </Box>
-      )}
-    />
-  );
-};
 
 const EditProfile = ({
   setIsEdit,
@@ -102,9 +46,7 @@ const EditProfile = ({
   contactNo,
   services,
   id,
-  User,
 }) => {
-  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [preview, setPreview] = useState(null);
   const [editProfileFields, setEditProfileFields] = useState({
@@ -176,43 +118,16 @@ const EditProfile = ({
                   }}
                   icon={<EditIcon color="black" size="12" />}
                 />
-                {show && (
-                  <Layer
-                    onEsc={() => setShow(false)}
-                    onClickOutside={() => setShow(false)}
-                  >
-                    <Box pad="medium">
-                      <Heading level={3} textAlign="center">
-                        Edit Image
-                      </Heading>
-                      <Box
-                        direction="row"
-                        gap="small"
-                        background="white"
-                        pad="small"
-                        round
-                      >
-                        <ReactAvatar
-                          width={200}
-                          imageHeight={150}
-                          onCrop={onCrop}
-                          onClose={onClose}
-                          onBeforeFileLoad={onBeforeFileLoad}
-                          src={src}
-                        />
-                        <Box
-                          height="small"
-                          width="small"
-                          justify="center"
-                          align="center"
-                        >
-                          {preview && <img src={preview} alt="Preview" />}
-                        </Box>
-                      </Box>
-                      <Button primary label="Upload" onClick={onUpload} />
-                    </Box>
-                  </Layer>
-                )}
+                {show &&
+                  UploadPicture(
+                    setShow,
+                    onCrop,
+                    onClose,
+                    onBeforeFileLoad,
+                    src,
+                    preview,
+                    onUpload
+                  )}
               </Stack>
             </Box>
             <Box align="start" width="large">
