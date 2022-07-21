@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Box, Form, Text, Button } from "grommet";
-import { Controller } from "react-hook-form";
+import { Box, Form, Button } from "grommet";
 import { registerUser } from "../API/user";
 
 import { useNavigate } from "react-router-dom";
@@ -9,6 +8,9 @@ import { StyledTextInput, ErrorLabel } from "../components/Form/Index";
 
 import { useRegisterForm } from "../components/Form/SchemaValidation";
 import TypeButtons from "../components/Form/TypeButtons";
+import RegisterFields, {
+  fieldsControllers,
+} from "../components/Form/RegisterFields";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -22,7 +24,6 @@ const Register = () => {
   } = useRegisterForm();
 
   const [accType, setAccType] = useState(0);
-
   const [result, setResult] = useState({});
   const [loadSpinner, setLoadSpinner] = useState(false);
 
@@ -31,6 +32,10 @@ const Register = () => {
   };
 
   const onSubmit = async () => {
+    console.log(
+      "🚀 ~ file: Register.jsx ~ line 37 ~ onSubmit ~ registerForm",
+      getValues()
+    );
     const registerForm = getValues();
 
     let res = await registerUser(registerForm, accType);
@@ -54,45 +59,12 @@ const Register = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Box margin="auto" width={{ min: "medium", max: "50%" }}>
             <Box gap="medium">
-              <Controller
-                name="username"
+              <RegisterFields
+                fieldsControllers={fieldsControllers.map((fieldData) => {
+                  fieldData.errorMessage = errors[fieldData.name]?.message;
+                  return fieldData;
+                })}
                 control={control}
-                rules={{ required: true, maxLength: 20, minLength: 5 }}
-                render={({ field }) => (
-                  <>
-                    <Box direction="row" gap="medium" wrap>
-                      <Text>Username</Text>
-                      <StyledTextInput {...field} />
-                    </Box>
-                    <ErrorLabel>{errors.username?.message}</ErrorLabel>
-                  </>
-                )}
-              />
-              <Controller
-                name="password"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <Box direction="row" gap="medium" wrap>
-                      <Text>Password</Text>
-                      <StyledTextInput type="password" {...field} />
-                    </Box>
-                    <ErrorLabel>{errors.password?.message}</ErrorLabel>
-                  </>
-                )}
-              />
-              <Controller
-                name="email"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <Box direction="row" gap="medium" wrap>
-                      <Text>Email</Text>
-                      <StyledTextInput {...field} />
-                    </Box>
-                    <ErrorLabel>{errors.username?.message}</ErrorLabel>
-                  </>
-                )}
               />
               {result.email || result.username ? (
                 <ErrorLabel>Username or email already exists.</ErrorLabel>
