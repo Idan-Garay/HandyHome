@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Grid } from "grommet";
-
 import { getProfiles } from "../API/profiles";
-import Plumbing from "/assets/tap.png";
-import Housekeeping from "/assets/sweeping.png";
-import Carpentry from "/assets/tools.png";
-import Gardening from "/assets/gardening.png";
-import BabySitting from "/assets/baby-stroller.png";
-import Masonry from "/assets/brickwork.png";
-
+import {
+  Plumbing,
+  Housekeeping,
+  Carpentry,
+  Gardening,
+  BabySitting,
+  Masonry,
+} from "../components/Discovery/PicturesIndex";
 import JobCategory from "../components/JobCategory.jsx";
 import DiscoveryList from "../components/Lists/DiscoveryList";
 
