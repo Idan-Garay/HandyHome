@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ProfileCard from "../components/Discovery/ProfileCard";
 import { Box, Button, Grid, Text, Avatar, Heading } from "grommet";
 import { User } from "grommet-icons";
 
 import { getProfiles } from "../API/profiles";
-import ListContainer from "../components/JobCategory/ListContainer";
 import Plumbing from "/assets/tap.png";
 import Housekeeping from "/assets/sweeping.png";
 import Carpentry from "/assets/tools.png";
@@ -13,32 +11,9 @@ import BabySitting from "/assets/baby-stroller.png";
 import Masonry from "/assets/brickwork.png";
 import { Link } from "react-router-dom";
 
-let profilesCache = [];
+import JobCategory from "../components/JobCategory.jsx";
 
-const JobCategory = ({ text = "All", Figure, isSelected, handleClick }) => {
-  const bgColor = isSelected ? "#a9a9a9" : "white";
-  return (
-    <Box
-      direction="row-responsive"
-      height="3em"
-      align="center"
-      gap="small"
-      text={text.toLowerCase()}
-      background={bgColor}
-      cursor="pointer"
-      onClick={() => {
-        handleClick(text);
-      }}
-    >
-      <Box width="xsmall" align="center">
-        {Figure && <img src={Figure} alt="Plumber" height="30" width="30" />}
-      </Box>
-      <Box direction="row">
-        <Text>{text}</Text>
-      </Box>
-    </Box>
-  );
-};
+let profilesCache = [];
 
 const FilterButton = ({ handleClick }) => {
   return <Button primary onClick={handleClick} label="Filter" />;

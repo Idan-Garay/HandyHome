@@ -8,14 +8,11 @@ import Discovery from "./Discovery";
 import RequestByEmployer from "../components/Order/RequestByEmployer";
 import RegisterPrompt from "../components/Prompts/RegisterPrompt";
 import ProtectedRoute from "../components/ProtectedRoute";
-import ProfileEdit from "../components/Profile/ProfileEdit";
 import ProfileValidation from "../components/Profile/ProfileValidation";
 import Admin from "./admin/Admin";
 import History from "./History";
-import EditProfile from "./profile/EditProfile";
 import AddMember from "../components/Profile/ProfileContents/Team/AddMember";
 import OtherProfile from "./profile/OtherProfile";
-import JobCategoryList from "./JobCategoryList";
 import CategoryUserList from "./CategoryUserList";
 import AdminOrders from "./admin/AdminOrders";
 import AdminRequests from "./admin/AdminRequests";
@@ -75,7 +72,6 @@ const CustomerRoutes = () => {
         element={<ProtectedRoute children={<AddMember />} />}
       />
       <Route path="/profilevalidation" element={<ProfileValidation />} />
-      <Route path="/list" element={<JobCategoryList />} />
       <Route path="/list/:path" element={<CategoryUserList />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
