@@ -37,7 +37,7 @@ const Profile = () => {
   };
 
   return (
-    <Page kind="wide" pad="0 .5em" fill>
+    <Page kind="wide" fill>
       <PageContent
         round="small"
         gap="medium"
@@ -45,24 +45,20 @@ const Profile = () => {
         direction="column"
         align="start"
       >
-        <Box
-          height="small"
-          direction="row"
-          align="center"
-          fill="horizontal"
-          margin={{ top: "1em" }}
-          border={{ side: "bottom", color: "#ECECEC" }}
-        >
-          <Heading level={3}>
-            Settings: {accountType === 0 ? "Employer" : "Handyman"}
-          </Heading>
-        </Box>
-
         <Box direction="row-responsive" gap="large" width="100vh" fill>
-          <Sidebar width={{ min: "20%" }}>
-            <ShowButtons accountType={accountType} menuOnClick={menuOnClick} />
-          </Sidebar>
-          <Main width={{ max: "79%" }}>
+          <Box>
+            <Heading level={4}>
+              Settings: {accountType === 0 ? "Employer" : "Handyman"}
+            </Heading>
+
+            <Sidebar width={{ min: "20%" }}>
+              <ShowButtons
+                accountType={accountType}
+                menuOnClick={menuOnClick}
+              />
+            </Sidebar>
+          </Box>
+          <Main width={{ max: "75%" }}>
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} myDetailsData={profileData} />
               <Team

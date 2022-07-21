@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TextInput, Text, Box } from "grommet";
+import { TextInput, Text, Box, TextArea } from "grommet";
 import { Controller, useForm } from "react-hook-form";
 import styled from "styled-components";
 

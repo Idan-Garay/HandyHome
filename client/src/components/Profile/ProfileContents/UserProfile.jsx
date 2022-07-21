@@ -33,14 +33,12 @@ const UserProfile = ({
   useEffect(() => {
     const fn = async () => {
       const res = await getFeedbacksToUserId(id);
-      console.log("fn", res);
     };
     if (User) fn();
   }, [User]);
-  console.log("here");
   return (
     <Box direction="column" pad="small">
-      <StyledBox height="small" align="end">
+      <StyledBox height="small">
         <Box
           direction="row"
           gap="medium"

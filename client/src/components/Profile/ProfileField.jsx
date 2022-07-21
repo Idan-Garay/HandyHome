@@ -1,10 +1,7 @@
 import React from "react";
 import { Box, Text } from "grommet";
 import { Controller } from "react-hook-form";
-import {
-  StyledTextArea,
-  StyledTextInput,
-} from "../../pages/profile/EditProfile";
+import { StyledTextArea, StyledTextInput } from "../Form/Index";
 
 export default function ProfileField({
   name,
