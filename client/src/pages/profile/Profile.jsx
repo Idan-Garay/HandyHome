@@ -1,30 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Page,
-  PageContent,
-  Button,
-  Box,
-  Main,
-  Sidebar,
-  Nav,
-  Heading,
-} from "grommet";
+import { Page, PageContent, Box, Main, Sidebar, Heading } from "grommet";
 import { getProfile } from "../../API/profiles";
 import { AccountContext } from "../../App";
 import MyDetails from "../../components/Profile/ProfileContents/MyDetails";
 import Orders from "../../components/Profile/ProfileContents/Orders";
 import Team from "../../components/Profile/ProfileContents/Team/Team";
 import Verify from "../../components/Profile/ProfileContents/Verify";
-
-const OptionalRender = (props) => {
-  const { componentToRender, children } = props;
-
-  const ChosenComponent = children.find(
-    (component) => component.props.value === componentToRender
-  );
-
-  return ChosenComponent;
-};
+import ShowButtons from "../../components/Profile/ShowButtons";
+import OptionalRender from "../../components/OptionalRender";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({});
@@ -103,43 +86,6 @@ const Profile = () => {
         </Box>
       </PageContent>
     </Page>
-  );
-};
-
-const ShowButtons = ({ accountType = 0, menuOnClick }) => {
-  return (
-    <Nav gap="small">
-      <Button
-        primary
-        value={0}
-        label="My Details"
-        onClick={menuOnClick}
-        key={`menu-0`}
-      />
-      {accountType === 1 && (
-        <Button
-          primary
-          value={1}
-          label="Team"
-          onClick={menuOnClick}
-          key={`menu-1`}
-        />
-      )}
-      <Button
-        primary
-        value={2}
-        label="Orders"
-        onClick={menuOnClick}
-        key={`menu-2`}
-      />
-      <Button
-        primary
-        value={3}
-        label="Verify"
-        onClick={menuOnClick}
-        key={`menu-3`}
-      />
-    </Nav>
   );
 };
 
