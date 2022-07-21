@@ -7,6 +7,20 @@ export const StyledTextInput = styled(TextInput)`
   background-color: #f8f8f8;
 `;
 
+export const StyledTextArea = styled(TextArea)`
+  background-color: #f8f8f8;
+`;
+
+export const StyledBox = (props) => (
+  <Box
+    direction="row-responsive"
+    gap="small"
+    height="4em"
+    align="center"
+    {...props}
+  />
+);
+
 export const ErrorLabel = styled(Text)`
   color: red;
   text-align: left;

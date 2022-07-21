@@ -1,41 +1,13 @@
 import React, { useState } from "react";
 import { User as UserIcon, Edit as EditIcon } from "grommet-icons";
-import {
-  Box,
-  Button,
-  Avatar,
-  Heading,
-  Main,
-  TextInput,
-  TextArea,
-  Stack,
-  Image,
-} from "grommet";
+import { Box, Button, Avatar, Heading, Main, Stack, Image } from "grommet";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import { patchProfile } from "../../API/profiles";
 
 import ProfileField from "../../components/Profile/ProfileField";
 import ServicesField from "../../components/Profile/ServicesField";
 import UploadPicture from "../../components/Profile/UploadPicture";
-
-const StyledBox = (props) => (
-  <Box
-    direction="row-responsive"
-    gap="small"
-    height="4em"
-    align="center"
-    {...props}
-  />
-);
-
-export const StyledTextInput = styled(TextInput)`
-  background-color: #f8f8f8;
-`;
-
-export const StyledTextArea = styled(TextArea)`
-  background-color: #f8f8f8;
-`;
+import { StyledBox } from "../../components/Form/Index";
 
 const EditProfile = ({
   setIsEdit,
