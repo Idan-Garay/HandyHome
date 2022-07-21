@@ -4,13 +4,11 @@ import { registerUser } from "../API/user";
 
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
-import { StyledTextInput, ErrorLabel } from "../components/Form/Index";
+import { ErrorLabel, ControllerFields } from "../components/Form/Index";
 
-import { useRegisterForm } from "../components/Form/SchemaValidation";
+import { useRegisterForm } from "../components/Form/registerForm";
 import TypeButtons from "../components/Form/TypeButtons";
-import RegisterFields, {
-  fieldsControllers,
-} from "../components/Form/RegisterFields";
+import { fieldsControllers } from "../components/Form/registerForm";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -55,7 +53,7 @@ const Register = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Box margin="auto" width={{ min: "medium", max: "50%" }}>
             <Box gap="medium">
-              <RegisterFields
+              <ControllerFields
                 fieldsControllers={fieldsControllers.map((fieldData) => {
                   fieldData.errorMessage = errors[fieldData.name]?.message;
                   return fieldData;
