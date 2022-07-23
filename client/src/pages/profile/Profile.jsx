@@ -58,7 +58,7 @@ const Profile = () => {
               />
             </Sidebar>
           </Box>
-          <Main width={{ max: "75%" }}>
+          <Main width={{ max: "79%" }}>
             <OptionalRender componentToRender={componentIndex}>
               <MyDetails value={0} myDetailsData={profileData} />
               <Team
