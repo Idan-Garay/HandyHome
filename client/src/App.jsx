@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Menu } from "@headlessui/react";
+// import { Menu } from "@headlessui/react";
+
 import "./App.css";
-import LoginPage from "./pages/login_page/LoginPage";
+import LoginPage from "./pages/login_page/view/LoginPage";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <div className="App">
+    <div className="App h-screen w-screen">
       <LoginPage/>
     </div>
   );
