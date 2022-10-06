@@ -8,12 +8,14 @@ import LoginPageFooter from "./LoginPageFooter";
 function LoginPageForm() {
   return (
     <>
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form className=" w-10/12 h-full shadow-md rounded px-16 pt-6 pb-8 mb-4">
         <LoginPageInput />
         <LoginPageInputPassword />
-        <div className="flex items-center justify-between">
-          <LoginPageButton />
+        <div className="text-end mr-2">
           <LoginPageForgotPassword />
+        </div>
+        <div className="mt-5 flex flex-col items-center justify-between">
+          <LoginPageButton />
         </div>
       </form>
       <LoginPageFooter />
