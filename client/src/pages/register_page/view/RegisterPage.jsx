@@ -17,7 +17,7 @@ const RegisterPage = () => {
       </div>
     </div>
       <div className="w-full h-full flex  gap-x-8 justify-center items-center lg:grid lg:grid-cols-2">
-        <div className="w-full sm:w-2/4 lg:w-3/4 lg:w-2/4 p-10 border rounded-3xl bg-red mx-auto" >
+        <div className="w-full sm:w-2/4 lg:w-2/4 p-10 border rounded-3xl bg-red mx-auto" >
           <form action="">
             <RegisterInput />
 
