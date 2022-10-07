@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
+    "daisyui": "^2.31.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^6.4.2",
+    "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

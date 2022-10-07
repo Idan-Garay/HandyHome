@@ -12,5 +12,7 @@ module.exports = {
       display: ["Nunito", "sans-serif"]
     }
   },
-  plugins: [],
+  plugins: [
+    require("daisyui"),
+  ],
 };
