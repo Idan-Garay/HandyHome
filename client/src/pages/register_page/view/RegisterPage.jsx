@@ -12,12 +12,12 @@ const RegisterPage = () => {
   return (
     <div className="w-screen h-screen ">
     <div style={{"zIndex": -1}} className=" flex flex-row-reverse rotate-80  fixed lg:block inset-0"> 
-      <div className="bg-primaryColor w-1/2 h-full object-right-bottom absolute right-0 origin-bottom rotate-90">
+      <div className="lg:bg-primaryColor w-1/2 h-full object-right-bottom absolute right-0 origin-bottom rotate-90">
         
       </div>
     </div>
       <div className="w-full h-full flex  gap-x-8 justify-center items-center lg:grid lg:grid-cols-2">
-        <div className="w-full sm:w-2/4 lg:w-2/4 p-10 border rounded-3xl bg-red mx-auto" >
+        <div className="w-full sm:w-2/4 lg:w-3/4 xl:w-3/5 p-10 border rounded-3xl bg-red mx-auto" >
           <form action="">
             <RegisterInput />
 
