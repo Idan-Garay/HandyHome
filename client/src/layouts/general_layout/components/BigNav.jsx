@@ -4,10 +4,10 @@ import AvatarMenu from "./AvatarMenu";
 function BigNav() {
   return (
     <>
-      <nav className="nav-bar hidden sm:block">
-      </nav>
-      <div className="profile-nav hidden sm:block  pr-[8px] text-right">
-        <div className="relative inline-block text-left ">
+      <nav className="nav-bar hidden sm:block text-right"></nav>
+      <div className="profile-nav hidden sm:block ">
+        <div className="relative flex justify-end items-center gap-5">
+          <a href="#" className=" text-lg font-">Discover</a>
           <AvatarMenu />
         </div>
       </div>

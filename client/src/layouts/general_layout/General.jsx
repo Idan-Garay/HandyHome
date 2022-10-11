@@ -7,11 +7,11 @@ function General({ children }) {
   return (
     <div className="flex flex-col text-black h-screen w-screen">
       <div
-        className="grow-0 grid"
+        className="grow-0 grid items-center"
         style={{ gridTemplate: "100% / 1fr 5fr 2fr" }}
       >
         <Logo />
-        {/* small nav */}
+        
         <SmallNav />
         <BigNav />
         

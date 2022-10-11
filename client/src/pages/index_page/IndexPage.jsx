@@ -9,14 +9,15 @@ function IndexPage() {
   return (
     <General>
       <section
-        className="border flex-0 flex-col"
+        className="border flex-0 flex-col "
       >
-        <div className="searchbar-title  ">
+      
+        {/* <div className="searchbar-title  ">
           <IndexSearchHeadline/>
         </div>
-        <div className="searchbar ">
+        <div className="searchbar  h-24">
           <IndexSearchInput/>
-        </div>
+        </div> */}
       </section>
       <div
         className="border-2 flex-1 grow flex flex-col sm:flex-row" 

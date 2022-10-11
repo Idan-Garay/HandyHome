@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
 import Avatar from "./Avatar";
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 function AvatarMenu() {
   return (
-    <Menu as="div" className="relative inline-block text-left ">
+    <Menu as="div" className=" relative inline-block  ">
           <div className="">
-            <Menu.Button>
+            <Menu.Button 
+            style={{padding: "8px", "minWidth":"70px"}}
+            >
               <Avatar />
             </Menu.Button>
           </div>
@@ -27,14 +28,27 @@ function AvatarMenu() {
                     <button
                       className={`${
                         active ? "bg-violet-500 text-white" : " font-semibold text-black bg-white"
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm text-right`}
                     >
                       See Profile
                     </button>
                   )}
                 </Menu.Item>
               </div>
-              <div className="p-1">
+              <div className="px-1 py-1 block sm:hidden">
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={`${
+                        active ? "bg-violet-500 text-white" : " font-semibold text-black bg-white"
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    >
+                      Discover
+                    </button>
+                  )}
+                </Menu.Item>
+              </div>
+              <div className="p-1 mt-2">
                 <Menu.Item>
                   {({ active }) => (
                     <button
