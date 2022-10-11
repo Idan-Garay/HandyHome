@@ -20,7 +20,7 @@ function IndexPage() {
         </div> */}
       </section>
       <div
-        className="border-2 flex-1 grow flex flex-col sm:flex-row" 
+        className=" flex-1 grow flex flex-col sm:flex-row" 
         // style={{ display: "grid", gridTemplate: "100% / 1fr 3fr" }}
       >
         <IndexSidebar/>
