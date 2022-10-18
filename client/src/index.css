@@ -18,6 +18,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --var-font-lato: "Lato, sans-serif"; /* font-family https://fonts.google.com/specimen/Lato?query=Lato */
+  --var-font-amerigo: "Amerigo-bt roman opt,sans-serif;"; /* font-family https://www.dafontfree.net/amerigo-bt-roman/f59144.htm */
+  --var-primary: "#35B188";
+  --var-secondary: "#4C525A";
+  --var-backgroundColor: "white";
+  --var-backgroundColorSecondary: "#F2FAFF";
 }
 
 a {
