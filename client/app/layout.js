@@ -1,7 +1,12 @@
+import { Montserrat } from "@next/font/google"
+
+const montserrat = Montserrat();
+
 export default function RootLayout({ children }) {
   return (
-    <html>
-      <head />
+    <html lang="en" className={montserrat.className}>
+      <head/>
+        
       <body>{children}</body>
     </html>
   )
