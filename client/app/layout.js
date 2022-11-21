@@ -1,13 +1,14 @@
 import { Montserrat } from "@next/font/google"
+import IndexNavbar from "./IndexNavbar";
 
 const montserrat = Montserrat();
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={montserrat.className}>
-      <head/>
-        
-      <body>{children}</body>
+      <head />
+
+      <body><IndexNavbar />{children}</body>
     </html>
   )
 }
