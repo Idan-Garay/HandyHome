@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 
+const Logo = () => {
+  return <img className="" src="/images/logo.svg" height="100%" />;
+}
+
 const AvatarCard = ({ img, title, description }) => {
   return <div className="avatar-card h-96 w-[300px] relative flex flex-col items-center">
     <div className="rounded-full border bg-white border-highlightColor h-24 w-24 flex-none -mb-10 z-10"></div>
@@ -14,19 +18,24 @@ const AvatarCard = ({ img, title, description }) => {
 export default function Home() {
   return (
     <>
-      <header className='border h-20'>
-        <nav className='h-full  flex'>
-          <div>photo</div>
+      <header className=' h-20'>
+        <nav className='h-full flex '>
+          <div className="flex flex-0 w-3/12 justify-end">
+            <Logo />
+          </div>
 
-          <ul>
-            <li>Jobs</li>
-            <li>FAQs</li>
-            <li>About</li>
+          <ul className="flex-1  flex justify-center">
+            <li className=" mx-4 py-7">Jobs</li>
+            <li className=" mx-4 py-7">FAQs</li>
+            <li className=" mx-4 py-7">About</li>
           </ul>
 
-          <div className="buttons">
-            <button>Login</button>
-            <button>Signup</button>
+          <div className="buttons flex space-x-3 flex-0 w-3/12">
+            <div className=" py-6">
+              <button className='bg-primaryColor text-secondaryColor rounded-md py-1 px-3 mr-2'>Login</button>
+              <button className='bg-secondaryColor text-primaryColor rounded-md py-1 px-3'>Signup</button>
+            </div>
+            <div className=" w-2/12"></div>
           </div>
         </nav>
       </header>
