@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from './page.module.css'
+// import styles from './page.module.css'
 
 const Logo = () => {
   return <img className="" src="/images/logo.svg" height="100%" />;
@@ -17,29 +17,29 @@ const AvatarCard = ({ img, title, description }) => {
 
 export default function Home() {
   return (
-    <>
-      <header className=' h-20'>
-        <nav className='h-full flex '>
-          <div className="flex flex-0 w-3/12 justify-end">
+    <div className='w-full h-full'>
+      <header className='h-20 w-full flex'>
+        <nav className='h-full min-w-full flex flex-row md:flex-row'>
+          <div className="flex flex-0 min-w-fit w-3/12 justify-end">
             <Logo />
           </div>
 
-          <ul className="flex-1  flex justify-center">
+          <ul className="w-full hidden flex-col flex-1 sm:flex sm:flex-row justify-center">
             <li className=" mx-4 py-7">Jobs</li>
             <li className=" mx-4 py-7">FAQs</li>
             <li className=" mx-4 py-7">About</li>
           </ul>
 
-          <div className="buttons flex space-x-3 flex-0 w-3/12">
+          <div className="buttons hidden sm:flex flex-row space-x-3  w-3/12  ">
             <div className=" py-6">
               <button className='bg-primaryColor text-secondaryColor rounded-md py-1 px-3 mr-2'>Login</button>
               <button className='bg-secondaryColor text-primaryColor rounded-md py-1 px-3'>Signup</button>
             </div>
-            <div className=" w-2/12"></div>
+            <div className="hidden sm:w-2/12"></div>
           </div>
         </nav>
       </header>
-      <main className='bg-white h-full'>
+      {/* <main className='bg-white h-full'>
         <section className='hero h-screen bg-secondaryColor md:bg-[url(/images/hero_bg.svg)] bg-right-bottom bg-cover bg-no-repeat'>
           <div className='flex flex-col w-full md:w-1/2 '>
             <h1>Handyhome: Job Marketplace</h1>
@@ -83,7 +83,7 @@ export default function Home() {
 
           <p>© Photo, Inc. 2022. We love our users!</p>
         </nav>
-      </footer>
-    </>
+      </footer> */}
+    </div>
   )
 }
