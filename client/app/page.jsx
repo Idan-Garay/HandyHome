@@ -32,16 +32,16 @@ export default function Home() {
             <Logo /> 
           </div>
 
-          <ul className={`absolute rounded-md top-full right-[2%] flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}>
-            <li className="py-2 mx-2 sm:mx-4 sm:py-7">Jobs</li>
-            <li className="py-2 mx-2 sm:mx-4 sm:py-7">FAQs</li>
-            <li className="py-2 mx-2 sm:mx-4 sm:py-7">About</li>
+          <ul className={`absolute rounded-md top-full right-[2%] ${toggleMenu? '': 'hidden'} display flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}>
+            <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md">Jobs</li>
+            <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">FAQs</li>
+            <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">About</li>
           </ul> 
 
-          <div className="buttons flex justify-evenly py-6">
-              <button className='bg-primaryColor text-secondaryColor rounded-md py-1 px-3 mr-2'>Login</button>
-              <button className='bg-secondaryColor text-primaryColor rounded-md py-1 px-3'>Signup</button>
-              <GiHamburgerMenu size="30" className='m-auto block sm:hidden' color='bg-primaryColor'/>
+          <div className="buttons flex justify-evenly py-5">
+              <button className='bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2'>Login</button>
+              <button className='bg-secondaryColor cursor-pointer text-primaryColor rounded-md py-1 px-3 mr-2'>Signup</button>
+              <GiHamburgerMenu onClick={() => setToggleMenu(!toggleMenu)} size="35" className='cursor-pointer m-auto block sm:hidden p-1  bg-highlightColor rounded-full' color='bg-primaryColor'/>
           </div>
           {/* <div className="block  sm:hidden h-full w-full"/> */}
           {/* <div className={`sm:hidden w-40 h-full py-4 cursor-pointer`} onClick={() => setToggleMenu(!toggleMenu)}>
