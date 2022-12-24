@@ -31,15 +31,15 @@ export default function Home() {
     <div className="w-full h-full">
       <header className="h-20 w-full fixed z-50 bg-white">
         {/* <Navbar />  */}
-        <nav className="h-full min-w-full flex justify-between px-[2%] sm:px-[12%] bg-transparent transition-all  top-0 right-0">
+        <nav className="h-full min-w-full flex  justify-between px-[2%] sm:px-[12%] bg-transparent transition-all  top-0 right-0">
           <div className="flex flex-0 min-w-fit justify-end ">
             <Logo />
           </div>
 
           <ul
             className={`absolute rounded-md top-full right-[2%] ${
-              toggleMenu ? "" : "hidden"
-            } display flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
+              toggleMenu ? "" : "hidden sm:flex"
+            }  flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
           >
             <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md">
               Jobs
