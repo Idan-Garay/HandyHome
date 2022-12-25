@@ -13,9 +13,9 @@ const Logo = () => {
 
 const AvatarCard = ({ img, title, description }) => {
   return (
-    <div className="avatar-card h-96 w-[300px] relative flex flex-col items-center">
+    <div className="avatar-card h-3/6 sm:h-96  w-[300px] relative flex flex-col items-center">
       <div className="rounded-full border bg-white border-highlightColor h-24 w-24 flex-none -mb-10 z-10"></div>
-      <div className="px-3 border h-full bg-white border-highlightColor relative flex-auto flex flex-col space-y-5 text-center rounded-lg">
+      <div className="w-full px-3 border h-full bg-white border-highlightColor relative flex-auto flex flex-col space-y-5 text-center rounded-lg">
         <div className="h-12 spacer"></div>
         <h3 className=" font-semibold">{title}</h3>
         <p className="h-full">{description}</p>
@@ -37,9 +37,8 @@ export default function Home() {
           </div>
 
           <ul
-            className={`absolute rounded-md top-full right-[2%] ${
-              toggleMenu ? "" : "hidden sm:flex"
-            }  flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
+            className={`absolute rounded-md top-full right-[2%] ${toggleMenu ? "" : "hidden sm:flex"
+              }  flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
           >
             <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md">
               Jobs
@@ -71,8 +70,8 @@ export default function Home() {
       <main className="h-full  bg-secondaryColor ">
         {/* content 1 */}
         <div className="h-screen">
-          <div className="h-32"/>
-            
+          <div className="format-spacer h-32" />
+
           <div className="left h-full  absolute z-100 w-9/12 py-2 px-5">
             <h1 className="text-4xl font-bold">{Strings.handyHomeJobMarketplace}</h1>
             <div className="space h-2"></div>
@@ -90,14 +89,34 @@ export default function Home() {
             height="100%"
             width="100%"
           />
-          
+
+        </div>
+
+        {/* content 2 */}
+        <div className="h-full sm:h-screen px-4  w-full bg-secondaryColor ">
+          <div className="format-spacer h-16 sm:h-24" />
+          <h1 className="text-4xl font-bold text-center">{Strings.forEmployers}</h1>
+          <div className="format-spacer h-12" />
+          <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
+            <AvatarCard title="Browse Services and Portfolios" description="Choose people by their creativity and previous projects, not just resumes." />
+            <AvatarCard title="Get Best Matches for Your Jobs" description="Get the best candidates on top of your list of job applciations." />
+          </div>
+          <div className="format-spacer h-16 sm:h-1/3" />
         </div>
         
-        {/* content 2 */}
-        <div className="h-screen bg-red-100 relative z-50 border">
+        {/* content 3: strip */}
+        <div className="h-32  w-full bg-white flex flex-col justify-center items-center">
+          <h1 className="text-2xl font-bold text-center">{Strings.hireTalents}</h1>
 
+          <div className="buttons flex justify-evenly py-5">
+            <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
+              {Strings.postAJob}
+            </button>
+            <button className="bg-white cursor-pointer text-primaryColor border border-primaryColor rounded-md py-1 px-3 mr-2">
+              {Strings.hireAClient}
+            </button>
+          </div>
         </div>
-
       </main>
     </div>
   );
