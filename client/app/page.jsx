@@ -37,7 +37,7 @@ export default function Home() {
           </div>
 
           <ul
-            className={`absolute rounded-md top-full right-[2%] ${toggleMenu ? "" : "hidden sm:flex"
+            className={`border-2 sm:border-none border-primaryColor absolute rounded-md top-full right-[2%] ${toggleMenu ? "" : "hidden sm:flex"
               }  flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
           >
             <li className="p-2 pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md">
