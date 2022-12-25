@@ -68,35 +68,36 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main className="h-full pt-20 bg-secondaryColor ">
-        <div className="h-screen flex flex-col  ">
-          <img
-            className="absolute z-0"
-            src="/images/hero_bg.svg"
-            height="100%"
-            width="100%"
-          />
-          <div className="left h-full absolute z-10 w-9/12 py-2 px-5">
-            <h1 className="text-4xl">{Strings.handyHomeJobMarketplace}</h1>
+      <main className="h-full  bg-secondaryColor ">
+        {/* content 1 */}
+        <div className="h-screen">
+          <div className="h-32"/>
+            
+          <div className="left h-full  absolute z-100 w-9/12 py-2 px-5">
+            <h1 className="text-4xl font-bold">{Strings.handyHomeJobMarketplace}</h1>
             <div className="space h-2"></div>
-            <h3 className="text-2xl">
+            <h3 className="text-2xl font-extralight">
               Find to employ or post to get employed.
             </h3>
-            <div className="space h-5"></div>
+            <div className="space h-10"></div>
             <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
               Post a job
             </button>
           </div>
-          {/* <div className="right w-full h-full absolute z-0 hidden md:block overflow-hidden">
-            <img
-              className=""
-              src="/images/hero_bg.svg"
-              height="100%"
-              width="100%"
-            />
-          </div> */}
+          <img
+            className="absolute z-0 bottom-0"
+            src="/images/hero_bg.png"
+            height="100%"
+            width="100%"
+          />
+          
         </div>
-        <div className="h-screen bg-red-100 relative z-50 border"></div>
+        
+        {/* content 2 */}
+        <div className="h-screen bg-red-100 relative z-50 border">
+
+        </div>
+
       </main>
     </div>
   );
