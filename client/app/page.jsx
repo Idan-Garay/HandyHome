@@ -103,15 +103,18 @@ export default function Home() {
           </div>
           <div className="format-spacer h-16 sm:h-1/3" />
         </div>
-        
-        {/* content 3: strip */}
-        <div className="h-32  w-full bg-white flex flex-col justify-center items-center">
-          <h1 className="text-2xl font-bold text-center">{Strings.hireTalents}</h1>
 
-          <div className="buttons flex justify-evenly py-5">
+        {/* content 3: strip */}
+        <div className="h-40 w-full bg-white flex flex-col justify-center items-center p-3">
+          <h2 className="text-2xl font-bold text-center">{Strings.hireTalents}</h2>
+
+          <div className="buttons flex justify-evenly py-3 items-center gap-5">
             <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
               {Strings.postAJob}
             </button>
+
+            <h2 className="text-xl font-bold text-center mr-2 ">{Strings.or}</h2>
+
             <button className="bg-white cursor-pointer text-primaryColor border border-primaryColor rounded-md py-1 px-3 mr-2">
               {Strings.hireAClient}
             </button>

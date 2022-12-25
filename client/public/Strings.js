@@ -4,6 +4,7 @@ class String {
     static hireTalents = "Hire talents or get hired for your dream job";
     static postAJob = "Post a Job";
     static hireAClient = "Hire a Client";
+    static or = "or";
 }
 
 export default String;
