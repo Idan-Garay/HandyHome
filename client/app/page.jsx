@@ -72,7 +72,7 @@ export default function Home() {
         <div className="h-screen">
           <div className="format-spacer h-32" />
 
-          <div className="left h-full  absolute z-100 w-9/12 py-2 px-5">
+          <div className="left h-full absolute z-100 w-9/12 py-2 px-10">
             <h1 className="text-4xl font-bold">{Strings.handyHomeJobMarketplace}</h1>
             <div className="space h-2"></div>
             <h3 className="text-2xl font-extralight">
@@ -85,7 +85,7 @@ export default function Home() {
           </div>
           <img
             className="absolute z-0 bottom-0"
-            src="/images/hero_bg.png"
+            src="/images/hero_bg.svg"
             height="100%"
             width="100%"
           />
@@ -120,7 +120,23 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        {/* content 4 */}
+        <div className="h-full sm:h-screen px-4  w-full bg-secondaryColor ">
+          <div className="format-spacer h-16 sm:h-24" />
+          <h1 className="text-4xl font-bold text-center">{Strings.forClients}</h1>
+          <div className="format-spacer h-12" />
+          <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
+            <AvatarCard title="Post Jobs For Free" description="Choose people by their creativity and previous projects, not just resumes." />
+            <AvatarCard title="Get Best Matches for Your Jobs" description="Get the best candidates on top of your list of job applications." />
+            <AvatarCard title="Get Exposures For Free" description="More exposures means more chance to get employed and noticed by employers." />
+            <AvatarCard title="Build Credibility as Freelancers" description="Get employers to testify you with reviews and stars." />
+          </div>
+          <div className="format-spacer h-16 sm:h-1/3" />
+        </div>
       </main>
+
+      <footer>hello world</footer>
     </div>
   );
 }
