@@ -6,6 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Navbar from "./Navbar";
 import Strings from "../public/Strings";
 // import styles from './page.module.css'
+import {Subtitle, Title} from "./components/format";
 
 const Logo = () => {
   return <img className="" src="/images/logo.svg" height="100%" />;
@@ -67,17 +68,15 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main className="h-full  bg-secondaryColor ">
+      <main className="h-full bg-secondaryColor ">
         {/* content 1 */}
         <div className="h-screen">
           <div className="format-spacer h-32" />
 
           <div className="left h-full absolute z-100 w-9/12 py-2 px-10">
-            <h1 className="text-4xl font-bold">{Strings.handyHomeJobMarketplace}</h1>
+            <Title align="start">{Strings.handyHomeJobMarketplace}</Title>
             <div className="space h-2"></div>
-            <h3 className="text-2xl font-extralight">
-              Find to employ or post to get employed.
-            </h3>
+            <Subtitle>Find to employ or post to get employed.</Subtitle>
             <div className="space h-10"></div>
             <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
               Post a job
@@ -95,7 +94,7 @@ export default function Home() {
         {/* content 2 */}
         <div className="h-full sm:h-screen px-4  w-full bg-secondaryColor ">
           <div className="format-spacer h-16 sm:h-24" />
-          <h1 className="text-4xl font-bold text-center">{Strings.forEmployers}</h1>
+          <Title>{Strings.forEmployers}</Title>
           <div className="format-spacer h-12" />
           <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
             <AvatarCard title="Browse Services and Portfolios" description="Choose people by their creativity and previous projects, not just resumes." />
@@ -106,8 +105,7 @@ export default function Home() {
 
         {/* content 3: strip */}
         <div className="h-40 w-full bg-white flex flex-col justify-center items-center p-3">
-          <h2 className="text-2xl font-bold text-center">{Strings.hireTalents}</h2>
-
+          <Subtitle>{Strings.hireTalents}</Subtitle>
           <div className="buttons flex justify-evenly py-3 items-center gap-5">
             <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
               {Strings.postAJob}
@@ -124,7 +122,7 @@ export default function Home() {
         {/* content 4 */}
         <div className="h-full sm:h-screen px-4  w-full bg-secondaryColor ">
           <div className="format-spacer h-16 sm:h-24" />
-          <h1 className="text-4xl font-bold text-center">{Strings.forClients}</h1>
+          <Title>{Strings.forClients}</Title>
           <div className="format-spacer h-12" />
           <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
             <AvatarCard title="Post Jobs For Free" description="Choose people by their creativity and previous projects, not just resumes." />
