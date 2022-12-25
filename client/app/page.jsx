@@ -136,7 +136,24 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>hello world</footer>
+      <footer className="h-40 flex flex-col sm:flex-row px-[2%]">
+        {/* logo, nav, tagline */}
+        <Image src="/images/logo.svg" className="flex-none " height={100} width={100} />
+        <ul
+          className={`flex-auto w-full  py-5 sm:py-auto rounded-md flex flex-col items-center h-full  sm:relative sm:top-0 sm:bg-transparent sm:w-full sm:flex-row sm:justify-center `}
+        >
+          <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md">
+            Jobs
+          </li>
+          <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">
+            FAQs
+          </li>
+          <li className="p-2 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">
+            About
+          </li>
+        </ul>
+        <div className=" flex-auto flex  sm:w-5/12 justify-center items-center"><p className=" h-fit ">&#169; HandyHome, We love our users!</p></div>
+      </footer>
     </div>
   );
 }
