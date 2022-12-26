@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import Strings from "../public/Strings";
 // import styles from './page.module.css'
 import {Subtitle, Title} from "./components/format";
+import Button from "./components/Button";
 
 const Logo = () => {
   return <img className="" src="/images/logo.svg" height="100%" />;
@@ -54,12 +55,8 @@ export default function Home() {
           </ul>
 
           <div className="buttons flex justify-evenly py-5">
-            <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
-              Login
-            </button>
-            <button className="bg-secondaryColor cursor-pointer text-primaryColor rounded-md py-1 px-3 mr-2">
-              Signup
-            </button>
+            <Button>Login</Button>
+           <Button isPrimary={false}>Signup</Button>
             <GiHamburgerMenu
               onClick={() => setToggleMenu(!toggleMenu)}
               size="35"
