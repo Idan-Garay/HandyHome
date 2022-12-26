@@ -106,7 +106,7 @@ export default function Home() {
 
         {/* content 3: strip */}
         <div className="h-40 w-full bg-white flex flex-col justify-center items-center p-3">
-          <Subtitle>{Strings.hireTalents}</Subtitle>
+          <Subtitle weight="bold">{Strings.hireTalents}</Subtitle>
           <div className="buttons flex justify-evenly py-3 items-center gap-5">
             <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
               {Strings.postAJob}
