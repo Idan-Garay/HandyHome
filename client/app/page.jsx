@@ -17,9 +17,9 @@ const Logo = () => {
 
 const AvatarCard = ({ img, title, description }) => {
   return (
-    <div className="avatar-card h-3/6 sm:h-96  w-[300px] relative flex flex-col items-center">
+    <div className="avatar-card h-3/6 sm:h-96  w-[300px] relative flex_col items-center">
       <div className="rounded-full border bg-white border-highlightColor h-24 w-24 flex-none -mb-10 z-10"></div>
-      <div className="w-full px-3 border h-full bg-white border-highlightColor relative flex-auto flex flex-col space-y-5 text-center rounded-lg">
+      <div className="w-full px-3 border h-full bg-white border-highlightColor relative flex-auto flex_col space-y-5 text-center rounded-lg">
         <div className="h-12 spacer"></div>
         <h3 className=" font-semibold">{title}</h3>
         <p className="h-full">{description}</p>
@@ -41,7 +41,7 @@ export default function Home() {
           </div>
           <ul
             className={`border-2 sm:border-none border-primaryColor absolute rounded-md top-full right-[2%] ${toggleMenu ? "" : "hidden sm:flex"
-              }  flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
+              }  flex_col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
           >
             <MenuListItemSkin otherCssClasses="rounded-t-md sm:rounded-none">
               <Link href="#jobs">Jobs</Link>
@@ -90,7 +90,7 @@ export default function Home() {
           <div className="format-spacer h-16 sm:h-24" />
           <Title>{Strings.forEmployers}</Title>
           <div className="format-spacer h-12" />
-          <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
+          <div className="flex_col sm:flex-row w-full gap-5 items-center sm:justify-center">
             <AvatarCard title="Browse Services and Portfolios" description="Choose people by their creativity and previous projects, not just resumes." />
             <AvatarCard title="Get Best Matches for Your Jobs" description="Get the best candidates on top of your list of job applciations." />
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
 
         {/* content 3: strip */}
-        <div className="h-40 w-full bg-white flex flex-col justify-center items-center p-3">
+        <div className="h-40 w-full bg-white flex_col justify-center items-center p-3">
           <Subtitle weight="bold">{Strings.hireTalents}</Subtitle>
           <div className="buttons flex justify-evenly py-3 items-center gap-5">
             <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
@@ -118,7 +118,7 @@ export default function Home() {
           <div className="format-spacer h-16 sm:h-24" />
           <Title>{Strings.forClients}</Title>
           <div className="format-spacer h-12" />
-          <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
+          <div className="flex_col sm:flex-row w-full gap-5 items-center sm:justify-center">
             {[
               ['avatar-x1x', 'Post Jobs For Free', 'Choose people by their creativity and previous projects, not just resumes.'],
               ['avatar-x2x', 'Get Best Matches for Your Jobs', 'Get the best candidates on top of your list of job applications.'],
@@ -130,11 +130,11 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="h-40 flex flex-col sm:flex-row px-[2%]">
+      <footer className="h-40 flex_col sm:flex-row px-[2%]">
         {/* logo, nav, tagline */}
         <Image src="/images/logo.svg" alt="logo" className="flex-none " height={100} width={100} />
         <ul
-          className={`flex-auto w-full  py-5 sm:py-auto rounded-md flex flex-col items-center h-full  sm:relative sm:top-0 sm:bg-transparent sm:w-full sm:flex-row sm:justify-center `}
+          className={`flex-auto w-full  py-5 sm:py-auto rounded-md flex_col items-center h-full  sm:relative sm:top-0 sm:bg-transparent sm:w-full sm:flex-row sm:justify-center `}
         >
           <MenuListItemSkin otherCssClasses=" sm:rounded-none">
             <Link href={`#jobs`}>Jobs</Link>

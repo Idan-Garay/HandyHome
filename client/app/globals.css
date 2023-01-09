@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer components {
+  .flex_col {
+    @apply flex flex-col;
+  }
+}
+
 html,
 body {
   padding: 0;
