@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
-import Navbar from "./Navbar";
 import Strings from "../public/Strings";
 // import styles from './page.module.css'
 import { Subtitle, Title } from "./components/format";
@@ -62,7 +60,7 @@ export default function Home() {
           </div>
         </nav>
       </header>
-      <main className="h-full bg-secondaryColor ">
+      <main className="h-full bg-secondaryColor">
         {/* content 1 */}
         <div className="h-screen">
           <div className="format-spacer h-32" />
@@ -72,7 +70,7 @@ export default function Home() {
             <div className="space h-2"></div>
             <Subtitle>Find to employ or post to get employed.</Subtitle>
             <div className="space h-10"></div>
-            <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
+            <button className="btn primary mr-2">
               Post a job
             </button>
           </div>
@@ -101,7 +99,7 @@ export default function Home() {
         <div className="h-40 w-full bg-white flex_col justify-center items-center p-3">
           <Subtitle weight="bold">{Strings.hireTalents}</Subtitle>
           <div className="buttons flex justify-evenly py-3 items-center gap-5">
-            <button className="bg-primaryColor cursor-pointer text-secondaryColor rounded-md py-1 px-3 mr-2">
+            <button className="btn-primary mr-2">
               {Strings.postAJob}
             </button>
 
@@ -132,7 +130,7 @@ export default function Home() {
 
       <footer className="h-40 flex_col sm:flex-row px-[2%]">
         {/* logo, nav, tagline */}
-        <Image src="/images/logo.svg" alt="logo" className="flex-none " height={100} width={100} />
+        <Image src="/images/logo.svg" alt="logo" className="flex-none h-auto" height={100} width={100} />
         <ul
           className={`flex-auto w-full  py-5 sm:py-auto rounded-md flex_col items-center h-full  sm:relative sm:top-0 sm:bg-transparent sm:w-full sm:flex-row sm:justify-center `}
         >

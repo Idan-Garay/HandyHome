@@ -11,8 +11,10 @@ module.exports = {
         primaryColor: "#323145",
         secondaryColor: "#EEF5F9",
         highlightColor: "#C8E5F9",
-      }
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

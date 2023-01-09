@@ -7,6 +7,16 @@
   .flex_col {
     @apply flex flex-col;
   }
+
+  .btn {
+    @apply rounded-md py-1 px-3 mr-2;
+  }
+  .primary {
+    @apply bg-primaryColor cursor-pointer text-secondaryColor;
+  }
+  .secondary {
+    @apply bg-secondaryColor cursor-pointer text-primaryColor;
+  }
 }
 
 html,
