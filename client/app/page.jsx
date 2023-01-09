@@ -7,8 +7,9 @@ import { AiOutlineClose } from "react-icons/ai";
 import Navbar from "./Navbar";
 import Strings from "../public/Strings";
 // import styles from './page.module.css'
-import {Subtitle, Title} from "./components/format";
+import { Subtitle, Title } from "./components/format";
 import Button from "./components/Button";
+import { MenuListItemSkin } from "./skins/skins";
 
 const Logo = () => {
   return <img className="" src="/images/logo.svg" height="100%" />;
@@ -34,29 +35,24 @@ export default function Home() {
     <div className="w-full h-full">
       <header className="h-20 w-full fixed z-50 bg-white">
         {/* <Navbar />  */}
-        <nav className="h-full min-w-full flex  justify-between px-[2%] sm:px-[12%] bg-transparent transition-all  top-0 right-0">
+        <nav className="h-full min-w-full flex justify-between px-[2%] sm:px-[12%] bg-transparent transition-all  top-0 right-0">
           <div className="flex flex-0 min-w-fit justify-end ">
             <Logo />
           </div>
-
           <ul
             className={`border-2 sm:border-none border-primaryColor absolute rounded-md top-full right-[2%] ${toggleMenu ? "" : "hidden sm:flex"
               }  flex flex-col h-[29vh] w-[270px] bg-secondaryColor sm:relative sm:top-0 sm:bg-transparent sm:h-full sm:w-full sm:flex-row sm:justify-center `}
           >
-            <li className="p-2 pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md sm:rounded-none">
+            <MenuListItemSkin otherCssClasses="rounded-t-md sm:rounded-none">
               <Link href="#jobs">Jobs</Link>
-            </li>
-            <li className="p-2 pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">
-              <Link href="#faqs">FAQs</Link>
-            </li>
-            <li className="p-2 pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">
-              <Link href="#about">About</Link>
-            </li>
+            </MenuListItemSkin>
+            <MenuListItemSkin><Link href="#faqs">FAQs</Link></MenuListItemSkin>
+            <MenuListItemSkin><Link href="#about">About</Link></MenuListItemSkin>
           </ul>
 
           <div className="buttons flex justify-evenly py-5">
             <Button>Login</Button>
-           <Button isPrimary={false}>Signup</Button>
+            <Button isPrimary={false}>Signup</Button>
             <GiHamburgerMenu
               onClick={() => setToggleMenu(!toggleMenu)}
               size="35"
@@ -123,10 +119,12 @@ export default function Home() {
           <Title>{Strings.forClients}</Title>
           <div className="format-spacer h-12" />
           <div className="flex flex-col sm:flex-row w-full gap-5 items-center sm:justify-center">
-            <AvatarCard title="Post Jobs For Free" description="Choose people by their creativity and previous projects, not just resumes." />
-            <AvatarCard title="Get Best Matches for Your Jobs" description="Get the best candidates on top of your list of job applications." />
-            <AvatarCard title="Get Exposures For Free" description="More exposures means more chance to get employed and noticed by employers." />
-            <AvatarCard title="Build Credibility as Freelancers" description="Get employers to testify you with reviews and stars." />
+            {[
+              ['avatar-x1x', 'Post Jobs For Free', 'Choose people by their creativity and previous projects, not just resumes.'],
+              ['avatar-x2x', 'Get Best Matches for Your Jobs', 'Get the best candidates on top of your list of job applications.'],
+              ['avatar-x3x', 'Get Exposures For Free', 'More exposures means more chance to get employed and noticed by employers.'],
+              ['avatar-x4x', 'Build Credibility as Freelancers', 'Get employers to testify you with reviews and stars.'],
+            ].map(([key, title, description]) => <AvatarCard key={key} title={title} description={description} />)}
           </div>
           <div className="format-spacer h-16 sm:h-1/3" />
         </div>
@@ -134,19 +132,16 @@ export default function Home() {
 
       <footer className="h-40 flex flex-col sm:flex-row px-[2%]">
         {/* logo, nav, tagline */}
-        <Image src="/images/logo.svg" className="flex-none " height={100} width={100} />
+        <Image src="/images/logo.svg" alt="logo" className="flex-none " height={100} width={100} />
         <ul
           className={`flex-auto w-full  py-5 sm:py-auto rounded-md flex flex-col items-center h-full  sm:relative sm:top-0 sm:bg-transparent sm:w-full sm:flex-row sm:justify-center `}
         >
-          <li className="p-2  pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7 rounded-t-md sm:rounded-none">
+          <MenuListItemSkin otherCssClasses=" sm:rounded-none">
             <Link href={`#jobs`}>Jobs</Link>
-          </li>
-          <li className="p-2  pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">
-            <Link href={`#faqs`}>FAQs</Link>
-          </li>
-          <li className="p-2  pr-5 sm:ml-5 pl-5 hover:bg-primaryColor cursor-pointer hover:text-secondaryColor sm:mx-4 sm:py-7">
-            <Link href={`#about`}>About</Link>
-          </li>
+          </MenuListItemSkin>
+
+          <MenuListItemSkin><Link href={`#faqs`}>FAQs</Link></MenuListItemSkin>
+          <MenuListItemSkin><Link href={`#about`}>About</Link></MenuListItemSkin>
         </ul>
         <div className=" flex-auto flex  sm:w-5/12 justify-center items-center"><p className=" h-fit ">&#169; HandyHome, We love our users!</p></div>
       </footer>
