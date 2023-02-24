@@ -1,3 +1,76 @@
+.nav_menu {
+  position: relative;
+  display: block;
+  width: 32px;
+  min-height: 100%;
+  cursor: pointer;
+}
+
+.nav_menu_bar{
+  display: block;
+  content: '';
+  height: 6px;
+  width: 100%;
+  background-color: #323145;
+  margin-bottom: 3px;
+  transition: .4s;
+  border-radius: 2px;
+}
+/* .nav_unchecked:has(~ div) {
+  display:none;
+  background-color: red;
+} */
+
+.animated_underline::after:hover {
+  transform: scaleX(100);
+}
+
+.nav_checkbox {
+  display: none;
+}
+
+.nav_checkbox:checked ~ div .nav_menu > .nav_menu_bar {
+  margin-bottom: 0px;
+  position: absolute;
+  background-color: #323145;
+}
+
+.nav_checkbox:checked ~ div .nav_menu {
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.nav_checkbox:checked ~ div .nav_menu > .nav_menu_bar:nth-child(1) {
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+.nav_checkbox:checked ~ div .nav_menu > .nav_menu_bar:nth-child(2) {
+  transform: translate(120px, 50%);
+}
+
+.nav_checkbox:checked ~ div .nav_menu > .nav_menu_bar:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.nav_checkbox:checked + ul {
+  display: block;
+}
+
+/* media at medium and checkbox:checked display none */
+@media (min-width: 768px) {
+  .nav_checkbox:checked ~ ul {
+    display: flex;
+    border: none;
+    border-radius: 0;
+    height: auto;
+    position: static;
+    width: 50%;
+    justify-content: space-evenly;
+    place-items: center;
+  }
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -143,11 +216,9 @@
   inset: 0;
   padding: 1px;
   border-radius: var(--border-radius);
-  background: linear-gradient(
-    to bottom right,
-    rgba(var(--tile-start-rgb), 1),
-    rgba(var(--tile-end-rgb), 1)
-  );
+  background: linear-gradient(to bottom right,
+      rgba(var(--tile-start-rgb), 1),
+      rgba(var(--tile-end-rgb), 1));
   background-clip: content-box;
 }
 
@@ -226,11 +297,9 @@
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
+    background: linear-gradient(to bottom,
+        rgba(var(--background-start-rgb), 1),
+        rgba(var(--callout-rgb), 0.5));
     background-clip: padding-box;
     backdrop-filter: blur(24px);
   }
@@ -241,11 +310,9 @@
     inset: auto 0 0;
     padding: 2rem;
     height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(var(--background-end-rgb)) 40%);
     z-index: 1;
   }
 }
@@ -265,6 +332,7 @@
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }
