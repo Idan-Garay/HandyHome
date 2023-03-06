@@ -19,7 +19,8 @@ export default function RootLayout({
       <head />
       <body className='text-primaryColor'>
         <Navbar/>
-        {children}</body>
+        {children}
+      </body>
     </html>
   )
 }
