@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <main className="h-full bg-secondary">
       <Hero/>
+      <div className="min-h-[100vh] w-full"></div>
     </main>
   )
 }

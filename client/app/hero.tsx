@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Hero() {
     return (
-        <div className="hero border min-w-full flex justify-between min-h-[91.5vh] z-0 relative">
+        <div className="hero min-w-full flex justify-between min-h-[91.5vh] z-0 relative">
             <div className="absolute content z-20 pl-12 md:pl-24 pt-20">
                 <h1 className=' font-semibold text-3xl'>HandyHome: Job Marketplace</h1>
                 <div className="h-3" />
