@@ -22,6 +22,14 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="bg-secondary md:bg-white min-h-[10rem] flex flex-col gap-y-5 justify-center items-center">
+        <h1 className='text-lg font-semibold'>Hire talents or get hired for your dream job</h1>
+        <div className="flex justify-center items-center gap-3">
+          <button className='button min-h-[3rem] min-w-[8rem] rounded bg-primary text-white border hover:bg-black hover:ease-in-out hover:duration-300'>Post a Job</button>
+          <p className='font-semibold'>or</p>
+          <button className='button min-h-[3rem] min-w-[8rem] rounded bg-white text-primary border hover:bg-primary hover:text-white hover:ease-in-out hover:duration-300'>Hire a Client</button>
+        </div>
+      </div>
     </main>
   )
 }
