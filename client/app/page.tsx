@@ -41,15 +41,15 @@ export default function Home() {
               <strong className='block p-2 md:p-5 text-lg'>Post Jobs For Free</strong>
               <p className='md:mx-8 text-lg' >Choose people by their creativity and previous projects, not just resumes.</p>
             </div>
-            <div className="bg-secondary md:bg-white px-5 py-5 min-h-[5rem] md:min-h-[12rem] h-[25vh] w-[40vh] md:h-[45vh] md:w-[40vh] border-highlight border-2 rounded text-center">
+            <div className="bg-secondary md:bg-white px-5 pt-5 min-h-[8rem] md:min-h-[12rem] h-[30vh] w-[40vh] md:h-[45vh] md:w-[40vh] border-highlight border-2 rounded text-center">
               <strong className='block p-2 md:p-5 text-lg'>Get Best Matches for Your Jobs</strong>
               <p className='md:mx-8 text-lg' >Get the best candidates on top of your list of job applications.</p>
             </div>
-            <div className="bg-secondary md:bg-white px-5 py-5 min-h-[5rem] md:min-h-[12rem] h-[25vh] w-[40vh] md:h-[45vh] md:w-[40vh] border-highlight border-2 rounded text-center">
+            <div className="bg-secondary md:bg-white px-5 pt-5 min-h-[8rem] md:min-h-[12rem] h-[30vh] w-[40vh] md:h-[45vh] md:w-[40vh] border-highlight border-2 rounded text-center">
               <strong className='block p-2 md:p-5 text-lg'>Get Discovered For Free</strong>
               <p className='md:mx-8 text-lg' >More exposures means more chance to get employed and noticed by employers.</p>
             </div>
-            <div className="bg-secondary md:bg-white px-5 pt-5 min-h-[5rem] md:min-h-[12rem] h-[25vh] w-[40vh] md:h-[45vh] md:w-[40vh] border-highlight border-2 rounded text-center">
+            <div className="bg-secondary md:bg-white px-5 pt-5 min-h-[8rem] md:min-h-[12rem] h-[30vh] w-[40vh] md:h-[45vh] md:w-[40vh] border-highlight border-2 rounded text-center">
               <strong className='block  p-2 md:p-5 text-lg'>Build Credibility as Freelancers</strong>
               <p className='md:mx-8 text-lg' >Get employers to testify you with reviews and stars.</p>
             </div>
@@ -57,7 +57,7 @@ export default function Home() {
         </div>
       </main>
       <footer className=' bg-secondary md:bg-white md:min-h-[20vh] flex gap-5 flex-col md:flex-row md:justify-between items-center w-full'>
-            
+
         <Link href="/" className='self-start md:self-center'>
           <Image
             src="/logo.png"
